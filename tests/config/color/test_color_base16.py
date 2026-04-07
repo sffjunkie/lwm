@@ -1,0 +1,44 @@
+from pathlib import Path
+from lwm.config.color.base16 import (
+    load_base16_color_scheme,
+    base16_colors_from_config,
+)
+
+
+def test_load_base16_color_scheme(test_data: Path):
+    data_path = test_data / "config"
+    scheme = load_base16_color_scheme(
+        Path("gruvbox-material-dark-soft.yaml"), data_path / "color"
+    )
+
+    assert scheme is not None
+    assert scheme["base07"] == "#fbf1c7"
+
+
+def test_load_base16_colors_from_scheme(test_data: Path):
+    data_path = test_data / "config"
+    config = {
+        "scheme_dir": data_path / "color",
+        "scheme_name": "gruvbox-material-dark-soft.yaml",
+    }
+
+    base16_colors = base16_colors_from_config(config)
+
+    assert base16_colors is not None
+    assert base16_colors["base07"] == "#fbf1c7"
+
+
+def test_load_base16_colors_from_colors(test_data: Path):
+    data_path = test_data / "config"
+    config = {
+        "scheme_dir": data_path / "color",
+        "scheme_name": "gruvbox-material-dark-soft.yaml",
+        "colors": {
+            "base07": "#282828",
+        },
+    }
+
+    base16_colors = base16_colors_from_config(config)
+
+    assert base16_colors is not None
+    assert base16_colors["base07"] == "#282828"

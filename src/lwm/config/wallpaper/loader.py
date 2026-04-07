@@ -1,0 +1,18 @@
+from .typedef import WallpaperDefinitions, WallpaperDefinition
+from .waypaper import wallpapersdefs_waypaper
+
+
+def wallpaperdefs() -> WallpaperDefinitions:
+    return wallpapersdefs_waypaper()
+
+
+def wallpaper_for_screen(
+    screen: str, definitions: WallpaperDefinitions
+) -> WallpaperDefinition | None:
+    if (definition := definitions.get(screen, None)) is not None:
+        return definition
+
+    if (definition := definitions.get("*", None)) is not None:
+        return definition
+
+    return None

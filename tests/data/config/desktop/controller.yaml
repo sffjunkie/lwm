@@ -1,0 +1,4 @@
+controller:
+  audio: /nix/store/bbb220lr6pqqjfpjl8r1849qnnb3cw3v-pavucontrol-6.2/bin/pavucontrol
+  music: /nix/store/pwgnb6iwxjmwdwpkmzbdbk1ymf50426h-musicctl/bin/musicctl
+  volume: /nix/store/ckbb37h5gvskmnssrzqb8w7w44k0nnyk-volumectl/bin/volumectl

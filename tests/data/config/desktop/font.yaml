@@ -1,0 +1,16 @@
+font:
+  text:
+    family: "JetBrainsMono Nerd Font"
+    size: 16
+  ui:
+    family: "JetBrainsMono Nerd Font"
+    size: 16
+  icon:
+    family: "Material Design Icons"
+    size: 22
+  weather:
+    family: "Hack Nerd Font"
+    size: 22
+  logo:
+    family: "Hack Nerd Font"
+    size: 22

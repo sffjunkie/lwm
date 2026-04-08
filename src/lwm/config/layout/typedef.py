@@ -1,24 +1,26 @@
-from lwm.config.typedef import PropertyDefinitions
 from typing import TypedDict, NotRequired
+
+LayoutDefinition = str | int | float | dict[str, "LayoutDefinition"]
+LayoutDefinitions = dict[str, LayoutDefinition]
 
 
 class LayoutDefs(TypedDict):
-    common: PropertyDefinitions
-    Bsp: NotRequired[PropertyDefinitions]
-    Columns: NotRequired[PropertyDefinitions]
-    Floating: NotRequired[PropertyDefinitions]
-    Matrix: NotRequired[PropertyDefinitions]
-    Max: NotRequired[PropertyDefinitions]
-    Plasma: NotRequired[PropertyDefinitions]
-    RatioTile: NotRequired[PropertyDefinitions]
-    ScrteenSplit: NotRequired[PropertyDefinitions]
-    Slice: NotRequired[PropertyDefinitions]
-    Spiral: NotRequired[PropertyDefinitions]
-    Stack: NotRequired[PropertyDefinitions]
-    Tile: NotRequired[PropertyDefinitions]
-    TreeTab: NotRequired[PropertyDefinitions]
-    VerticalTile: NotRequired[PropertyDefinitions]
-    MonadTall: NotRequired[PropertyDefinitions]
-    MonadThreeCol: NotRequired[PropertyDefinitions]
-    MonadWide: NotRequired[PropertyDefinitions]
-    Zoomy: NotRequired[PropertyDefinitions]
+    common: LayoutDefinitions
+    Bsp: NotRequired[LayoutDefinitions]
+    Columns: NotRequired[LayoutDefinitions]
+    Floating: NotRequired[LayoutDefinitions]
+    Matrix: NotRequired[LayoutDefinitions]
+    Max: NotRequired[LayoutDefinitions]
+    Plasma: NotRequired[LayoutDefinitions]
+    RatioTile: NotRequired[LayoutDefinitions]
+    ScrteenSplit: NotRequired[LayoutDefinitions]
+    Slice: NotRequired[LayoutDefinitions]
+    Spiral: NotRequired[LayoutDefinitions]
+    Stack: NotRequired[LayoutDefinitions]
+    Tile: NotRequired[LayoutDefinitions]
+    TreeTab: NotRequired[LayoutDefinitions]
+    VerticalTile: NotRequired[LayoutDefinitions]
+    MonadTall: NotRequired[LayoutDefinitions]
+    MonadThreeCol: NotRequired[LayoutDefinitions]
+    MonadWide: NotRequired[LayoutDefinitions]
+    Zoomy: NotRequired[LayoutDefinitions]

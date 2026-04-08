@@ -5,6 +5,6 @@ DEFAULT_WIDGET = {
     "padding": 0,
     "font": DEFAULT_FONTS["text"]["family"],
     "fontsize": DEFAULT_FONTS["text"]["size"],
-    "foreground": "base00",
-    "background": "base07",
+    "foreground": "panel_fg",
+    "background": "panel_bg",
 }

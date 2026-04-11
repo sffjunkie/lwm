@@ -23,7 +23,7 @@ class BarContext:
     logo_font_family: str
     logo_font_size: int
 
-    background: str
+    background_rgb: str
     opacity: float
 
     def __init__(
@@ -66,11 +66,11 @@ class BarContext:
                 background = config["color"]["named"].get("panel_bg", "000000")
             else:
                 background = "000000"
-        self.background = background
+        self.background_rgb = background
 
         self.opacity = props.get("opacity", 1.0)
         self.opacity_str = opacity_to_str(self.opacity)
-        self.background_color = f"{self.background}{self.opacity_str}"
+        self.background_rgba = f"{self.background_rgb}{self.opacity_str}"
 
         if (powerline := props.get("powerline", None)) is not None:
             start = powerline.get("start", None)

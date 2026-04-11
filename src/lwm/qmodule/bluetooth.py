@@ -11,20 +11,23 @@ from lwm.context.module import ModuleContext
 class Bluetooth(WidgetModule):
     def __init__(
         self,
-        context: ModuleContext,
+        ctx: ModuleContext,
     ):
-        self.context = context
+        self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.context.props.get(
-            "background", self.context.bar.background
+        background_color = self.ctx.props.get(
+            "background", self.ctx.config["color"]["named"]["widget_bg"]
+        )
+        foreground_color = self.ctx.props.get(
+            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
         )
 
         decorations = None
         if group_id != -1:
             decorations = [
                 RectDecoration(
-                    colour=f"{background_color}{self.context.bar.opacity_str}",
+                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
                     radius=5,
                     filled=True,
                     group=True,
@@ -35,16 +38,17 @@ class Bluetooth(WidgetModule):
         bluetooth_props = {
             "name": "bluetooth",
             "padding": 8,
-            "font": self.context.text_font_family,
-            "fontsize": self.context.text_font_size,
-            "menu_font": self.context.text_font_family,
-            "menu_fontsize": self.context.text_font_size,
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
+            "menu_font": self.ctx.text_font_family,
+            "menu_fontsize": self.ctx.text_font_size,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             bluetooth_props,
-            self.context.props.pop("menu", {}),
+            self.ctx.props.pop("menu", {}),
         )
 
         if decorations is not None:
@@ -54,9 +58,10 @@ class Bluetooth(WidgetModule):
 
         bluetooth_icon_props = {
             "name": "bluetooth",
-            "font": self.context.icon_font_family,
-            "fontsize": self.context.icon_font_size,
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
             "padding": 8,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button4": lazy.widget["bar_volume"].decrease_vol(),
@@ -64,9 +69,9 @@ class Bluetooth(WidgetModule):
             },
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             bluetooth_icon_props,
-            self.context.props.pop("icon", {}),
+            self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:

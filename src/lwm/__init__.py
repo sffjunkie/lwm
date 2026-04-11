@@ -4,7 +4,7 @@ from libqtile import hook
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.log_utils import logger
 
-from lwm.debug import show_runtime_info
+from lwm.debug import log_runtime_info
 from lwm.builder.floating import build_floating
 from lwm.builder.group import build_group_keys, build_groups
 from lwm.builder.keyboard import build_keys
@@ -15,7 +15,7 @@ from lwm.builder.screen import build_screens
 from lwm.config.loader import load_config
 from lwm.secret.loader import load_secrets
 
-show_runtime_info()
+log_runtime_info()
 
 secrets = load_secrets()
 config = load_config()
@@ -53,22 +53,23 @@ else:
 
     wl_xcursor_size = 32
 
-    @hook.subscribe.startup_once
-    def autostart() -> None:
-        subprocess.run(
-            [
-                "dbus-update-activation-environment",
-                "--all",
-                "--systemd",
-            ],
-            check=False,
-        )
-        subprocess.run(
-            [
-                "systemctl",
-                "--user",
-                "start",
-                "lde-session.target",
-            ],
-            check=False,
-        )
+
+@hook.subscribe.startup_once
+def autostart() -> None:
+    subprocess.run(
+        [
+            "dbus-update-activation-environment",
+            "--all",
+            "--systemd",
+        ],
+        check=False,
+    )
+    subprocess.run(
+        [
+            "systemctl",
+            "--user",
+            "start",
+            "lde-session.target",
+        ],
+        check=False,
+    )

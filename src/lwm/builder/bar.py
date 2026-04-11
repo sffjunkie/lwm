@@ -28,30 +28,20 @@ from lwm.qmodule.system_menu import SystemMenu
 from lwm.qmodule.user_menu import UserMenu
 from lwm.qmodule.volume_status import VolumeStatus
 from lwm.qmodule.weather import Weather
-from lwm.qmodule.wifi import Wifi
 from lwm.qmodule.window_name import WindowName
 
 Bars = dict[BarLocation, QBar | None]
 
 
-def fg_cycle(iterable, fg_light: str, fg_dark: str) -> Iterator:
-    saved = []
-    for element in iterable:
-        fg = contrast_color(element, fg_light, fg_dark)
-        yield fg
-        saved.append(fg)
+def fg_color(config: Config):
+    def func(bg_color: str) -> str:
+        return contrast_color(
+            bg_color,
+            config["color"]["named"]["widget_fg_light"],
+            config["color"]["named"]["widget_fg_dark"],
+        )
 
-    while saved:
-        for element in saved:
-            yield element
-
-
-def widget_fg_iter(config: Config) -> Iterator:
-    return fg_cycle(
-        config["color"]["named"]["widget_bg"],
-        config["color"]["named"]["widget_fg_light"],
-        config["color"]["named"]["widget_fg_dark"],
-    )
+    return func
 
 
 def widget_bg_iter(config: Config) -> Iterator:
@@ -64,8 +54,7 @@ def build_top_bar(config: Config) -> QBar | None:
     logger.warning(named_colors)
 
     bg_iter = widget_bg_iter(config)
-
-    # fg_iter = widget_fg_iter(theme)
+    fg_func = fg_color(config)
 
     bar_context = BarContext(
         position="top",
@@ -87,13 +76,16 @@ def build_top_bar(config: Config) -> QBar | None:
     )
 
     # region start
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     start: list[WidgetModule] = [
         UserMenu(
             ModuleContext(
                 bar_context,
                 config=config,
                 props={
-                    "background": next(bg_iter),
+                    "foreground": fg,
+                    "background": bg,
                 },
             )
         ),
@@ -149,11 +141,14 @@ def build_top_bar(config: Config) -> QBar | None:
     # endregion
 
     # region end
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     weather_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
             "weather": {
                 "app_key": os.environ.get("OWM_API_KEY", ""),
                 "coordinates": {
@@ -165,19 +160,25 @@ def build_top_bar(config: Config) -> QBar | None:
         },
     )
 
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     date_time_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
 
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     system_menu_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
 
@@ -199,13 +200,14 @@ def build_top_bar(config: Config) -> QBar | None:
         widgets=widgets,
         size=bar_context.height,
         margin=bar_context.margin,
-        # background="#00000088",
     )
 
 
 def build_bottom_bar(config: Config) -> QBar | None:
     idx = 0
     bg_iter = widget_bg_iter(config)
+    fg_func = fg_color(config)
+
     bar_context = BarContext(
         position="bottom",
         config=config,
@@ -226,6 +228,8 @@ def build_bottom_bar(config: Config) -> QBar | None:
     )
 
     # region start
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     network_status_context = ModuleContext(
         bar_context,
         config=config,
@@ -233,9 +237,13 @@ def build_bottom_bar(config: Config) -> QBar | None:
             "network": {
                 "interface": config["device"].get("net", "eth0"),
             },
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
+
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     memory_status_context = ModuleContext(
         bar_context,
         config=config,
@@ -243,40 +251,41 @@ def build_bottom_bar(config: Config) -> QBar | None:
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             },
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
+
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     cpu_usage_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
+
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     cpu_temp_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
         },
     )
+
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     bluetooth_context = ModuleContext(
         bar_context,
         config=config,
         props={
-            "background": next(bg_iter),
-            "menu": {
-                "menu_font": "JetBrainsMono Nerd Font",
-                "menu_fontsize": 16,
-                "menu_width": 400,
-            },
-        },
-    )
-    wifi_context = ModuleContext(
-        bar_context,
-        config=config,
-        props={
-            "background": next(bg_iter),
+            "foreground": fg,
+            "background": bg,
             "menu": {
                 "menu_font": "JetBrainsMono Nerd Font",
                 "menu_fontsize": 16,
@@ -291,7 +300,6 @@ def build_bottom_bar(config: Config) -> QBar | None:
         CPUUsageStatus(cpu_usage_context),
         CPUTempStatus(cpu_temp_context),
         Bluetooth(bluetooth_context),
-        # Wifi(wifi_context),
     ]
 
     for idx, group in enumerate(start):
@@ -315,6 +323,8 @@ def build_bottom_bar(config: Config) -> QBar | None:
 
     # region end
     end: list[WidgetModule] = []
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     music_status_context = ModuleContext(
         bar_context,
         config=config,
@@ -323,17 +333,21 @@ def build_bottom_bar(config: Config) -> QBar | None:
                 "status_format": "󰝚 {title} | 󰠃 {artist} | 󰀥 {album} {play_status}",
                 "idle_format": "Play queue empty",
             },
+            "foreground": fg,
             "background": next(bg_iter),
         },
     )
     end.append(MusicStatus(music_status_context))
 
     volume_control = config["controller"]["volume"]
+    bg = next(bg_iter)
+    fg = fg_func(bg)
     if volume_control is not None:
         volume_context = ModuleContext(
             bar_context,
             config=config,
             props={
+                "foreground": fg,
                 "background": next(bg_iter),
                 "volume": {
                     "volume_up_command": f"{volume_control} up",

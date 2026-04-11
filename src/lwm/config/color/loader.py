@@ -1,5 +1,3 @@
-from libqtile.log_utils import logger
-
 from lwm.config.color.base16 import base16_colors_from_config
 from lwm.config.color.default import (
     DEFAULT_BASE16_COLORS,

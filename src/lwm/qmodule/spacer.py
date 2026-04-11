@@ -8,23 +8,26 @@ from lwm.qmodule.base import WidgetModule
 class Spacer(WidgetModule):
     def __init__(
         self,
-        context: ModuleContext,
+        ctx: ModuleContext,
     ):
-        self.context = context
+        self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.context.props.get(
-            "background", self.context.bar.background
+        background_color = self.ctx.props.get(
+            "background", self.ctx.config["color"]["named"]["widget_bg"]
         )
-        background = f"{background_color}{self.context.bar.opacity_str}"
+        background = f"{background_color}{self.ctx.bar_ctx.opacity_str}"
+        foreground_color = self.ctx.props.get(
+            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
+        )
 
         spacer_props = {
             "background": background,
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             spacer_props,
-            self.context.props.pop("layout", {}),
+            self.ctx.props.pop("layout", {}),
         )
 
         spacer = QSpacer(**props)

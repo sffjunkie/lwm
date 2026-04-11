@@ -9,20 +9,23 @@ from lwm.context.module import ModuleContext
 class CurrentLayout(WidgetModule):
     def __init__(
         self,
-        context: ModuleContext,
+        ctx: ModuleContext,
     ):
-        self.context = context
+        self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.context.props.get(
-            "background", self.context.bar.background
+        background_color = self.ctx.props.get(
+            "background", self.ctx.config["color"]["named"]["widget_bg"]
+        )
+        foreground_color = self.ctx.props.get(
+            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
         )
 
         decorations = None
         # if group_id != -1:
         decorations = [
             RectDecoration(
-                colour=f"{background_color}{self.context.bar.opacity_str}",
+                colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
                 radius=5,
                 filled=True,
                 group=True,
@@ -32,15 +35,16 @@ class CurrentLayout(WidgetModule):
 
         current_layout_props = {
             "padding": 12,
-            "font": self.context.text_font_family,
-            "fontsize": self.context.text_font_size,
-            "foreground": self.context.config["color"]["named"]["panel_fg"],
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
+            "foreground": self.ctx.config["color"]["named"]["panel_fg"],
+            "foreground": foreground_color,
             "background": f"{background_color}00",
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             current_layout_props,
-            self.context.props.pop("layout", {}),
+            self.ctx.props.pop("layout", {}),
         )
 
         current_layout = QCurrentLayout(

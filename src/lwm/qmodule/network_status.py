@@ -12,20 +12,25 @@ from lwm.terminal import terminal_run_command
 class NetworkStatus(WidgetModule):
     def __init__(
         self,
-        context: ModuleContext,
+        ctx: ModuleContext,
     ):
-        self.context = context
+        self.ctx = ctx
+        self.wifi = ctx.config["device"]["wifi"]
+        self.eth = ctx.config["device"]["eth"]
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.context.props.get(
-            "background", self.context.bar.background
+        background_color = self.ctx.props.get(
+            "background", self.ctx.config["color"]["named"]["widget_bg"]
+        )
+        foreground_color = self.ctx.props.get(
+            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
         )
 
         decorations = None
         if group_id != -1:
             decorations = [
                 RectDecoration(
-                    colour=f"{background_color}{self.context.bar.opacity_str}",
+                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
                     radius=5,
                     filled=True,
                     group=True,
@@ -33,31 +38,32 @@ class NetworkStatus(WidgetModule):
                 )
             ]
 
-        network = self.context.props.pop("network", {})
+        network = self.ctx.props.pop("network", {})
 
         slurm = terminal_run_command(
             command=[
                 "slurm",
                 "-i",
-                network.get("interface", "wlp3s0"),
+                network.get("interface", self.wifi),
             ],
         )
 
         up_props = {
             "format": "{up:4.0f}{up_suffix:<2}",
-            "font": self.context.text_font_family,
-            "fontsize": self.context.text_font_size,
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
             "padding": 8,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
             },
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             up_props,
-            self.context.props.pop("up", {}),
-            self.context.props.pop("network", {}),
+            self.ctx.props.pop("up", {}),
+            self.ctx.props.pop("network", {}),
         )
 
         if decorations is not None:
@@ -67,18 +73,19 @@ class NetworkStatus(WidgetModule):
 
         up_icon_props = {
             "name": "net_up",
-            "font": self.context.icon_font_family,
-            "fontsize": self.context.icon_font_size,
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
             "padding": 8,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
             },
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             up_icon_props,
-            self.context.props.pop("icon", {}),
+            self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
@@ -88,8 +95,8 @@ class NetworkStatus(WidgetModule):
 
         down_props = {
             "format": "{down:4.0f}{down_suffix:<2}",
-            "font": self.context.text_font_family,
-            "fontsize": self.context.text_font_size,
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
@@ -97,10 +104,10 @@ class NetworkStatus(WidgetModule):
             },
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             down_props,
-            self.context.props.pop("down", {}),
-            self.context.props.pop("network", {}),
+            self.ctx.props.pop("down", {}),
+            self.ctx.props.pop("network", {}),
         )
 
         if decorations is not None:
@@ -110,8 +117,8 @@ class NetworkStatus(WidgetModule):
 
         down_icon_props = {
             "name": "net_down",
-            "font": self.context.icon_font_family,
-            "fontsize": self.context.icon_font_size,
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
             "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
@@ -119,9 +126,9 @@ class NetworkStatus(WidgetModule):
             },
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             down_icon_props,
-            self.context.props.pop("icon", {}),
+            self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:

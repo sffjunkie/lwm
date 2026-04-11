@@ -9,20 +9,23 @@ from lwm.context.module import ModuleContext
 class GroupBox(WidgetModule):
     def __init__(
         self,
-        context: ModuleContext,
+        ctx: ModuleContext,
     ):
-        self.context = context
+        self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.context.props.get(
-            "background", self.context.bar.background
+        background_color = self.ctx.props.get(
+            "background", self.ctx.bar_ctx.background_rgb
+        )
+        foreground_color = self.ctx.props.get(
+            "foreground", self.ctx.config["color"]["named"]["panel_fg"]
         )
 
         decorations = None
         if group_id != -1:
             decorations = [
                 RectDecoration(
-                    colour=f"{background_color}{self.context.bar.opacity_str}",
+                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
                     radius=5,
                     filled=True,
                     group=True,
@@ -36,28 +39,26 @@ class GroupBox(WidgetModule):
             "margin_x": 6,
             "padding_x": 6,
             "borderwidth": 0,
-            "font": self.context.text_font_family,
-            "fontsize": self.context.text_font_size,
-            "foreground": self.context.config["color"]["named"]["panel_fg"],
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
-            "active": self.context.config["color"]["named"]["group_active_fg"],
-            "inactive": self.context.config["color"]["named"]["group_inactive_fg"],
+            "active": self.ctx.config["color"]["named"]["group_active_fg"],
+            "inactive": self.ctx.config["color"]["named"]["group_inactive_fg"],
             "rounded": True,
             "highlight_method": "block",
-            "this_current_screen_border": self.context.config["color"]["named"][
+            "this_current_screen_border": self.ctx.config["color"]["named"][
                 "group_current_bg"
             ],
-            "this_screen_border": self.context.config["color"]["named"][
-                "group_current_bg"
-            ],
+            "this_screen_border": self.ctx.config["color"]["named"]["group_current_bg"],
             "use_mouse_wheel": False,
             # other_current_screen_border=theme_colors["panel_bg"],
             # other_screen_border=theme_colors["panel_bg"],
         }
 
-        props = self.context.merge_parameters(
+        props = self.ctx.merge_parameters(
             group_box_props,
-            self.context.props.pop("group_box", {}),
+            self.ctx.props.pop("group_box", {}),
         )
 
         if decorations is not None:

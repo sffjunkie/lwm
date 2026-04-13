@@ -14,16 +14,16 @@ class Separator(WidgetModule):
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
         background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["widget_bg"]
+            "background", self.ctx.config["color"]["named"]["panel_bg"]
         )
         foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
+            "foreground", self.ctx.config["color"]["named"]["panel_bg"]
         )
 
         separator_props = {
             "padding": 12,
             "linewidth": 0,
-            "foreground": foreground_color,
+            "foreground": f"{foreground_color}00",
             "background": f"{background_color}00",
         }
 

@@ -98,6 +98,7 @@ class NetworkStatus(WidgetModule):
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
@@ -120,6 +121,7 @@ class NetworkStatus(WidgetModule):
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),

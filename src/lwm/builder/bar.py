@@ -51,7 +51,6 @@ def widget_bg_iter(config: Config) -> Iterator:
 def build_top_bar(config: Config) -> QBar | None:
     idx = 0
     named_colors = config["color"]["named"]
-    logger.warning(named_colors)
 
     bg_iter = widget_bg_iter(config)
     fg_func = fg_color(config)

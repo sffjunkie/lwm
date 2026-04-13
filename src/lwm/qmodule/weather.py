@@ -37,6 +37,7 @@ class Weather(WidgetModule):
             "padding": 12,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
+            "foreground": foreground_color,
             "background": f"{background_color}00",
         }
 

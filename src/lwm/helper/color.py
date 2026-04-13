@@ -25,7 +25,7 @@ def is_base16(value: str) -> bool:
 
 
 def opacity_to_str(opacity: float) -> str:
-    return hex(int(opacity * 255.0))[2:]
+    return hex(int(opacity * 255.0))[2:].lower()
 
 
 def rgb_intensity(rgb: RGBColor):
@@ -36,11 +36,20 @@ def rgb_intensity(rgb: RGBColor):
 
 def contrast_color(
     color: str,
-    light: str = "FFFFFF",
+    light: str = "ffffff",
     dark: str = "000000",
 ) -> str:
     """Return either the light ior dark color
     whichever provides the most contrast"""
+
+    if color[0] == "#":
+        color = color[1:]
+
+    if light[0] == "#":
+        light = light[1:]
+
+    if dark[0] == "#":
+        dark = dark[1:]
 
     rgb = rgbhex_to_rgb(color)
     if rgb is None:
@@ -75,25 +84,28 @@ def rgbhex_to_rgb(value: str, allow_short: bool = True) -> RGBColor | None:
         # http://docs.python.org/library/itertools.html
         def to_iterable() -> RGBColor:
             # pylint: disable=missing-docstring
-            args = [iter(value[1:])] * 2
-            return RGBColor([int("%s%s" % t, 16) / 255 for t in zip(*args)])
+            args = [iter(value)] * 2
+            values = zip(*args)
+            color = [int("%s%s" % t, 16) / 255 for t in list(values)]
+            return RGBColor(color)
 
     elif len(value) == 3 and allow_short:
 
         def to_iterable() -> RGBColor:
             # pylint: disable=missing-docstring
-            return RGBColor([int("%s%s" % (t, t), 16) / 255 for t in value[1:]])
+            return RGBColor([int("%s%s" % (t, t), 16) / 255 for t in value])
 
     else:
         return None
 
     try:
-        return to_iterable()
+        color = to_iterable()
+        return color
     except ValueError:
         return None
 
 
-def rgbcolor_to_rgb_hex(value: RGBColor) -> str:
+def rgbcolor_to_rgb_hex(value: RGBColor, with_hash: bool = False) -> str:
     """Convert from an (R, G, B) tuple to a hex color.
 
     :param value: The RGB value to convert
@@ -101,4 +113,7 @@ def rgbcolor_to_rgb_hex(value: RGBColor) -> str:
     R, G and B should be in the range 0.0 - 1.0
     """
     color = "".join(["%02x" % x1 for x1 in [int(x * 255) for x in value]])
-    return "#%s" % color
+    if with_hash:
+        return "#%s" % color.lower()
+    else:
+        return "%s" % color.lower()

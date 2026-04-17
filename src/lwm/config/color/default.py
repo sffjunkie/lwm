@@ -22,8 +22,8 @@ DEFAULT_BASE16_COLORS: Base16Colors = {
 
 
 DEFAULT_NAMED_COLORS: NamedColors = {
-    "panel_fg": "base01",
-    "panel_bg": "base0f",
+    "bar_fg": "base01",
+    "bar_bg": "base0f",
     "group_current_fg": "base05",
     "group_current_bg": "base0f",
     "group_active_fg": "base01",

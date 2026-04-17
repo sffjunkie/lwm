@@ -7,6 +7,8 @@ from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
 from lwm.terminal import terminal_run_command
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class MemoryStatus(WidgetModule):
@@ -17,24 +19,8 @@ class MemoryStatus(WidgetModule):
         self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["widget_bg"]
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
-        )
-
-        decorations = None
-        if group_id != -1:
-            decorations = [
-                RectDecoration(
-                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
-                    radius=5,
-                    filled=True,
-                    group=True,
-                    group_id=group_id,
-                )
-            ]
+        background_color = self.ctx.props.get("background", self.ctx.background_rgba)
+        foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         system_status = terminal_run_command(command=["htop"])
 
@@ -44,13 +30,39 @@ class MemoryStatus(WidgetModule):
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "foreground": foreground_color,
-            "background": f"{background_color}00",
+            "background": background_color,
             "mouse_callbacks": {
                 "Button1": lazy.spawn(system_status),
             },
         }
 
-        props = self.ctx.merge_parameters(
+        icon_props = {
+            "name": "memory",
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(system_status),
+            },
+        }
+
+        decorations = None
+        if group_id != -1:
+            decorations = [
+                RectDecoration(
+                    colour=background_color,
+                    radius=5,
+                    filled=True,
+                    group=True,
+                    group_id=group_id,
+                )
+            ]
+            memory_props["background"] = TRANSPARENT
+            icon_props["background"] = TRANSPARENT
+
+        props = override_parameters(
             memory_props,
             self.ctx.props.pop("memory", {}),
         )
@@ -60,19 +72,7 @@ class MemoryStatus(WidgetModule):
 
         memory = Memory(**props)
 
-        icon_props = {
-            "name": "memory",
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
-            "padding": 8,
-            "foreground": foreground_color,
-            "background": f"{background_color}00",
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(system_status),
-            },
-        }
-
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             icon_props,
             self.ctx.props.pop("icon", {}),
         )

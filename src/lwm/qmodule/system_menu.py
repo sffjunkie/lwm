@@ -7,6 +7,8 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class SystemMenu(WidgetModule):
@@ -17,24 +19,8 @@ class SystemMenu(WidgetModule):
         self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["widget_bg"]
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
-        )
-
-        decorations = None
-        if group_id != -1:
-            decorations = [
-                RectDecoration(
-                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
-                    radius=5,
-                    filled=True,
-                    group=True,
-                    group_id=group_id,
-                )
-            ]
+        background_color = self.ctx.props.get("background", self.ctx.background_rgba)
+        foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         system_menu = self.ctx.config["menu"].get("system", None)
         hostname_props = {
@@ -44,13 +30,40 @@ class SystemMenu(WidgetModule):
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "foreground": foreground_color,
-            "background": f"{background_color}00",
+            "background": background_color,
         }
 
         if system_menu is not None:
             hostname_props["mouse_callbacks"] = {"Button1": lazy.spawn(system_menu)}
 
-        props = self.ctx.merge_parameters(
+        icon_props = {
+            "text": self.ctx.config["branding"]["icon"],
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            "width": self.ctx.bar_ctx.height,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+        }
+
+        if system_menu is not None:
+            icon_props["mouse_callbacks"] = {"Button1": lazy.spawn(system_menu)}
+
+        decorations = None
+        if group_id != -1:
+            decorations = [
+                RectDecoration(
+                    colour=background_color,
+                    radius=5,
+                    filled=True,
+                    group=True,
+                    group_id=group_id,
+                )
+            ]
+            hostname_props["background"] = TRANSPARENT
+            icon_props["background"] = TRANSPARENT
+
+        props = override_parameters(
             hostname_props,
             self.ctx.props.pop("layout", {}),
         )
@@ -60,20 +73,7 @@ class SystemMenu(WidgetModule):
 
         hostname = TextBox(**props)
 
-        icon_props = {
-            "text": self.ctx.config["branding"]["icon"],
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
-            "width": self.ctx.bar_ctx.height,
-            "padding": 8,
-            "foreground": foreground_color,
-            "background": f"{background_color}00",
-        }
-
-        if system_menu is not None:
-            icon_props["mouse_callbacks"] = {"Button1": lazy.spawn(system_menu)}
-
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             icon_props,
             self.ctx.props.pop("layout", {}),
         )

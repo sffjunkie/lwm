@@ -4,7 +4,7 @@ from lwm.helper.color import (
     is_color,
     is_base16,
     contrast_color,
-    opacity_to_str,
+    opacity_to_hex,
     rgb_intensity,
     rgbhex_to_rgb,
     rgbcolor_to_rgb_hex,
@@ -25,7 +25,7 @@ def test_is_base16():
 
 
 def test_opacity_to_string():
-    assert opacity_to_str(0.5) == "7f"
+    assert opacity_to_hex(0.5) == "7f"
 
 
 def test_rgb_intensiy():

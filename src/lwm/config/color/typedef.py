@@ -36,8 +36,8 @@ class NamedColors(TypedDict):
     group_inactive_fg: Color
     group_inactive_bg: Color
 
-    panel_fg: Color
-    panel_bg: Color
+    bar_fg: Color
+    bar_bg: Color
 
     widget_bg: list[str]
     widget_fg_dark: Color

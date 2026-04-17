@@ -21,6 +21,6 @@ def test_deref_colors_named():
         named=DEFAULT_NAMED_COLORS,
     )
 
-    assert new_colors["panel_fg"] == "#1e2030"
-    assert new_colors["panel_bg"] == "#f0c6c6"
+    assert new_colors["bar_fg"] == "#1e2030"
+    assert new_colors["bar_bg"] == "#f0c6c6"
     assert new_colors["widget_bg"] == ["#f4dbd6"]

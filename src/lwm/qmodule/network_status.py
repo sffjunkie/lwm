@@ -7,6 +7,8 @@ from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
 from lwm.qwidget.net_min import NetMin
 from lwm.terminal import terminal_run_command
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class NetworkStatus(WidgetModule):
@@ -19,24 +21,8 @@ class NetworkStatus(WidgetModule):
         self.eth = ctx.config["device"]["eth"]
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["widget_bg"]
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
-        )
-
-        decorations = None
-        if group_id != -1:
-            decorations = [
-                RectDecoration(
-                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
-                    radius=5,
-                    filled=True,
-                    group=True,
-                    group_id=group_id,
-                )
-            ]
+        background_color = self.ctx.props.get("background", self.ctx.background_rgba)
+        foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         network = self.ctx.props.pop("network", {})
 
@@ -54,13 +40,65 @@ class NetworkStatus(WidgetModule):
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "foreground": foreground_color,
-            "background": f"{background_color}00",
+            "background": background_color,
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
             },
         }
 
-        props = self.ctx.merge_parameters(
+        up_icon_props = {
+            "name": "net_up",
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(slurm),
+            },
+        }
+
+        down_props = {
+            "format": "{down:4.0f}{down_suffix:<2}",
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(slurm),
+            },
+        }
+
+        down_icon_props = {
+            "name": "net_down",
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(slurm),
+            },
+        }
+
+        decorations = None
+        if group_id != -1:
+            decorations = [
+                RectDecoration(
+                    colour=background_color,
+                    radius=5,
+                    filled=True,
+                    group=True,
+                    group_id=group_id,
+                )
+            ]
+            up_props["background"] = TRANSPARENT
+            up_icon_props["background"] = TRANSPARENT
+            down_props["background"] = TRANSPARENT
+            down_icon_props["background"] = TRANSPARENT
+
+        props = override_parameters(
             up_props,
             self.ctx.props.pop("up", {}),
             self.ctx.props.pop("network", {}),
@@ -71,19 +109,7 @@ class NetworkStatus(WidgetModule):
 
         up = NetMin(**props)
 
-        up_icon_props = {
-            "name": "net_up",
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
-            "padding": 8,
-            "foreground": foreground_color,
-            "background": f"{background_color}00",
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
-        }
-
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             up_icon_props,
             self.ctx.props.pop("icon", {}),
         )
@@ -93,19 +119,7 @@ class NetworkStatus(WidgetModule):
 
         up_icon = MDIcon(**props)
 
-        down_props = {
-            "format": "{down:4.0f}{down_suffix:<2}",
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
-            "padding": 8,
-            "foreground": foreground_color,
-            "background": f"{background_color}00",
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
-        }
-
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             down_props,
             self.ctx.props.pop("down", {}),
             self.ctx.props.pop("network", {}),
@@ -116,19 +130,7 @@ class NetworkStatus(WidgetModule):
 
         down = NetMin(**props)
 
-        down_icon_props = {
-            "name": "net_down",
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
-            "padding": 8,
-            "foreground": foreground_color,
-            "background": f"{background_color}00",
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
-        }
-
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             down_icon_props,
             self.ctx.props.pop("icon", {}),
         )

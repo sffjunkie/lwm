@@ -4,9 +4,8 @@ import os
 from itertools import cycle
 from typing import Iterator
 
-from libqtile.log_utils import logger
-from libqtile.bar import Bar as QBar  # type: ignore
-from qtile_extras.widget import Spacer as QSpacer  # type: ignore
+from libqtile.bar import Bar as QBar
+from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.helper.color import contrast_color, TRANSPARENT
 from lwm.config.bar.typedef import BarLocation
@@ -93,7 +92,7 @@ def build_top_bar(config: Config) -> QBar | None:
                 bar_context,
                 config=config,
                 props={
-                    "background": named_colors["panel_bg"],
+                    "background": named_colors["bar_bg"],
                 },
             )
         ),
@@ -102,7 +101,7 @@ def build_top_bar(config: Config) -> QBar | None:
                 bar_context,
                 config=config,
                 props={
-                    "background": named_colors["panel_bg"],
+                    "background": named_colors["bar_bg"],
                 },
             )
         ),
@@ -124,7 +123,7 @@ def build_top_bar(config: Config) -> QBar | None:
                 props={
                     # "background": next(bg_iter),
                     "group": 4,
-                    "background": named_colors["panel_bg"],
+                    "background": named_colors["bar_bg"],
                 },
             )
         ),

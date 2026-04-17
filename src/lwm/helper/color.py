@@ -24,7 +24,7 @@ def is_base16(value: str) -> bool:
     )
 
 
-def opacity_to_str(opacity: float) -> str:
+def opacity_to_hex(opacity: float) -> str:
     return hex(int(opacity * 255.0))[2:].lower()
 
 
@@ -36,8 +36,8 @@ def rgb_intensity(rgb: RGBColor):
 
 def contrast_color(
     color: str,
-    light: str = "ffffff",
     dark: str = "000000",
+    light: str = "ffffff",
 ) -> str:
     """Return either the light ior dark color
     whichever provides the most contrast"""

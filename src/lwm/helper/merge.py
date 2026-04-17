@@ -1,9 +1,9 @@
 # https://stackoverflow.com/a/7205672/3253026
-def mergedicts(dict1: dict, dict2: dict):
+def merge_dict(dict1: dict, dict2: dict):
     for k in set(dict1.keys()).union(dict2.keys()):
         if k in dict1 and k in dict2:
             if isinstance(dict1[k], dict) and isinstance(dict2[k], dict):
-                yield (k, dict(mergedicts(dict1[k], dict2[k])))
+                yield (k, dict(merge_dict(dict1[k], dict2[k])))
             else:
                 # If one of the values is not a dict, you can't continue merging it.
                 # Value from second dict overrides one in first and we move on.
@@ -13,3 +13,10 @@ def mergedicts(dict1: dict, dict2: dict):
             yield (k, dict1[k])
         else:
             yield (k, dict2[k])
+
+
+def override_parameters(base: dict, *overrides: dict) -> dict:
+    res = base.copy()
+    for override in overrides:
+        res = dict(merge_dict(res, override))
+    return res

@@ -5,6 +5,8 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class WindowName(WidgetModule):
@@ -15,22 +17,18 @@ class WindowName(WidgetModule):
         self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["widget_bg"]
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["widget_fg_dark"]
-        )
+        background_color = self.ctx.props.get("background", self.ctx.background_rgba)
+        foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         window_name_props = {
             "padding": 12,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
-            "foreground": self.ctx.config["color"]["named"]["panel_fg"],
-            "background": f"{background_color}00",
+            "foreground": foreground_color,
+            "background": background_color,
         }
 
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             window_name_props,
             self.ctx.props.pop("name", {}),
         )
@@ -39,17 +37,18 @@ class WindowName(WidgetModule):
         if group_id != -1:
             decorations = [
                 RectDecoration(
-                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
+                    colour=background_color,
                     radius=5,
                     filled=True,
                     group=True,
                     group_id=group_id,
                 )
             ]
+            window_name_props["background"] = TRANSPARENT
 
         widgets = [
             QSpacer(
-                background=f"{background_color}00",
+                background=TRANSPARENT,
                 decorations=decorations,
             ),
             QWindowName(
@@ -57,7 +56,7 @@ class WindowName(WidgetModule):
                 decorations=decorations,
             ),
             QSpacer(
-                background=f"{background_color}00",
+                background=TRANSPARENT,
                 decorations=decorations,
             ),
         ]

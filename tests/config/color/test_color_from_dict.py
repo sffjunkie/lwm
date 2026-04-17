@@ -14,11 +14,11 @@ def test_color_from_dict(test_data: Path):
                 },
             },
             "named": {
-                "panel_fg": "base07",
+                "bar_fg": "base07",
             },
         }
     }
 
     color = colordefs_from_config(config)
     assert color["base16"]["base00"] == "#32302f"
-    assert color["named"]["panel_fg"] == "#282828"
+    assert color["named"]["bar_fg"] == "#282828"

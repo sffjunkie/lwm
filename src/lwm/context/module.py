@@ -1,8 +1,9 @@
 from typing import Literal
 
-from lwm.helper.color import opacity_to_str
+from lwm.helper.color import opacity_to_hex
 from lwm.config.typedef import Config
 from lwm.context.bar import BarContext
+from lwm.helper.color import contrast_color
 
 GroupPosition = Literal["start", "middle", "end"]
 
@@ -15,8 +16,10 @@ class ModuleContext:
     logo_font_family: str
     logo_font_size: int
 
-    background_rgba: str
     opacity: float
+    background_rgb: str
+    background_rgba: str
+    foreground_rgb: str
 
     def __init__(
         self,
@@ -36,13 +39,16 @@ class ModuleContext:
         self.logo_font_size = props.get("logo_font_size", bar_ctx.logo_font_size)
 
         self.opacity = props.get("opacity", bar_ctx.opacity)
-        self.background_rgb = props.get("background", bar_ctx.background_rgba)
+        opacity_str = opacity_to_hex(self.opacity)
 
-        self.opacity_str = opacity_to_str(self.opacity)
-        self.background_rgba = f"{self.background_rgb}{self.opacity_str}"
+        self.background_rgb = props.get(
+            "background", config["color"]["named"]["widget_bg"][0]
+        )
+        self.background_rgba = f"{self.background_rgb}{opacity_str}"
 
-    def merge_parameters(self, base: dict, *overrides: dict):
-        cfg = base.copy()
-        for override in overrides:
-            cfg.update(override)
-        return cfg
+        fg_dark = config["color"]["named"]["widget_fg_dark"]
+        fg_light = config["color"]["named"]["widget_fg_light"]
+        self.foreground_rgb = props.get(
+            "foreground",
+            contrast_color(self.background_rgb, dark=fg_dark, light=fg_light),
+        )

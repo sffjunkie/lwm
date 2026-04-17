@@ -4,6 +4,8 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class GroupBox(WidgetModule):
@@ -14,24 +16,8 @@ class GroupBox(WidgetModule):
         self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.bar_ctx.background_rgb
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["panel_fg"]
-        )
-
-        decorations = None
-        if group_id != -1:
-            decorations = [
-                RectDecoration(
-                    colour=f"{background_color}{self.ctx.bar_ctx.opacity_str}",
-                    radius=5,
-                    filled=True,
-                    group=True,
-                    group_id=group_id,
-                )
-            ]
+        background_color = self.ctx.props.get("background", self.ctx.background_rgba)
+        foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         group_box_props = {
             "margin_y": 3,
@@ -42,7 +28,7 @@ class GroupBox(WidgetModule):
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "foreground": foreground_color,
-            "background": f"{background_color}00",
+            "background": background_color,
             "active": self.ctx.config["color"]["named"]["group_active_fg"],
             "inactive": self.ctx.config["color"]["named"]["group_inactive_fg"],
             "rounded": True,
@@ -52,11 +38,24 @@ class GroupBox(WidgetModule):
             ],
             "this_screen_border": self.ctx.config["color"]["named"]["group_current_bg"],
             "use_mouse_wheel": False,
-            # other_current_screen_border=theme_colors["panel_bg"],
-            # other_screen_border=theme_colors["panel_bg"],
+            # other_current_screen_border=theme_colors["bar_bg"],
+            # other_screen_border=theme_colors["bar_bg"],
         }
 
-        props = self.ctx.merge_parameters(
+        decorations = None
+        if group_id != -1:
+            decorations = [
+                RectDecoration(
+                    colour=background_color,
+                    radius=5,
+                    filled=True,
+                    group=True,
+                    group_id=group_id,
+                )
+            ]
+            group_box_props["background"] = TRANSPARENT
+
+        props = override_parameters(
             group_box_props,
             self.ctx.props.pop("group_box", {}),
         )

@@ -3,6 +3,8 @@ from qtile_extras.widget import Sep  # type: ignore
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
+from lwm.helper.merge import override_parameters
+from lwm.helper.color import TRANSPARENT
 
 
 class Separator(WidgetModule):
@@ -13,21 +15,14 @@ class Separator(WidgetModule):
         self.ctx = ctx
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
-        background_color = self.ctx.props.get(
-            "background", self.ctx.config["color"]["named"]["panel_bg"]
-        )
-        foreground_color = self.ctx.props.get(
-            "foreground", self.ctx.config["color"]["named"]["panel_bg"]
-        )
-
         separator_props = {
             "padding": 12,
             "linewidth": 0,
-            "foreground": f"{foreground_color}00",
-            "background": f"{background_color}00",
+            "foreground": TRANSPARENT,
+            "background": TRANSPARENT,
         }
 
-        props = self.ctx.merge_parameters(
+        props = override_parameters(
             separator_props,
             self.ctx.props.pop("separator", {}),
         )

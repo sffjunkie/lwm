@@ -78,6 +78,7 @@ class ModuleContext:
         fg = self.bar_ctx.widget_fg(bg)
 
         self._props = override_parameters(
+            self._props,
             {
                 "foreground": fg,
                 "background": bg,

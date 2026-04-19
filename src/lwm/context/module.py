@@ -1,5 +1,6 @@
 from typing import Literal
 
+from lwm.helper.merge import override_parameters
 from lwm.helper.color import opacity_to_hex
 from lwm.config.typedef import Config
 from lwm.context.bar import BarContext
@@ -31,24 +32,55 @@ class ModuleContext:
         self.config = config
         self.props = props
 
-        self.text_font_family = props.get("text_font_family", bar_ctx.text_font_family)
-        self.text_font_size = props.get("text_font_size", bar_ctx.text_font_size)
-        self.icon_font_family = props.get("icon_font_family", bar_ctx.icon_font_family)
-        self.icon_font_size = props.get("icon_font_size", bar_ctx.icon_font_size)
-        self.logo_font_family = props.get("logo_font_family", bar_ctx.logo_font_family)
-        self.logo_font_size = props.get("logo_font_size", bar_ctx.logo_font_size)
+    @property
+    def props(self) -> dict:
+        return self._props or {}
 
-        self.opacity = props.get("opacity", bar_ctx.opacity)
+    @props.setter
+    def props(self, new_props: dict) -> None:
+        new_props = new_props or {}
+
+        self.text_font_family = new_props.get(
+            "text_font_family", self.bar_ctx.text_font_family
+        )
+        self.text_font_size = new_props.get(
+            "text_font_size", self.bar_ctx.text_font_size
+        )
+        self.icon_font_family = new_props.get(
+            "icon_font_family", self.bar_ctx.icon_font_family
+        )
+        self.icon_font_size = new_props.get(
+            "icon_font_size", self.bar_ctx.icon_font_size
+        )
+        self.logo_font_family = new_props.get(
+            "logo_font_family", self.bar_ctx.logo_font_family
+        )
+        self.logo_font_size = new_props.get(
+            "logo_font_size", self.bar_ctx.logo_font_size
+        )
+
+        self.opacity = new_props.get("opacity", self.bar_ctx.opacity)
         opacity_str = opacity_to_hex(self.opacity)
 
-        self.background_rgb = props.get(
-            "background", config["color"]["named"]["widget_bg"][0]
+        self.background_rgb = new_props.get(
+            "background", self.config["color"]["named"]["widget_bg"][0]
         )
         self.background_rgba = f"{self.background_rgb}{opacity_str}"
 
-        fg_dark = config["color"]["named"]["widget_fg_dark"]
-        fg_light = config["color"]["named"]["widget_fg_light"]
-        self.foreground_rgb = props.get(
+        fg_dark = self.config["color"]["named"]["widget_fg_dark"]
+        fg_light = self.config["color"]["named"]["widget_fg_light"]
+        self.foreground_rgb = new_props.get(
             "foreground",
             contrast_color(self.background_rgb, dark=fg_dark, light=fg_light),
+        )
+
+        bg = next(self.bar_ctx.widget_bg_iter)
+        fg = self.bar_ctx.widget_fg(bg)
+
+        self._props = override_parameters(
+            {
+                "foreground": fg,
+                "background": bg,
+            },
+            new_props,
         )

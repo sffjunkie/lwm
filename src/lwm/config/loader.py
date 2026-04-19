@@ -33,6 +33,7 @@ ConfigKeys = Literal[
     "extension",
     "font",
     "group",
+    "input",
     "key",
     "layout",
     "menu",

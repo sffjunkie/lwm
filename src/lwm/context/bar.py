@@ -1,9 +1,13 @@
 from typing import Literal
+from itertools import cycle
+from typing import Any
 
 from lwm.config.bar.default import DEFAULT_BAR_HEIGHT, DEFAULT_BAR_MARGIN
 from lwm.config.font.default import DEFAULT_FONTS
 from lwm.config.typedef import Config
-from lwm.helper.color import opacity_to_hex
+from lwm.helper.color import opacity_to_hex, contrast_color
+from lwm.context.module import ModuleContext
+from lwm.helper.merge import override_parameters
 
 BarPosition = Literal["top", "bottom", "left", "right"]
 
@@ -99,3 +103,30 @@ class BarContext:
         self.opacity = props.get("opacity", config["bar"][position]["opacity"])
         self.opacity_hex = opacity_to_hex(self.opacity)
         self.background_rgba = f"{self.background_rgb}{self.opacity_hex}"
+
+        self.widget_bg_iter = cycle(self.config["color"]["named"]["widget_bg"])
+
+    def widget_fg(self, bg_color: str):
+        return contrast_color(
+            bg_color,
+            self.config["color"]["named"]["widget_fg_light"],
+            self.config["color"]["named"]["widget_fg_dark"],
+        )
+
+    def module_ctx(self, props: dict[str, Any] | None = None) -> ModuleContext:
+        props = props or {}
+
+        bg = next(self.widget_bg_iter)
+        fg = self.widget_fg(bg)
+
+        return ModuleContext(
+            self,
+            config=self.config,
+            props=override_parameters(
+                {
+                    "foreground": fg,
+                    "background": bg,
+                },
+                props,
+            ),
+        )

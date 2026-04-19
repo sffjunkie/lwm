@@ -51,7 +51,6 @@ def build_top_bar(config: Config) -> QBar | None:
     idx = 0
     named_colors = config["color"]["named"]
 
-    bg_iter = widget_bg_iter(config)
     fg_func = fg_color(config)
 
     bar_context = BarContext(
@@ -67,44 +66,23 @@ def build_top_bar(config: Config) -> QBar | None:
     widgets = []
 
     separator = Separator(
-        ModuleContext(
-            bar_context,
-            config=config,
+        bar_context.module_ctx(
+            props={
+                "background": TRANSPARENT,
+                "foreground": TRANSPARENT,
+            }
         )
     )
 
+    user_menu_context = bar_context.module_ctx()
+    group_box_context = bar_context.module_ctx()
+    current_layout_context = bar_context.module_ctx()
+
     # region start
-    bg = next(bg_iter)
-    fg = fg_func(bg)
     start: list[WidgetModule] = [
-        UserMenu(
-            ModuleContext(
-                bar_context,
-                config=config,
-                props={
-                    "foreground": fg,
-                    "background": bg,
-                },
-            )
-        ),
-        GroupBox(
-            ModuleContext(
-                bar_context,
-                config=config,
-                props={
-                    "background": named_colors["bar_bg"],
-                },
-            )
-        ),
-        CurrentLayout(
-            ModuleContext(
-                bar_context,
-                config=config,
-                props={
-                    "background": named_colors["bar_bg"],
-                },
-            )
-        ),
+        UserMenu(user_menu_context),
+        GroupBox(group_box_context),
+        CurrentLayout(current_layout_context),
     ]
 
     for idx, group in enumerate(start):
@@ -114,19 +92,11 @@ def build_top_bar(config: Config) -> QBar | None:
         widgets.extend(group.widgets(group_id=idx))
     # endregion
 
+    window_name_context = bar_context.module_ctx()
+
     # region middle
     middle: list[WidgetModule] = [
-        WindowName(
-            ModuleContext(
-                bar_context,
-                config=config,
-                props={
-                    # "background": next(bg_iter),
-                    "group": 4,
-                    "background": named_colors["bar_bg"],
-                },
-            )
-        ),
+        WindowName(window_name_context),
     ]
 
     if middle == []:
@@ -139,14 +109,8 @@ def build_top_bar(config: Config) -> QBar | None:
     # endregion
 
     # region end
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    weather_context = ModuleContext(
-        bar_context,
-        config=config,
+    weather_context = bar_context.module_ctx(
         props={
-            "foreground": fg,
-            "background": bg,
             "weather": {
                 "app_key": os.environ.get("OWM_API_KEY", ""),
                 "coordinates": {
@@ -158,27 +122,8 @@ def build_top_bar(config: Config) -> QBar | None:
         },
     )
 
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    date_time_context = ModuleContext(
-        bar_context,
-        config=config,
-        props={
-            "foreground": fg,
-            "background": bg,
-        },
-    )
-
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    system_menu_context = ModuleContext(
-        bar_context,
-        config=config,
-        props={
-            "foreground": fg,
-            "background": bg,
-        },
-    )
+    date_time_context = bar_context.module_ctx()
+    system_menu_context = bar_context.module_ctx()
 
     end: list[WidgetModule] = [
         Weather(weather_context),
@@ -226,64 +171,27 @@ def build_bottom_bar(config: Config) -> QBar | None:
     )
 
     # region start
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    network_status_context = ModuleContext(
-        bar_context,
-        config=config,
+    network_status_context = bar_context.module_ctx(
         props={
             "network": {
                 "interface": config["device"].get("net", "eth0"),
             },
-            "foreground": fg,
-            "background": bg,
         },
     )
 
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    memory_status_context = ModuleContext(
-        bar_context,
-        config=config,
+    memory_status_context = bar_context.module_ctx(
         props={
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             },
-            "foreground": fg,
-            "background": bg,
         },
     )
 
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    cpu_usage_context = ModuleContext(
-        bar_context,
-        config=config,
-        props={
-            "foreground": fg,
-            "background": bg,
-        },
-    )
+    cpu_usage_context = bar_context.module_ctx()
+    cpu_temp_context = bar_context.module_ctx()
 
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    cpu_temp_context = ModuleContext(
-        bar_context,
-        config=config,
+    bluetooth_context = bar_context.module_ctx(
         props={
-            "foreground": fg,
-            "background": bg,
-        },
-    )
-
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    bluetooth_context = ModuleContext(
-        bar_context,
-        config=config,
-        props={
-            "foreground": fg,
-            "background": bg,
             "menu": {
                 "menu_font": "JetBrainsMono Nerd Font",
                 "menu_fontsize": 16,
@@ -321,32 +229,20 @@ def build_bottom_bar(config: Config) -> QBar | None:
 
     # region end
     end: list[WidgetModule] = []
-    bg = next(bg_iter)
-    fg = fg_func(bg)
-    music_status_context = ModuleContext(
-        bar_context,
-        config=config,
+    music_status_context = bar_context.module_ctx(
         props={
             "music": {
                 "status_format": "󰝚 {title} | 󰠃 {artist} | 󰀥 {album} {play_status}",
                 "idle_format": "Play queue empty",
             },
-            "foreground": fg,
-            "background": next(bg_iter),
         },
     )
     end.append(MusicStatus(music_status_context))
 
     volume_control = config["controller"]["volume"]
-    bg = next(bg_iter)
-    fg = fg_func(bg)
     if volume_control is not None:
-        volume_context = ModuleContext(
-            bar_context,
-            config=config,
+        volume_context = bar_context.module_ctx(
             props={
-                "foreground": fg,
-                "background": next(bg_iter),
                 "volume": {
                     "volume_up_command": f"{volume_control} up",
                     "volume_down_command": f"{volume_control} down",

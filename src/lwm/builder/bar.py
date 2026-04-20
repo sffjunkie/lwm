@@ -69,7 +69,11 @@ def build_top_bar(config: Config) -> QBar | None:
     )
     separator = Separator(ctx)
 
-    user_menu_context = ModuleContext(bar_context, config)
+    user_menu_context = ModuleContext(
+        bar_context,
+        config,
+        props={"background": "base0f"},
+    )
     group_box_context = ModuleContext(bar_context, config)
     current_layout_context = ModuleContext(bar_context, config)
 
@@ -120,7 +124,11 @@ def build_top_bar(config: Config) -> QBar | None:
     )
 
     date_time_context = ModuleContext(bar_context, config)
-    system_menu_context = ModuleContext(bar_context, config)
+    system_menu_context = ModuleContext(
+        bar_context,
+        config,
+        props={"background": "base0f"},
+    )
 
     end: list[WidgetModule] = [
         Weather(weather_context),

@@ -6,7 +6,7 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 from lwm.qwidget.icon import MDIcon
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -68,7 +68,7 @@ class VolumeStatus(WidgetModule):
             volume_text_props["background"] = TRANSPARENT
             volume_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             volume_text_props,
             self.ctx.props.pop("volume", {}),
         )
@@ -78,7 +78,7 @@ class VolumeStatus(WidgetModule):
 
         volume_text = PulseVolume(**props)
 
-        props = override_parameters(
+        props = merge_props(
             volume_icon_props,
             self.ctx.props.pop("icon", {}),
         )

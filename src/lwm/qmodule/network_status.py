@@ -7,7 +7,7 @@ from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
 from lwm.qwidget.net_min import NetMin
 from lwm.terminal import terminal_run_command
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -98,7 +98,7 @@ class NetworkStatus(WidgetModule):
             down_props["background"] = TRANSPARENT
             down_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             up_props,
             self.ctx.props.pop("up", {}),
             self.ctx.props.pop("network", {}),
@@ -109,7 +109,7 @@ class NetworkStatus(WidgetModule):
 
         up = NetMin(**props)
 
-        props = override_parameters(
+        props = merge_props(
             up_icon_props,
             self.ctx.props.pop("icon", {}),
         )
@@ -119,7 +119,7 @@ class NetworkStatus(WidgetModule):
 
         up_icon = MDIcon(**props)
 
-        props = override_parameters(
+        props = merge_props(
             down_props,
             self.ctx.props.pop("down", {}),
             self.ctx.props.pop("network", {}),
@@ -130,7 +130,7 @@ class NetworkStatus(WidgetModule):
 
         down = NetMin(**props)
 
-        props = override_parameters(
+        props = merge_props(
             down_icon_props,
             self.ctx.props.pop("icon", {}),
         )

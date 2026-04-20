@@ -7,7 +7,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -58,7 +58,7 @@ class UserMenu(WidgetModule):
             icon_props["background"] = TRANSPARENT
             username_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             icon_props,
             self.ctx.props.pop("icon", {}),
         )
@@ -68,7 +68,7 @@ class UserMenu(WidgetModule):
 
         icon = MDIcon(**props)
 
-        props = override_parameters(
+        props = merge_props(
             username_props,
             self.ctx.props.pop("username", {}),
         )

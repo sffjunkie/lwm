@@ -1,4 +1,4 @@
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 
 
 def test_override_parameters_additional_data():
@@ -11,7 +11,7 @@ def test_override_parameters_additional_data():
         "c": 3,
     }
 
-    assert override_parameters(d1, d2) == {
+    assert merge_props(d1, d2) == {
         "a": 1,
         "b": 2,
         "c": 3,
@@ -28,7 +28,7 @@ def test_override_parameters_update_data():
         "b": 3,
     }
 
-    assert override_parameters(d1, d2) == {
+    assert merge_props(d1, d2) == {
         "a": 1,
         "b": 3,
     }

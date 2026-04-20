@@ -1,6 +1,6 @@
 from typing import Literal
 
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import opacity_to_hex
 from lwm.config.typedef import Config
 from lwm.context.bar import BarContext
@@ -77,7 +77,7 @@ class ModuleContext:
         bg = next(self.bar_ctx.widget_bg_iter)
         fg = self.bar_ctx.widget_fg(bg)
 
-        self._props = override_parameters(
+        self._props = merge_props(
             self._props,
             {
                 "foreground": fg,

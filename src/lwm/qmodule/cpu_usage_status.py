@@ -7,7 +7,7 @@ from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
 from lwm.qwidget.icon import MDIcon
 from lwm.terminal import terminal_run_command
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -62,7 +62,7 @@ class CPUUsageStatus(WidgetModule):
             usage_props["background"] = TRANSPARENT
             usage_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             usage_props,
             self.ctx.props.pop("usage", {}),
         )
@@ -72,7 +72,7 @@ class CPUUsageStatus(WidgetModule):
 
         cpu_usage = CPU(**props)
 
-        props = override_parameters(
+        props = merge_props(
             usage_icon_props,
             self.ctx.props.pop("icon", {}),
         )

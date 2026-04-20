@@ -4,7 +4,7 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -40,7 +40,7 @@ class CurrentLayout(WidgetModule):
             ]
             current_layout_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             current_layout_props,
             self.ctx.props.pop("layout", {}),
         )

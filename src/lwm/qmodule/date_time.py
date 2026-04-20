@@ -5,7 +5,7 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
 from lwm.qwidget.icon import MDIcon
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -72,7 +72,7 @@ class DateTime(WidgetModule):
             time_text_props["background"] = TRANSPARENT
             time_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             date_text_props,
             self.ctx.props.pop("date", {}),
         )
@@ -82,7 +82,7 @@ class DateTime(WidgetModule):
 
         date_text = Clock(**props)
 
-        props = override_parameters(
+        props = merge_props(
             date_icon_props,
             self.ctx.props.pop("icon", {}),
         )
@@ -92,7 +92,7 @@ class DateTime(WidgetModule):
 
         date_icon = MDIcon(**props)
 
-        props = override_parameters(
+        props = merge_props(
             time_text_props,
             self.ctx.props.pop("time", {}),
         )
@@ -102,7 +102,7 @@ class DateTime(WidgetModule):
 
         time_text = Clock(**props)
 
-        props = override_parameters(
+        props = merge_props(
             time_icon_props,
             self.ctx.props.pop("icon", {}),
         )

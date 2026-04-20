@@ -6,7 +6,7 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 from lwm.qwidget.icon import MDIcon
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -59,7 +59,7 @@ class Bluetooth(WidgetModule):
             bluetooth_props["background"] = TRANSPARENT
             bluetooth_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             bluetooth_props,
             self.ctx.props.pop("menu", {}),
         )
@@ -69,7 +69,7 @@ class Bluetooth(WidgetModule):
 
         bluetooth_widget = QEBluetooth(**props)
 
-        props = override_parameters(
+        props = merge_props(
             bluetooth_icon_props,
             self.ctx.props.pop("icon", {}),
         )

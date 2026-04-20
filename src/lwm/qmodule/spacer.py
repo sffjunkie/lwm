@@ -3,7 +3,7 @@ from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 
 
 class Spacer(WidgetModule):
@@ -26,7 +26,7 @@ class Spacer(WidgetModule):
             "background": background,
         }
 
-        props = override_parameters(
+        props = merge_props(
             spacer_props,
             self.ctx.props.pop("layout", {}),
         )

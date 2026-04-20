@@ -5,6 +5,7 @@ from lwm.helper.color import opacity_to_hex
 from lwm.config.typedef import Config
 from lwm.context.bar import BarContext
 from lwm.helper.color import contrast_color
+from lwm.config.color.deref import deref_colors
 
 GroupPosition = Literal["start", "middle", "end"]
 
@@ -30,6 +31,7 @@ class ModuleContext:
     ):
         self.bar_ctx = bar_ctx
         self.config = config
+        self._props = {}
         self.props = props
 
     @property
@@ -38,7 +40,14 @@ class ModuleContext:
 
     @props.setter
     def props(self, new_props: dict) -> None:
-        new_props = new_props or {}
+        new_props = (
+            deref_colors(
+                new_props,
+                self.config["color"]["base16"],
+                self.config["color"]["named"],
+            )
+            or {}
+        )
 
         self.text_font_family = new_props.get(
             "text_font_family", self.bar_ctx.text_font_family

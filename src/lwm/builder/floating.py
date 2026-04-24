@@ -1,5 +1,6 @@
 from libqtile import layout
 from libqtile.config import Match, _Match
+from qtile_extras.layout.decorations.borders import RoundedCorners
 
 from lwm.config.layout.default import DEFAULT_LAYOUT_COMMON
 from lwm.config.typedef import Config
@@ -27,6 +28,6 @@ def build_floating(config: Config) -> layout.Floating:
     return layout.Floating(
         float_rules=float_rules(),
         border_width=DEFAULT_LAYOUT_COMMON["border_width"],
-        border_normal=color_scheme["window_border_focus"],
-        border_focus=color_scheme["window_border_normal"],
+        border_normal=RoundedCorners(colour=color_scheme["window_border_normal"]),
+        border_focus=RoundedCorners(colour=color_scheme["window_border_focus"]),
     )

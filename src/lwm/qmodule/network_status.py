@@ -47,7 +47,7 @@ class NetworkStatus(WidgetModule):
         }
 
         up_icon_props = {
-            "name": "net_up",
+            "name": "upload-outline",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
@@ -71,7 +71,7 @@ class NetworkStatus(WidgetModule):
         }
 
         down_icon_props = {
-            "name": "net_down",
+            "name": "download-outline",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,

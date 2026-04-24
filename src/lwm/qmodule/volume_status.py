@@ -42,7 +42,7 @@ class VolumeStatus(WidgetModule):
         }
 
         volume_icon_props = {
-            "name": "volume",
+            "name": "volume-high",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,

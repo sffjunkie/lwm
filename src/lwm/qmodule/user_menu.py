@@ -23,7 +23,7 @@ class UserMenu(WidgetModule):
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         icon_props = {
-            "name": "user",
+            "name": "account",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             # "width": self.context.bar.height,

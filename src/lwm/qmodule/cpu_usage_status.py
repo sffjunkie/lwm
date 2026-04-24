@@ -37,7 +37,7 @@ class CPUUsageStatus(WidgetModule):
         }
 
         usage_icon_props = {
-            "name": "cpu_usage",
+            "name": "cpu-64-bit",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,

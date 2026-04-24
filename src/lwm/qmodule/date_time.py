@@ -48,7 +48,7 @@ class DateTime(WidgetModule):
         }
 
         time_icon_props = {
-            "name": "clock",
+            "name": "clock-outline",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,

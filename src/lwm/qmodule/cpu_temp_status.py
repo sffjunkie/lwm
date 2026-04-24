@@ -29,7 +29,7 @@ class CPUTempStatus(WidgetModule):
         }
 
         temp_icon_props = {
-            "name": "cpu_temp",
+            "name": "thermometer",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,

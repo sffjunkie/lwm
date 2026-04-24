@@ -1,7 +1,7 @@
 MatchType = str
 AppName = str
-Match = str
-MatchRegistry = dict[MatchType, dict[AppName, list[Match]]]
+MatchRe = str
+MatchRegistry = dict[MatchType, dict[AppName, list[MatchRe]]]
 
 MATCH_REGISTRY: MatchRegistry = {
     "app_id": {

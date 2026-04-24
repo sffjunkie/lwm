@@ -39,10 +39,6 @@ class Bluetooth(WidgetModule):
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": {
-                "Button4": lazy.widget["bar_volume"].decrease_vol(),
-                "Button5": lazy.widget["bar_volume"].increase_vol(),
-            },
         }
 
         decorations = None

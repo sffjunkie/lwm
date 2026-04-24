@@ -1,11 +1,11 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Spacer as QSpacer  # type: ignore
-from qtile_extras.widget import WindowName as QWindowName  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Spacer as QSpacer
+from qtile_extras.widget import WindowName as QWindowName
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -28,7 +28,7 @@ class WindowName(WidgetModule):
             "background": background_color,
         }
 
-        props = override_parameters(
+        props = merge_props(
             window_name_props,
             self.ctx.props.pop("name", {}),
         )

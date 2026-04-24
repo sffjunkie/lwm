@@ -1,11 +1,11 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import ThermalSensor  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import ThermalSensor
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -29,7 +29,7 @@ class CPUTempStatus(WidgetModule):
         }
 
         temp_icon_props = {
-            "name": "cpu_temp",
+            "name": "thermometer",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
@@ -51,7 +51,7 @@ class CPUTempStatus(WidgetModule):
             temp_props["background"] = TRANSPARENT
             temp_icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             temp_props,
             self.ctx.props.pop("temperature", {}),
         )
@@ -61,7 +61,7 @@ class CPUTempStatus(WidgetModule):
 
         cpu_temp = ThermalSensor(**props)
 
-        props = override_parameters(
+        props = merge_props(
             temp_icon_props,
             self.ctx.props.pop("icon", {}),
         )

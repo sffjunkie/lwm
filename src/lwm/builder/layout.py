@@ -5,16 +5,26 @@ from qtile_extras.layout.decorations.borders import RoundedCorners
 from lwm.config.typedef import Config
 
 
+def _layout_type_args(config: Config, layout: str) -> dict:
+    return getattr(config.layout, layout, None) or {}
+
+
 def build_layouts(config: Config) -> list[_SimpleLayoutBase]:
-    layout_args = config["layout"]["common"] | {
-        "border_focus": RoundedCorners(
-            colour=config["color"]["named"]["window_border_focus"]
-        ),
-        "border_normal": RoundedCorners(
-            colour=config["color"]["named"]["window_border_normal"]
-        ),
-    }
+    if config.layout.common.rounded:
+        borders = {
+            "border_focus": RoundedCorners(
+                colour=config.color.named.window_border_focus
+            ),
+            "border_normal": RoundedCorners(
+                colour=config.color.named.window_border_normal
+            ),
+        }
+    else:
+        borders = {}
+
+    layout_args = dict(config.layout.common) | borders
+
     return [
-        MonadTall(**(layout_args | config["layout"].get("MonadTall", {}))),
-        Max(**(layout_args | config["layout"].get("Max", {}))),
+        MonadTall(**(layout_args | _layout_type_args(config, "MonadTall"))),
+        Max(**(layout_args | _layout_type_args(config, "Max"))),
     ]

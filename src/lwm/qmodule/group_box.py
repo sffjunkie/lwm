@@ -1,10 +1,10 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import GroupBox as QGroubBox  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import GroupBox as QGroubBox
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -29,14 +29,12 @@ class GroupBox(WidgetModule):
             "fontsize": self.ctx.text_font_size,
             "foreground": foreground_color,
             "background": background_color,
-            "active": self.ctx.config["color"]["named"]["group_active_fg"],
-            "inactive": self.ctx.config["color"]["named"]["group_inactive_fg"],
+            "active": self.ctx.config.color.named.group_active_fg,
+            "inactive": self.ctx.config.color.named.group_inactive_fg,
             "rounded": True,
             "highlight_method": "block",
-            "this_current_screen_border": self.ctx.config["color"]["named"][
-                "group_current_bg"
-            ],
-            "this_screen_border": self.ctx.config["color"]["named"]["group_current_bg"],
+            "this_current_screen_border": self.ctx.config.color.named.group_current_bg,
+            "this_screen_border": self.ctx.config.color.named.group_current_bg,
             "use_mouse_wheel": False,
             # other_current_screen_border=theme_colors["bar_bg"],
             # other_screen_border=theme_colors["bar_bg"],
@@ -55,7 +53,7 @@ class GroupBox(WidgetModule):
             ]
             group_box_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             group_box_props,
             self.ctx.props.pop("group_box", {}),
         )

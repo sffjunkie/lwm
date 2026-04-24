@@ -7,7 +7,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -23,12 +23,12 @@ class UserMenu(WidgetModule):
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         icon_props = {
-            "name": "user",
+            "name": "account",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             # "width": self.context.bar.height,
             "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config["menu"]["user"])},
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -38,7 +38,7 @@ class UserMenu(WidgetModule):
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config["menu"]["user"])},
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -58,7 +58,7 @@ class UserMenu(WidgetModule):
             icon_props["background"] = TRANSPARENT
             username_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             icon_props,
             self.ctx.props.pop("icon", {}),
         )
@@ -68,7 +68,7 @@ class UserMenu(WidgetModule):
 
         icon = MDIcon(**props)
 
-        props = override_parameters(
+        props = merge_props(
             username_props,
             self.ctx.props.pop("username", {}),
         )

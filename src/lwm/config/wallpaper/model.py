@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 from pathlib import Path
 from typing import Literal
 
@@ -10,8 +10,7 @@ WallpaperMode = Literal["fill", "stretch", "center"]
 DEFAULT_MODE = "fill"
 
 
-@dataclass
-class WallpaperDefinition:
+class WallpaperDefinition(BaseModel):
     path: Path
     mode: WallpaperMode
     monitor: str = "*"
@@ -20,7 +19,6 @@ class WallpaperDefinition:
 WallpaperDefinitions = dict[ScreenName, WallpaperDefinition]
 
 
-@dataclass
-class ColorPalette:
+class ColorPalette(BaseModel):
     count: int
     colors: dict[str, str]

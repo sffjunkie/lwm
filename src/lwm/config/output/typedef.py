@@ -1,14 +1,12 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 
-@dataclass
-class PhysicalSize:
+class PhysicalSize(BaseModel):
     width: int
     height: int
 
 
-@dataclass
-class OutputMode:
+class OutputMode(BaseModel):
     width: int
     height: int
     refresh: float
@@ -16,14 +14,12 @@ class OutputMode:
     current: bool
 
 
-@dataclass
-class OutputPosition:
+class OutputPosition(BaseModel):
     x: int
     y: int
 
 
-@dataclass
-class Output:
+class Output(BaseModel):
     name: str
     description: str
     make: str
@@ -38,6 +34,5 @@ class Output:
     adaptive_sync: bool
 
 
-@dataclass
-class Outputs:
+class Outputs(BaseModel):
     outputs: list[Output]

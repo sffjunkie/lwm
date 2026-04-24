@@ -1,13 +1,13 @@
-from libqtile.lazy import lazy  # type: ignore
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Memory  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.lazy import lazy
+from libqtile.widget import base
+from qtile_extras.widget import Memory
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
 from lwm.terminal import terminal_run_command
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -62,7 +62,7 @@ class MemoryStatus(WidgetModule):
             memory_props["background"] = TRANSPARENT
             icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             memory_props,
             self.ctx.props.pop("memory", {}),
         )
@@ -72,7 +72,7 @@ class MemoryStatus(WidgetModule):
 
         memory = Memory(**props)
 
-        props = override_parameters(
+        props = merge_props(
             icon_props,
             self.ctx.props.pop("icon", {}),
         )

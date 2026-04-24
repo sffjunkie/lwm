@@ -1,9 +1,9 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Sep  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Sep
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -22,7 +22,7 @@ class Separator(WidgetModule):
             "background": TRANSPARENT,
         }
 
-        props = override_parameters(
+        props = merge_props(
             separator_props,
             self.ctx.props.pop("separator", {}),
         )

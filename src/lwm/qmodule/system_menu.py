@@ -1,13 +1,13 @@
 from socket import gethostname
 
-from libqtile.lazy import lazy  # type: ignore
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import TextBox  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.lazy import lazy
+from libqtile.widget import base
+from qtile_extras.widget import TextBox
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -22,7 +22,7 @@ class SystemMenu(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        system_menu = self.ctx.config["menu"].get("system", None)
+        system_menu = getattr(self.ctx.config.menu, "system", None)
         hostname_props = {
             "text": gethostname(),
             # "fmt": "<b>{}</b>",
@@ -37,7 +37,7 @@ class SystemMenu(WidgetModule):
             hostname_props["mouse_callbacks"] = {"Button1": lazy.spawn(system_menu)}
 
         icon_props = {
-            "text": self.ctx.config["branding"]["icon"],
+            "text": self.ctx.config.branding.icon,
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "width": self.ctx.bar_ctx.height,
@@ -63,7 +63,7 @@ class SystemMenu(WidgetModule):
             hostname_props["background"] = TRANSPARENT
             icon_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             hostname_props,
             self.ctx.props.pop("layout", {}),
         )
@@ -73,7 +73,7 @@ class SystemMenu(WidgetModule):
 
         hostname = TextBox(**props)
 
-        props = override_parameters(
+        props = merge_props(
             icon_props,
             self.ctx.props.pop("layout", {}),
         )

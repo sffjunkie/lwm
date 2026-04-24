@@ -15,7 +15,7 @@ def merge_dict(dict1: dict, dict2: dict):
             yield (k, dict2[k])
 
 
-def override_parameters(base: dict, *overrides: dict) -> dict:
+def merge_props(base: dict, *overrides: dict) -> dict:
     res = base.copy()
     for override in overrides:
         res = dict(merge_dict(res, override))

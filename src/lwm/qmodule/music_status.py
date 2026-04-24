@@ -1,10 +1,10 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Mpd2  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Mpd2
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import override_parameters
+from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
 
 
@@ -40,7 +40,7 @@ class MusicStatus(WidgetModule):
             ]
             mpd2_props["background"] = TRANSPARENT
 
-        props = override_parameters(
+        props = merge_props(
             mpd2_props,
             self.ctx.props.pop("music", {}),
         )

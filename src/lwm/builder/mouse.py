@@ -7,7 +7,7 @@ from lwm.config.typedef import Config
 
 
 def build_buttons(config: Config):
-    cmd = config["key"].cmd
+    cmd = config.key.cmd
     return [
         Drag(
             [cmd],

@@ -1,6 +1,6 @@
 from pathlib import Path
 from typing import TypedDict
-
+from dataclasses import dataclass
 
 from lwm.config.bar.model import BarDefinitions
 from lwm.config.branding.model import Branding
@@ -21,7 +21,8 @@ PropertyDefinition = str | int | float | dict[str, "PropertyDefinition"]
 PropertyDefinitions = dict[str, PropertyDefinition]
 
 
-class Config(TypedDict):
+@dataclass
+class Config:
     app: Apps
     bar: BarDefinitions
     branding: Branding

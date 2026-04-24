@@ -39,8 +39,8 @@ if not is_under_pytest:
         layouts = build_layouts(config)
         mouse = build_buttons(config)
 
-        extension_defaults = config["extension"].copy()
-        widget_defaults = config["widget"].copy()
+        extension_defaults = config.extension.model_copy()
+        widget_defaults = config.widget.model_copy()
 
         auto_fullscreen = True
         bring_front_click = "floating_only"

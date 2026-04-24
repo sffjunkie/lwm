@@ -16,7 +16,7 @@ def build_screens(config: Config) -> list[Screen]:
         right=bar_defs.get("right", None),
     )
 
-    if (wpdef := config["wallpaper"].get("*", None)) is not None:
+    if (wpdef := config.wallpaper.get("*", None)) is not None:
         screen.wallpaper = str(wpdef.path)
         screen.wallpaper_mode = wpdef.monitor
 

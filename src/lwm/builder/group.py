@@ -24,7 +24,7 @@ def decoration(group_idx: int, style: str) -> str:
 
 
 def build_groups(config: Config) -> list[Group]:
-    groupdefs = config["group"]
+    groupdefs = config.group
     groups = groupdefs.groups
     decoration_style = getattr(groupdefs, "decoration", DECORATION)
 
@@ -46,10 +46,10 @@ def build_groups(config: Config) -> list[Group]:
 
 
 def build_group_keys(config: Config) -> list[Key]:
-    groupdefs = config["group"]
+    groupdefs = config.group
 
-    cmd = config["key"].cmd
-    shift = config["key"].shift
+    cmd = config.key.cmd
+    shift = config.key.shift
     keys = []
     for idx, _ in enumerate(groupdefs.groups, start=1):
         name = str(idx)

@@ -25,11 +25,11 @@ def float_rules() -> list[_Match]:
 def build_floating(config: Config) -> layout.Floating:
     return layout.Floating(
         float_rules=float_rules(),
-        border_width=config["layout"].common.border_width,
+        border_width=config.layout.common.border_width,
         border_normal=RoundedCorners(
-            color=config["color"].named.window_border_focus,
+            color=config.color.named.window_border_focus,
         ),
         border_focus=RoundedCorners(
-            color=config["color"].named.window_border_normal,
+            color=config.color.named.window_border_normal,
         ),
     )

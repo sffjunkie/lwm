@@ -6,23 +6,23 @@ from lwm.config.typedef import Config
 
 
 def _layout_type_args(config: Config, layout: str) -> dict:
-    return getattr(config["layout"], layout, None) or {}
+    return getattr(config.layout, layout, None) or {}
 
 
 def build_layouts(config: Config) -> list[_SimpleLayoutBase]:
-    if config["layout"].common.rounded:
+    if config.layout.common.rounded:
         borders = {
             "border_focus": RoundedCorners(
-                colour=config["color"].named.window_border_focus
+                colour=config.color.named.window_border_focus
             ),
             "border_normal": RoundedCorners(
-                colour=config["color"].named.window_border_normal
+                colour=config.color.named.window_border_normal
             ),
         }
     else:
         borders = {}
 
-    layout_args = dict(config["layout"].common) | borders
+    layout_args = dict(config.layout.common) | borders
 
     return [
         MonadTall(**(layout_args | _layout_type_args(config, "MonadTall"))),

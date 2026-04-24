@@ -43,8 +43,8 @@ class ModuleContext:
         new_props = (
             deref_colors(
                 new_props,
-                self.config["color"].base16,
-                self.config["color"].named,
+                self.config.color.base16,
+                self.config.color.named,
             )
             or {}
         )
@@ -72,12 +72,12 @@ class ModuleContext:
         opacity_str = opacity_to_hex(self.opacity)
 
         self.background_rgb = new_props.get(
-            "background", self.config["color"].named.widget_bg[0]
+            "background", self.config.color.named.widget_bg[0]
         )
         self.background_rgba = f"{self.background_rgb}{opacity_str}"
 
-        fg_dark = self.config["color"].named.widget_fg_dark
-        fg_light = self.config["color"].named.widget_fg_light
+        fg_dark = self.config.color.named.widget_fg_dark
+        fg_light = self.config.color.named.widget_fg_light
         self.foreground_rgb = new_props.get(
             "foreground",
             contrast_color(self.background_rgb, dark=fg_dark, light=fg_light),

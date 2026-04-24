@@ -43,60 +43,60 @@ def user_menu(config: Config):
 
 
 def system_menu(config: Config):
-    launch = [getattr(config["key"], name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
     return [
         Key(
             launch,
             "F12",
-            lazy.spawn(config["menu"].system),
+            lazy.spawn(config.menu.system),
             desc="Show the system menu",
         ),
     ]
 
 
 def application(config: Config):
-    launch = [getattr(config["key"], name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
     return [
         # Launcher
         Key(
             launch,
             "Return",
-            lazy.spawn(config["app"].launcher),
+            lazy.spawn(config.app.launcher),
             desc="Show the rofi app launcher (drun)",
         ),
         # Browser
         Key(
             launch,
             "w",
-            lazy.spawn(config["app"].browser),
+            lazy.spawn(config.app.browser),
             desc="Start the browser",
         ),
         # Brain
         Key(
             launch,
             "b",
-            lazy.spawn(config["app"].brain),
+            lazy.spawn(config.app.brain),
             desc="Start the Brain",
         ),
         # Code Editor
         Key(
             launch,
             "c",
-            lazy.spawn(config["app"].code_editor),
+            lazy.spawn(config.app.code_editor),
             desc="Start Coding",
         ),
         # Terminal
         Key(
             launch,
             "t",
-            lazy.spawn(config["app"].terminal),
+            lazy.spawn(config.app.terminal),
             desc="Start the terminal",
         ),
     ]
 
 
 def layout(config: Config):
-    cmd = config["key"].cmd
+    cmd = config.key.cmd
     return [
         Key(
             [cmd],
@@ -108,10 +108,10 @@ def layout(config: Config):
 
 
 def window(config: Config):
-    switch = [getattr(config["key"], name) for name in (WINDOW_SWITCH)]
-    move = [getattr(config["key"], name) for name in (WINDOW_MOVE)]
-    control = [getattr(config["key"], name) for name in (WINDOW_CONTROL)]
-    alt_control = [getattr(config["key"], name) for name in (WINDOW_ALT_CONTROL)]
+    switch = [getattr(config.key, name) for name in (WINDOW_SWITCH)]
+    move = [getattr(config.key, name) for name in (WINDOW_MOVE)]
+    control = [getattr(config.key, name) for name in (WINDOW_CONTROL)]
+    alt_control = [getattr(config.key, name) for name in (WINDOW_ALT_CONTROL)]
 
     return [
         # region Switch
@@ -245,7 +245,7 @@ def window(config: Config):
 
 
 def group(config: Config):
-    switch = [getattr(config["key"], name) for name in (GROUP_SWITCH)]
+    switch = [getattr(config.key, name) for name in (GROUP_SWITCH)]
     return [
         Key(
             switch,
@@ -263,7 +263,7 @@ def group(config: Config):
 
 
 def screen(config: Config):
-    switch = [getattr(config["key"], name) for name in (SCREEN_SWITCH)]
+    switch = [getattr(config.key, name) for name in (SCREEN_SWITCH)]
     return [
         Key(
             switch,
@@ -281,13 +281,13 @@ def screen(config: Config):
 
 
 def clipboard(config: Config):
-    launch = [getattr(config["key"], name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
     return [
         Key(
             launch,
             "Insert",
             lazy.spawn(
-                f'{config["controller"].clipboard} -c',
+                f'{config.controller.clipboard} -c',
             ),
             desc="Copy an item from the clipboard history",
         ),
@@ -295,7 +295,7 @@ def clipboard(config: Config):
             launch,
             "Delete",
             lazy.spawn(
-                f'{config["controller"].clipboard} -d',
+                f'{config.controller.clipboard} -d',
             ),
             desc="Delete an item from the clipboard history",
         ),
@@ -303,7 +303,7 @@ def clipboard(config: Config):
 
 
 def qtile(config: Config):
-    control = [getattr(config["key"], name) for name in (QTILE_CONTROL)]
+    control = [getattr(config.key, name) for name in (QTILE_CONTROL)]
     return [
         Key(
             control,
@@ -321,8 +321,8 @@ def qtile(config: Config):
 
 
 def music(config: Config):
-    fkey = [getattr(config["key"], name) for name in ("cmd",)]
-    launch = [getattr(config["key"], name) for name in (APP_LAUNCH)]
+    fkey = [getattr(config.key, name) for name in ("cmd",)]
+    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
     return [
         # Play / Pause
         Key(
@@ -359,7 +359,7 @@ def music(config: Config):
 
 
 def vt(config: Config):
-    switch = [getattr(config["key"], name) for name in (VT_SWITCH)]
+    switch = [getattr(config.key, name) for name in (VT_SWITCH)]
     return [
         Key(
             switch,

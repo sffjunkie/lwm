@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import cast
 
 from lwm.fs import user_config_dir
-from .typedef import WallpaperDefinitions, WallpaperMode, WallpaperDefinition
+from .model import WallpaperDefinitions, WallpaperMode, WallpaperDefinition
 
 
 """

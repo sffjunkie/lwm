@@ -8,7 +8,7 @@ from libqtile.bar import Bar as QBar
 from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.helper.color import contrast_color, TRANSPARENT
-from lwm.config.bar.typedef import BarLocation
+from lwm.config.bar.model import BarLocation
 from lwm.config.typedef import Config
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
@@ -36,25 +36,28 @@ def fg_color(config: Config):
     def func(bg_color: str) -> str:
         return contrast_color(
             bg_color,
-            config["color"]["named"]["widget_fg_light"],
-            config["color"]["named"]["widget_fg_dark"],
+            config["color"].named.widget_fg_light,
+            config["color"].named.widget_fg_dark,
         )
 
     return func
 
 
 def widget_bg_iter(config: Config) -> Iterator:
-    return cycle(config["color"]["named"].get("widget_bg", "000000"))
+    return cycle(getattr(config["color"].named, "widget_bg", "000000"))
 
 
 def build_top_bar(config: Config) -> QBar | None:
+    if config["bar"].top is None:
+        return None
+
     idx = 0
 
     bar_context = BarContext(position="top", config=config)
     bar_context.props = {
-        "height": config["bar"]["top"]["height"],
-        "margin": config["bar"]["top"]["margin"],
-        "opacity": config["bar"]["top"]["opacity"],
+        "height": config["bar"].top.height,
+        "margin": config["bar"].top.margin,
+        "opacity": config["bar"].top.opacity,
     }
 
     widgets = []
@@ -152,13 +155,16 @@ def build_top_bar(config: Config) -> QBar | None:
 
 
 def build_bottom_bar(config: Config) -> QBar | None:
+    if config["bar"].bottom is None:
+        return None
+
     idx = 0
 
     bar_context = BarContext(position="bottom", config=config)
     bar_context.props = {
-        "height": config["bar"]["bottom"]["height"],
-        "margin": config["bar"]["bottom"]["margin"],
-        "opacity": config["bar"]["bottom"]["opacity"],
+        "height": config["bar"].bottom.height,
+        "margin": config["bar"].bottom.margin,
+        "opacity": config["bar"].bottom.opacity,
     }
 
     widgets = []
@@ -176,7 +182,7 @@ def build_bottom_bar(config: Config) -> QBar | None:
         config,
         props={
             "network": {
-                "interface": config["device"].get("net", "eth0"),
+                "interface": getattr(config["device"], "net", "eth0"),
             },
         },
     )
@@ -247,7 +253,7 @@ def build_bottom_bar(config: Config) -> QBar | None:
     )
     end.append(MusicStatus(music_status_context))
 
-    volume_control = config["controller"]["volume"]
+    volume_control = config["controller"].volume
     if volume_control is not None:
         volume_context = ModuleContext(
             bar_context,
@@ -257,7 +263,7 @@ def build_bottom_bar(config: Config) -> QBar | None:
                     "volume_up_command": f"{volume_control} up",
                     "volume_down_command": f"{volume_control} down",
                     "mute_command": f"{volume_control} toggle",
-                    "volume_app": config["controller"]["audio"],
+                    "volume_app": config["controller"].audio,
                 },
             },
         )
@@ -278,15 +284,18 @@ def build_bottom_bar(config: Config) -> QBar | None:
 
 
 def build_bars(config: Config) -> Bars:
-    bars: Bars = {
-        "left": None,
-        "right": None,
-    }
+    bars: Bars = {}
 
-    if "top" in config["bar"]:
+    if config["bar"].top is not None:
         bars["top"] = build_top_bar(config=config)
 
-    if "bottom" in config["bar"]:
+    if config["bar"].bottom is not None:
         bars["bottom"] = build_bottom_bar(config=config)
+
+    if config["bar"].left is not None:
+        bars["left"] = build_top_bar(config=config)
+
+    if config["bar"].right is not None:
+        bars["right"] = build_top_bar(config=config)
 
     return bars

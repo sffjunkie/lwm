@@ -1,5 +1,5 @@
 from lwm.config.color.deref import deref_colors
-from lwm.config.color.default import DEFAULT_BASE16_COLORS, DEFAULT_NAMED_COLORS
+from lwm.config.color.model import Base16Colors, NamedColors
 
 
 def test_deref_colors_base16():
@@ -7,18 +7,16 @@ def test_deref_colors_base16():
         "fg": "base01",
     }
 
-    new_colors = deref_colors(
-        colors, base16=DEFAULT_BASE16_COLORS, named=DEFAULT_NAMED_COLORS
-    )
+    new_colors = deref_colors(colors, base16=Base16Colors(), named=NamedColors())
 
     assert new_colors["fg"] == "#1e2030"
 
 
 def test_deref_colors_named():
     new_colors = deref_colors(
-        dict(DEFAULT_NAMED_COLORS),
-        base16=DEFAULT_BASE16_COLORS,
-        named=DEFAULT_NAMED_COLORS,
+        dict(NamedColors()),
+        base16=Base16Colors(),
+        named=NamedColors(),
     )
 
     assert new_colors["bar_fg"] == "#1e2030"

@@ -1,7 +1,6 @@
 from lwm.config.color.deref import deref_colors
-from lwm.config.color.typedef import Base16Colors, NamedColors
-from lwm.config.layout.default import DEFAULT_LAYOUT
-from lwm.config.layout.typedef import LayoutDefs
+from lwm.config.color.model import Base16Colors, NamedColors
+from lwm.config.layout.model import LayoutDefs
 
 
 def layoutdef_from_config(
@@ -10,10 +9,9 @@ def layoutdef_from_config(
     layout: LayoutDefs
     layout_data = config.get("layout", None)
     if layout_data is None:
-        layout = DEFAULT_LAYOUT.copy()
+        layout = LayoutDefs()
     else:
-        layout = layout_data
+        layout = LayoutDefs(**layout_data)
 
     tc = deref_colors(dict(layout), base16, named)
-    layout.update(tc)
-    return layout
+    return layout.model_copy(update=tc)

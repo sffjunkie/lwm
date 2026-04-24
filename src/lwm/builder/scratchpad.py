@@ -26,7 +26,7 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
                     name="music-player",
                     cmd=terminal_run_command(
                         command=["ncmpcpp"],
-                        terminal=config["app"]["terminal"],
+                        terminal=config["app"].terminal,
                     ),
                     height=ncmpcpp_dimension.height,
                     width=ncmpcpp_dimension.width,
@@ -43,7 +43,7 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
             dropdowns=[
                 DropDown(
                     name="home-automation",
-                    cmd=f"{config['app']['browser']} https://hass.looniversity.net",
+                    cmd=f"{config['app'].browser} https://hass.looniversity.net",
                     height=home_automation_dimension.height,
                     width=home_automation_dimension.width,
                     x=home_automation_dimension.x,
@@ -58,8 +58,8 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
 
 
 def build_scratchpad_keys(config: Config) -> list[Key]:
-    Super = config["key"]["cmd"]
-    Alt = config["key"]["alt"]
+    Super = config["key"].cmd
+    Alt = config["key"].alt
     return [
         Key(
             [Super, Alt],

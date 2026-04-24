@@ -5,12 +5,13 @@ from lwm.helper.color import is_color
 
 
 def test_bars_not_base16(test_data: Path):
-    config = load_config(test_data.absolute())
+    data_path = test_data / "config" / "desktop"
+    config = load_config(data_path.absolute())
 
     assert config is not None
     bars = build_bars(config)
 
-    top = bars["top"]
+    top = bars.get("top", None)
     assert top is not None
     assert len(top.widgets) > 1
 

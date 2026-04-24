@@ -78,8 +78,8 @@ def load_config(configpath: Path | None = None) -> Config | None:
         logger.warning(f"Configs loaded: {', '.join(configs.keys())}")
 
         colordefs = colordefs_from_config(configs)
-        base16 = colordefs["base16"]
-        named = colordefs["named"]
+        base16 = colordefs.base16
+        named = colordefs.named
 
         config = Config(
             from_path=config_path,

@@ -17,8 +17,8 @@ class NetworkStatus(WidgetModule):
         ctx: ModuleContext,
     ):
         self.ctx = ctx
-        self.wifi = ctx.config["device"]["wifi"]
-        self.eth = ctx.config["device"]["eth"]
+        self.wifi = ctx.config["device"].wifi
+        self.eth = ctx.config["device"].eth
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)

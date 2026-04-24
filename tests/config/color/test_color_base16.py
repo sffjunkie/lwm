@@ -12,7 +12,7 @@ def test_load_base16_color_scheme(test_data: Path):
     )
 
     assert scheme is not None
-    assert scheme["base07"] == "#fbf1c7"
+    assert scheme.base07 == "#fbf1c7"
 
 
 def test_load_base16_colors_from_scheme(test_data: Path):
@@ -24,7 +24,7 @@ def test_load_base16_colors_from_scheme(test_data: Path):
     base16_colors = base16_colors_from_config(config)
 
     assert base16_colors is not None
-    assert base16_colors["base07"] == "#fbf1c7"
+    assert base16_colors.base07 == "#fbf1c7"
 
 
 def test_load_base16_colors_from_colors(test_data: Path):
@@ -39,4 +39,4 @@ def test_load_base16_colors_from_colors(test_data: Path):
     base16_colors = base16_colors_from_config(config)
 
     assert base16_colors is not None
-    assert base16_colors["base07"] == "#282828"
+    assert base16_colors.base07 == "#282828"

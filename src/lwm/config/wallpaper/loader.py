@@ -1,4 +1,4 @@
-from .typedef import WallpaperDefinitions, WallpaperDefinition
+from .model import WallpaperDefinitions, WallpaperDefinition
 from .waypaper import wallpapersdefs_waypaper
 
 

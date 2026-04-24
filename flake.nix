@@ -111,6 +111,7 @@
           default = pkgs.mkShell {
             packages = [
               virtualenv
+              pkgs.cairo
               pkgs.python3Packages.pytest
               pkgs.python3Packages.vulture
               pkgs.python3Packages.iwlib

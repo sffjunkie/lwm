@@ -2,7 +2,7 @@ from pathlib import Path
 from typing import cast, get_args
 
 from lwm.fs import user_config_dir, read_ini
-from lwm.config.wallpaper.typedef import (
+from lwm.config.wallpaper.model import (
     WallpaperDefinitions,
     WallpaperDefinition,
     WallpaperMode,

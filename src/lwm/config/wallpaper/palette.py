@@ -1,5 +1,5 @@
 from pathlib import Path
-from .typedef import ColorPalette
+from .model import ColorPalette
 from lwm.command import command_exists, command_output
 
 

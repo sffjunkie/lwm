@@ -1,4 +1,3 @@
-from libqtile.log_utils import logger
 from libqtile.config import Screen
 
 from lwm.config.typedef import Config
@@ -6,7 +5,6 @@ from lwm.builder.bar import build_bars
 
 
 def build_screens(config: Config) -> list[Screen]:
-    # logger.warning(config["color"])
     bar_defs = build_bars(config)
 
     screen = Screen(

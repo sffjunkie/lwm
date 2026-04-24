@@ -1,4 +1,4 @@
-from qtile_extras import widget  # type: ignore
+from qtile_extras import widget
 
 
 MDICONS: dict[str, str] = {

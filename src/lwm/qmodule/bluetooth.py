@@ -1,7 +1,6 @@
-from libqtile.lazy import lazy  # type: ignore
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Bluetooth as QEBluetooth  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Bluetooth as QEBluetooth
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qwidget.icon import MDIcon
 from lwm.qmodule.base import WidgetModule

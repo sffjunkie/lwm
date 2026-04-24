@@ -1,5 +1,5 @@
-from libqtile.config import DropDown, Key, ScratchPad  # type: ignore
-from libqtile.lazy import lazy  # type: ignore
+from libqtile.config import DropDown, Key, ScratchPad
+from libqtile.lazy import lazy
 
 from lwm.anchor import WindowLocation, anchor_window
 from lwm.config.typedef import Config

@@ -1,5 +1,5 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Sep  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Sep
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext

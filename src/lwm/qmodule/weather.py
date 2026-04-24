@@ -1,6 +1,6 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import OpenWeather  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import OpenWeather
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule

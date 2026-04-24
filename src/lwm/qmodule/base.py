@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from libqtile.widget import base  # type: ignore
+from libqtile.widget import base
 
 from lwm.context.module import ModuleContext
 

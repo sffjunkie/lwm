@@ -34,7 +34,7 @@ def read_yaml(filepath: Path) -> dict[str, Any]:
 
 def read_yaml_stream(fp: TextIOWrapper) -> dict[str, Any]:
     data = yaml.load(fp, Loader=yaml.SafeLoader)
-    return data  # type: ignore
+    return data
 
 
 def read_toml(filepath: Path | None = None) -> dict[str, Any]:

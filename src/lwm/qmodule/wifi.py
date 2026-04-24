@@ -1,7 +1,6 @@
-# from libqtile.lazy import lazy  # type: ignore
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import WiFiIcon as QEWifi  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import WiFiIcon as QEWifi
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
@@ -22,7 +21,7 @@ class Wifi(WidgetModule):
 
         wifi_props = {
             "name": "wifi",
-            "interface": self.ctx.config["device"]["wifi"],
+            "interface": self.ctx.config.device.wifi,
             "padding": 8,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,

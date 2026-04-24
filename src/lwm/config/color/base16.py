@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-import yaml  # type: ignore
+import yaml
 
 from lwm.config.color.model import Base16Colors
 from lwm.helper.color import is_base16, is_color

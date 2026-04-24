@@ -1,7 +1,7 @@
-from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Spacer as QSpacer  # type: ignore
-from qtile_extras.widget import WindowName as QWindowName  # type: ignore
-from qtile_extras.widget.decorations import RectDecoration  # type: ignore
+from libqtile.widget import base
+from qtile_extras.widget import Spacer as QSpacer
+from qtile_extras.widget import WindowName as QWindowName
+from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext

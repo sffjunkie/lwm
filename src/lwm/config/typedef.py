@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import TypedDict
 from dataclasses import dataclass
 
 from lwm.config.bar.model import BarDefinitions

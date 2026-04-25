@@ -8,7 +8,7 @@ def test_config_app(test_data: Path):
 
     assert (
         settings["app"]["terminal"]
-        == "/nix/store/gjg30k1xbw0cs5l8sdd8rbplnnn8f9sv-ghostty-1.3.0/bin/ghostty"
+        == "/nix/store/gzwsjzz2lgalvjs4dfikk9rwq0m0b27a-ghostty-1.3.1/bin/ghostty"
     )
 
 

@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Literal, get_args, Any
+from typing import Any, Literal, get_args
 
 from libqtile.log_utils import logger
 
@@ -16,13 +16,12 @@ from lwm.config.key.loader import keydefs_from_config
 from lwm.config.layout.loader import layoutdef_from_config
 from lwm.config.menu.loader import menudefs_from_config
 from lwm.config.typedef import Config
-from lwm.config.widget.loader import widgetdef_from_config
 from lwm.config.wallpaper.loader import wallpaperdefs
-from lwm.fs import read_yaml, user_config_dir
-
+from lwm.config.widget.loader import widgetdef_from_config
+from lwm.fs import read_toml, user_config_dir
 
 CONFIG_DIR = "lwm"
-CONFIG_FORMAT = "yaml"
+CONFIG_FORMAT = "toml"
 ConfigKeys = Literal[
     "app",
     "bar",
@@ -57,7 +56,7 @@ def get_config_path(filepath: Path | None = None) -> Path | None:
 
 def get_config_from_file(base_name: str, configpath: Path) -> dict[str, Any]:
     config_filename = configpath / base_name
-    config = read_yaml(config_filename)
+    config = read_toml(config_filename)
     return config
 
 

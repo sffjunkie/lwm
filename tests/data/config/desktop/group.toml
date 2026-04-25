@@ -1,0 +1,44 @@
+[group]
+decoration = "superscript"
+layout = "max"
+layouts = ["max", "monadtall"]
+
+[[group.groups]]
+layout = "monadtall"
+name = "WWW"
+[group.groups.matches]
+app_id = ["brave-browser", "chromium", "firefox"]
+
+[[group.groups]]
+layout = "max"
+name = "BRAIN"
+[group.groups.matches]
+app_id = ["obsidian"]
+
+[[group.groups]]
+layout = "max"
+name = "CODE"
+[group.groups.matches]
+app_id = ["code-url-handler"]
+
+[[group.groups]]
+layout = "monadtall"
+name = "TERM"
+
+[[group.groups]]
+layout = "monadtall"
+name = "DOC"
+
+[[group.groups]]
+layout = "monadtall"
+name = "CHAT"
+
+[[group.groups]]
+layout = "monadtall"
+name = "VID"
+
+[[group.groups]]
+layout = "max"
+name = "GFX"
+[group.groups.matches]
+app_id = ["Darktable", "Gimp-d+.d+", "org.inkscape.Inkscape"]

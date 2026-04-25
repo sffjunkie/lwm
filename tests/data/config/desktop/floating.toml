@@ -1,0 +1,3 @@
+[floating]
+[floating.match]
+wm_id = ["com.github.wwmm.easyeffects", "org.pulseaudio.pavucontrol", "org.gnome.Calculator", "org.gnome.Characters", "Pinentry", "ssh-askpass", "waypaper", "yubico.org"]

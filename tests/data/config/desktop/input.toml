@@ -1,0 +1,10 @@
+[input]
+[input.keyboard]
+[input.keyboard."1452:591:Keychron Keychron K1"]
+kb_layout = "hyper_super"
+kb_options = "altwin:swap_lalt_lwin"
+[input.pointer]
+[input.pointer."1133:45082:MX Anywhere 2S Mouse"]
+natural_scroll = true
+[input.pointer."1386:828:Wacom Intuos PT S 2 Finger"]
+tap = true

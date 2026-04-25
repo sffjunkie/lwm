@@ -1,0 +1,6 @@
+[layout]
+[layout.common]
+border_width = 4
+margin = 8
+rounded = true
+[layout.monadtall]

@@ -1,0 +1,4 @@
+[controller]
+audio = "/nix/store/k65i58mns74vfkwrgkrk44macwjzz1g3-pavucontrol-6.2/bin/pavucontrol"
+music = "/nix/store/cgxz4rrw46r6zw98ci1bdlzvlzniw2nf-musicctl/bin/musicctl"
+volume = "/nix/store/8zq1da1vjq4bimzcypafay6p43wl731k-volumectl/bin/volumectl"

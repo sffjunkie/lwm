@@ -1,0 +1,20 @@
+[font]
+[font.icon]
+family = "Material Design Icons"
+package = "/nix/store/6y9djj15lws063n4qx3rvr4jmhbxyxsa-material-design-icons-7.4.47"
+size = 22
+[font.logo]
+family = "Hack Nerd Font"
+package = "/nix/store/a87qlkcmpqzlq5fyj9wv3h8p6lsdmddl-nerd-fonts-hack-3.4.0+3.003"
+size = 22
+[font.text]
+family = "JetBrainsMono Nerd Font"
+package = "/nix/store/h4dp26272i1qq3i059l7skirhp2v6dr6-nerd-fonts-jetbrains-mono-3.4.0+2.304"
+size = 16
+[font.ui]
+family = "JetBrainsMono Nerd Font"
+size = 16
+[font.weather]
+family = "Hack Nerd Font"
+package = "/nix/store/a87qlkcmpqzlq5fyj9wv3h8p6lsdmddl-nerd-fonts-hack-3.4.0+3.003"
+size = 22

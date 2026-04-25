@@ -1,0 +1,8 @@
+[color]
+[color.base16]
+scheme_dir = "/nix/store/qiksx2gyvyzmqj85wnq778d52acsgy5g-base16-schemes-0-unstable-2026-01-15/share/themes"
+scheme_name = "catppuccin-macchiato"
+[color.named]
+widget_bg = ["#D08770"]
+widget_fg_dark = "base00"
+widget_fg_light = "base04"

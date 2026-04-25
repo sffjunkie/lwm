@@ -2,7 +2,7 @@ import configparser
 from pathlib import Path
 from typing import cast
 
-from lwm.fs import user_config_dir
+from lwm.helper.fs import user_config_dir
 from .model import WallpaperDefinitions, WallpaperMode, WallpaperDefinition
 
 

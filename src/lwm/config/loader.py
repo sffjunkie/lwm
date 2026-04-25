@@ -18,7 +18,7 @@ from lwm.config.menu.loader import menudefs_from_config
 from lwm.config.typedef import Config
 from lwm.config.wallpaper.loader import wallpaperdefs
 from lwm.config.widget.loader import widgetdef_from_config
-from lwm.fs import read_toml, user_config_dir
+from lwm.helper.fs import read_toml, user_config_dir
 
 CONFIG_DIR = "lwm"
 CONFIG_FORMAT = "toml"

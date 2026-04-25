@@ -3,7 +3,7 @@ from libqtile.lazy import lazy
 
 from lwm.anchor import WindowLocation, anchor_window
 from lwm.config.typedef import Config
-from lwm.terminal import terminal_run_command
+from lwm.helper.terminal import terminal_run_command
 
 
 def build_scratchpads(config: Config) -> list[ScratchPad]:

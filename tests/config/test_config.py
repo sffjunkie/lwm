@@ -26,5 +26,5 @@ def test_config_loader(test_data: Path):
 
 def test_config_real_path():
     data_path = get_config_path()
-    expected_path = Path("~/.config").expanduser() / "desktop" / "lwm"
-    assert data_path == expected_path
+    expected_path = Path("~/.config").expanduser() / "lde"
+    assert str(data_path) == str(expected_path)

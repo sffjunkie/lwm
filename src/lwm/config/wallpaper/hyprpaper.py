@@ -16,7 +16,7 @@ def wallpapersdefs_hyprpaper(filepath: Path | None = None) -> WallpaperDefinitio
         if filepath is None:
             filepath = Path("config.ini")
 
-        config_path = user_config_dir("hypr.conf") / filepath
+        config_path = user_config_dir(Path("hypr.conf")) / filepath
 
     if config_path is None or not config_path.exists():
         return {}

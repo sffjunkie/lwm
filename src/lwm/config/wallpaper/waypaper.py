@@ -22,7 +22,7 @@ def wallpapersdefs_waypaper(filepath: Path | None = None) -> WallpaperDefinition
         if filepath is None:
             filepath = Path("config.ini")
 
-        config_path = user_config_dir("waypaper") / filepath
+        config_path = user_config_dir(Path("waypaper")) / filepath
 
     if not config_path.exists():
         return {}

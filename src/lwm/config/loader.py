@@ -20,7 +20,7 @@ from lwm.config.wallpaper.loader import wallpaperdefs
 from lwm.config.widget.loader import widgetdef_from_config
 from lwm.helper.fs import read_toml, user_config_dir
 
-CONFIG_DIR = "lwm"
+CONFIG_DIR = "lde"
 CONFIG_FORMAT = "toml"
 ConfigKeys = Literal[
     "app",
@@ -45,7 +45,7 @@ def get_config_path(filepath: Path | None = None) -> Path | None:
     if filepath is not None and filepath.is_absolute():
         config_path = filepath
     else:
-        config_path = user_config_dir(f"desktop/{CONFIG_DIR}")
+        config_path = user_config_dir(Path(CONFIG_DIR))
 
     if not config_path.exists():
         logger.warning(f"No config found at {config_path}")

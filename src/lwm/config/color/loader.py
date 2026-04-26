@@ -6,7 +6,8 @@ from lwm.config.color.model import Colors, Base16Colors, NamedColors
 def colordefs_from_config(config: dict) -> Colors:
     color_data = config.get("color", None)
     if color_data is None:
-        color = Colors()
+        named_colors = NamedColors()
+        base16_colors = Base16Colors()
     else:
         if (base16 := color_data.get("base16", None)) is not None:
             base16_colors = base16_colors_from_config(base16)
@@ -18,6 +19,4 @@ def colordefs_from_config(config: dict) -> Colors:
         else:
             named_colors = named_colors_deref(dict(NamedColors()), base16_colors)
 
-        color = Colors(base16=base16_colors, named=named_colors)
-
-    return color
+    return Colors(base16=base16_colors, named=named_colors)

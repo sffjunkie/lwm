@@ -10,7 +10,7 @@ from io import TextIOWrapper
 import yaml
 
 
-def user_config_dir(config_dir: str) -> Path:
+def user_config_dir(config_dir: Path) -> Path:
     xdg_config = Path(
         os.environ.get(
             "XDG_CONFIG_HOME",

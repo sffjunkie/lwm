@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Self
+from pydantic import BaseModel, model_validator
 
 Color = str
 
@@ -43,10 +44,23 @@ class NamedColors(BaseModel):
     widget_fg_dark: Color = "base00"
     widget_fg_light: Color = "base01"
 
-    window_border_focus: Color = "base0f"
-    window_border_normal: Color = "base01"
+    tiled_border_focus: Color = "base06"
+    tiled_border_normal: Color = "base01"
+
+    floating_border_focus: Color | None = None
+    floating_border_normal: Color | None = None
+
+    @model_validator(mode="after")
+    def border_colors(self) -> Self:
+        self.floating_border_focus = (
+            self.floating_border_focus or self.tiled_border_focus
+        )
+        self.floating_border_normal = (
+            self.floating_border_normal or self.tiled_border_normal
+        )
+        return self
 
 
 class Colors(BaseModel):
-    base16: Base16Colors = Base16Colors()
-    named: NamedColors = NamedColors()
+    base16: Base16Colors
+    named: NamedColors

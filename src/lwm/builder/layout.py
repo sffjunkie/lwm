@@ -13,10 +13,10 @@ def build_layouts(config: Config) -> list[_SimpleLayoutBase]:
     if config.layout.common.rounded:
         borders = {
             "border_focus": RoundedCorners(
-                colour=config.color.named.window_border_focus
+                colour=config.color.named.tiled_border_focus
             ),
             "border_normal": RoundedCorners(
-                colour=config.color.named.window_border_normal
+                colour=config.color.named.tiled_border_normal
             ),
         }
     else:

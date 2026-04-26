@@ -5,7 +5,7 @@ from libqtile import hook
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.log_utils import logger
 
-from lwm.debug import log_runtime_info
+from lwm.runtime_info import log_runtime_info
 from lwm.builder.floating import build_floating
 from lwm.builder.group import build_group_keys, build_groups
 from lwm.builder.keyboard import build_keys

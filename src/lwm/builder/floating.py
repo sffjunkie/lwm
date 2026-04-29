@@ -27,9 +27,9 @@ def build_floating(config: Config) -> layout.Floating:
         float_rules=float_rules(),
         border_width=config.layout.common.border_width,
         border_normal=RoundedCorners(
-            colour=config.color.named.floating_border_focus,
+            colour=config.color.named.floating_border_normal,
         ),
         border_focus=RoundedCorners(
-            colour=config.color.named.floating_border_normal,
+            colour=config.color.named.floating_border_focus,
         ),
     )

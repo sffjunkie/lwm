@@ -2,10 +2,10 @@ from typing import Literal
 
 from lwm.helper.merge import merge_props
 from lwm.helper.color import opacity_to_hex
-from lwm.config.typedef import Config
+from lwm.loader.typedef import Config
 from lwm.context.bar import BarContext
 from lwm.helper.color import contrast_color
-from lwm.config.color.deref import deref_colors
+from lwm.loader.color.deref import deref_colors
 
 GroupPosition = Literal["start", "middle", "end"]
 

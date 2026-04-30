@@ -1,5 +1,5 @@
 from pathlib import Path
-from lwm.config.color.base16 import (
+from lwm.loader.color.base16 import (
     load_base16_color_scheme,
     base16_colors_from_config,
 )

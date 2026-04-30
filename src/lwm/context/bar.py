@@ -2,7 +2,7 @@ from typing import Literal
 from itertools import cycle
 from typing import Any
 
-from lwm.config.typedef import Config
+from lwm.loader.typedef import Config
 from lwm.helper.color import opacity_to_hex, contrast_color
 
 BarPosition = Literal["top", "bottom", "left", "right"]

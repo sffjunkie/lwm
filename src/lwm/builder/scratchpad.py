@@ -2,7 +2,7 @@ from libqtile.config import DropDown, Key, ScratchPad
 from libqtile.lazy import lazy
 
 from lwm.anchor import WindowLocation, anchor_window
-from lwm.config.typedef import Config
+from lwm.loader.typedef import Config
 from lwm.helper.terminal import terminal_run_command
 
 
@@ -58,8 +58,8 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
 
 
 def build_scratchpad_keys(config: Config) -> list[Key]:
-    Super = config.key.cmd
-    Alt = config.key.alt
+    Super = config.key.mapping.cmd
+    Alt = config.key.mapping.alt
     return [
         Key(
             [Super, Alt],

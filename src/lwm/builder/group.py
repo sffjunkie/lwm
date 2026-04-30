@@ -5,8 +5,8 @@ from libqtile.lazy import lazy
 from libqtile.config import Key, Group
 
 # from lwm.builder.match_registry import MATCH_REGISTRY
-from lwm.config.typedef import Config
-from lwm.config.group.model import GroupDef
+from lwm.loader.typedef import Config
+from lwm.loader.group.model import GroupDef
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
@@ -48,8 +48,8 @@ def build_groups(config: Config) -> list[Group]:
 def build_group_keys(config: Config) -> list[Key]:
     groupdefs = config.group
 
-    cmd = config.key.cmd
-    shift = config.key.shift
+    cmd = config.key.mapping.cmd
+    shift = config.key.mapping.shift
     keys = []
     for idx, _ in enumerate(groupdefs.groups, start=1):
         name = str(idx)

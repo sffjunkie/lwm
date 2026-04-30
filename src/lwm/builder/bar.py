@@ -8,8 +8,8 @@ from libqtile.bar import Bar as QBar
 from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.helper.color import contrast_color, TRANSPARENT
-from lwm.config.bar.model import BarLocation
-from lwm.config.typedef import Config
+from lwm.loader.bar.model import BarLocation
+from lwm.loader.typedef import Config
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule

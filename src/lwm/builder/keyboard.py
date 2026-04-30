@@ -3,7 +3,7 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
-from lwm.config.typedef import Config
+from lwm.loader.typedef import Config
 
 
 GROUP_SWITCH = ("cmd", "alt")
@@ -43,7 +43,7 @@ def user_menu(config: Config):
 
 
 def system_menu(config: Config):
-    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key.mapping, name) for name in APP_LAUNCH]
     return [
         Key(
             launch,
@@ -55,7 +55,7 @@ def system_menu(config: Config):
 
 
 def application(config: Config):
-    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key.mapping, name) for name in APP_LAUNCH]
     return [
         # Launcher
         Key(
@@ -96,7 +96,7 @@ def application(config: Config):
 
 
 def layout(config: Config):
-    cmd = config.key.cmd
+    cmd = config.key.mapping.cmd
     return [
         Key(
             [cmd],
@@ -108,10 +108,10 @@ def layout(config: Config):
 
 
 def window(config: Config):
-    switch = [getattr(config.key, name) for name in (WINDOW_SWITCH)]
-    move = [getattr(config.key, name) for name in (WINDOW_MOVE)]
-    control = [getattr(config.key, name) for name in (WINDOW_CONTROL)]
-    alt_control = [getattr(config.key, name) for name in (WINDOW_ALT_CONTROL)]
+    switch = [getattr(config.key.mapping, name) for name in WINDOW_SWITCH]
+    move = [getattr(config.key.mapping, name) for name in WINDOW_MOVE]
+    control = [getattr(config.key.mapping, name) for name in WINDOW_CONTROL]
+    alt_control = [getattr(config.key.mapping, name) for name in WINDOW_ALT_CONTROL]
 
     return [
         # region Switch
@@ -245,25 +245,25 @@ def window(config: Config):
 
 
 def group(config: Config):
-    switch = [getattr(config.key, name) for name in (GROUP_SWITCH)]
+    switch = [getattr(config.key.mapping, name) for name in GROUP_SWITCH]
     return [
         Key(
             switch,
             "Left",
             lazy.screen.prev_group(),
-            desc="Switch to next group",
+            desc="Switch to previous group",
         ),
         Key(
             switch,
             "Right",
             lazy.screen.next_group(),
-            desc="Switch to previous group",
+            desc="Switch to next group",
         ),
     ]
 
 
 def screen(config: Config):
-    switch = [getattr(config.key, name) for name in (SCREEN_SWITCH)]
+    switch = [getattr(config.key.mapping, name) for name in SCREEN_SWITCH]
     return [
         Key(
             switch,
@@ -281,13 +281,13 @@ def screen(config: Config):
 
 
 def clipboard(config: Config):
-    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
+    launch = [getattr(config.key.mapping, name) for name in APP_LAUNCH]
     return [
         Key(
             launch,
             "Insert",
             lazy.spawn(
-                f'{config.controller.clipboard} -c',
+                f"{config.controller.clipboard} -c",
             ),
             desc="Copy an item from the clipboard history",
         ),
@@ -295,7 +295,7 @@ def clipboard(config: Config):
             launch,
             "Delete",
             lazy.spawn(
-                f'{config.controller.clipboard} -d',
+                f"{config.controller.clipboard} -d",
             ),
             desc="Delete an item from the clipboard history",
         ),
@@ -303,7 +303,7 @@ def clipboard(config: Config):
 
 
 def qtile(config: Config):
-    control = [getattr(config.key, name) for name in (QTILE_CONTROL)]
+    control = [getattr(config.key.mapping, name) for name in QTILE_CONTROL]
     return [
         Key(
             control,
@@ -321,8 +321,8 @@ def qtile(config: Config):
 
 
 def music(config: Config):
-    fkey = [getattr(config.key, name) for name in ("cmd",)]
-    launch = [getattr(config.key, name) for name in (APP_LAUNCH)]
+    fkey = [getattr(config.key.mapping, name) for name in ("cmd",)]
+    launch = [getattr(config.key.mapping, name) for name in APP_LAUNCH]
     return [
         # Play / Pause
         Key(
@@ -359,7 +359,7 @@ def music(config: Config):
 
 
 def vt(config: Config):
-    switch = [getattr(config.key, name) for name in (VT_SWITCH)]
+    switch = [getattr(config.key.mapping, name) for name in VT_SWITCH]
     return [
         Key(
             switch,

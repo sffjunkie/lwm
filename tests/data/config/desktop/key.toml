@@ -1,6 +1,25 @@
 [key]
+[key.mapping]
 alt = "mod1"
 cmd = "mod4"
 ctrl = "control"
 hyper = "mod3"
 shift = "shift"
+
+[[key.definitions]]
+key = "Return"
+modifiers = ["cmd", "alt"]
+command = "spawn:{...}"
+desc = "Show the rofi app launcher (drun)"
+
+[[key.definitions]]
+key = "Left"
+modifiers = ["cmd", "alt"]
+command = "wm:screen.prev_group"
+desc = "Switch to previous group"
+
+[[key.definitions]]
+key = "Right"
+modifiers = ["cmd", "alt"]
+command = "wm:screen.next_group"
+desc = "Switch to next group"

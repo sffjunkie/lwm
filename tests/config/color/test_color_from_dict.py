@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lwm.config.color.loader import colordefs_from_config
+from lwm.loader.color.loader import colordefs_from_config
 
 
 def test_color_from_dict(test_data: Path):

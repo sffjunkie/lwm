@@ -2,7 +2,7 @@ from libqtile import layout
 from libqtile.config import Match, _Match
 from qtile_extras.layout.decorations.borders import RoundedCorners
 
-from lwm.config.typedef import Config
+from lwm.loader.typedef import Config
 
 wmclass_float = [
     "com.github.wwmm.easyeffects",

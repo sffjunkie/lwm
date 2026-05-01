@@ -2,7 +2,7 @@ from libqtile.config import DropDown, Key, ScratchPad
 from libqtile.lazy import lazy
 
 from lwm.anchor import WindowLocation, anchor_window
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 from lwm.helper.terminal import terminal_run_command
 
 

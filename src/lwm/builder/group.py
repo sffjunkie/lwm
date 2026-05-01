@@ -5,7 +5,7 @@ from libqtile.lazy import lazy
 from libqtile.config import Key, Group
 
 # from lwm.builder.match_registry import MATCH_REGISTRY
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 from lwm.loader.group.model import GroupDef
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]

@@ -3,8 +3,7 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
-from lwm.loader.typedef import Config
-
+from lwm.loader.model import Config
 
 GROUP_SWITCH = ("cmd", "alt")
 

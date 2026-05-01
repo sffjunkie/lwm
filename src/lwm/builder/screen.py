@@ -1,6 +1,6 @@
 from libqtile.config import Screen
 
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 from lwm.builder.bar import build_bars
 
 

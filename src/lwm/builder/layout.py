@@ -2,7 +2,7 @@ from libqtile.layout.max import Max
 from libqtile.layout.xmonad import MonadTall
 from libqtile.layout.base import _SimpleLayoutBase
 from qtile_extras.layout.decorations.borders import RoundedCorners
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 
 
 def _layout_type_args(config: Config, layout: str) -> dict:

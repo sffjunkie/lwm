@@ -9,7 +9,7 @@ from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.helper.color import contrast_color, TRANSPARENT
 from lwm.loader.bar.model import BarLocation
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule

@@ -4,17 +4,6 @@ from qtile_extras.layout.decorations.borders import RoundedCorners
 
 from lwm.loader.typedef import Config
 
-wmclass_float = [
-    "com.github.wwmm.easyeffects",
-    "org.pulseaudio.pavucontrol",
-    "org.gnome.Calculator",
-    "org.gnome.Characters",
-    "Pinentry",
-    "ssh-askpass",
-    "waypaper",
-    "yubico.org.",
-]
-
 
 def float_rules() -> list[_Match]:
     return [

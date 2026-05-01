@@ -10,6 +10,7 @@ from lwm.loader.color.loader import colordefs_from_config
 from lwm.loader.controller.loader import controllerdefs_from_config
 from lwm.loader.device.loader import devicedefs_from_config
 from lwm.loader.extension.loader import extensiondefs_from_config
+from lwm.loader.floating.loader import floatingdefs_from_config
 from lwm.loader.font.loader import fontdefs_from_config
 from lwm.loader.group.loader import groupdefs_from_config
 from lwm.loader.key.loader import keydefs_from_config
@@ -30,6 +31,7 @@ ConfigKeys = Literal[
     "controller",
     "device",
     "extension",
+    "floating",
     "font",
     "group",
     "input",
@@ -89,6 +91,7 @@ def load_config(configpath: Path | None = None) -> Config | None:
             controller=controllerdefs_from_config(configs),
             device=devicedefs_from_config(configs),
             extension=extensiondefs_from_config(configs, base16, named),
+            floating=floatingdefs_from_config(configs),
             font=fontdefs_from_config(configs),
             group=groupdefs_from_config(configs),
             key=keydefs_from_config(configs),

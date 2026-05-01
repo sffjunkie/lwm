@@ -6,6 +6,7 @@ from lwm.loader.branding.model import Branding
 from lwm.loader.color.model import Colors
 from lwm.loader.extension.model import Extension
 from lwm.loader.font.model import FontDefinitions
+from lwm.loader.floating.model import Floating
 from lwm.loader.group.model import GroupDefs
 from lwm.loader.apps.model import Apps
 from lwm.loader.menu.model import Menus
@@ -29,6 +30,7 @@ class Config:
     controller: Controllers
     device: Devices
     extension: Extension
+    floating: Floating
     font: FontDefinitions
     from_path: Path | None
     group: GroupDefs

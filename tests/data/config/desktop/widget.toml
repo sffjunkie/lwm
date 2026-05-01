@@ -1,0 +1,7 @@
+[widget]
+margin = 4
+padding = 20
+font = "A Font"
+fontsize = 800
+foreground = "non existent"
+background = "bar_bg"

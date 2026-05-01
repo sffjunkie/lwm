@@ -3,6 +3,7 @@ from typing import Any, Literal, get_args
 
 from libqtile.log_utils import logger
 
+from lwm.helper.fs import read_toml, user_config_dir
 from lwm.loader.apps.loader import appdefs_from_config
 from lwm.loader.bar.loader import bardefs_from_config
 from lwm.loader.branding.loader import branding_from_config
@@ -19,7 +20,6 @@ from lwm.loader.menu.loader import menudefs_from_config
 from lwm.loader.model import Config
 from lwm.loader.wallpaper.loader import wallpaperdefs
 from lwm.loader.widget.loader import widgetdef_from_config
-from lwm.helper.fs import read_toml, user_config_dir
 
 CONFIG_DIR = "lde"
 CONFIG_FORMAT = "toml"

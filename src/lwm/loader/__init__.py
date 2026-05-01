@@ -16,7 +16,7 @@ from lwm.loader.group.loader import groupdefs_from_config
 from lwm.loader.key.loader import keydefs_from_config
 from lwm.loader.layout.loader import layoutdef_from_config
 from lwm.loader.menu.loader import menudefs_from_config
-from lwm.loader.typedef import Config
+from lwm.loader.model import Config
 from lwm.loader.wallpaper.loader import wallpaperdefs
 from lwm.loader.widget.loader import widgetdef_from_config
 from lwm.helper.fs import read_toml, user_config_dir

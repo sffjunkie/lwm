@@ -18,12 +18,12 @@ from lwm.secret.loader import load_secrets
 
 is_under_pytest = "pytest" in sys.modules
 
-log_runtime_info()
-
-secrets = load_secrets()
-config = load_config()
-
 if not is_under_pytest:
+    log_runtime_info()
+
+    secrets = load_secrets()
+    config = load_config()
+
     if config is None:
         logger.error("lwm: Unable to load configuration")
     else:

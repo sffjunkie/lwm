@@ -49,7 +49,6 @@ if not is_under_pytest:
         follow_mouse_focus = False
         wmname = "lwm"
 
-        # to get ids use `qtile cmd-obj -o core -f get_inputs`
         wl_input_rules = {
             "1452:591:Keychron Keychron K1": InputConfig(
                 kb_layout="hyper_super",  # see siteconfig repo config/module/home/keyboard/hyper_super

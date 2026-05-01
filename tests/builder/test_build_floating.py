@@ -11,4 +11,4 @@ def test_build_floating(test_data: Path):
     floating = build_floating(config)
 
     assert floating.border_focus is not None
-    assert floating.border_focus.colour == "#363a4f"
+    assert floating.border_focus.colour == "#f4dbd6"

@@ -7,4 +7,4 @@ def test_floating_loader(test_data: Path):
     config = load_config(data_path.absolute())
 
     assert config is not None
-    assert len(config.floating.match["wm_appid"]) == 2
+    assert len(config.floating.match["wm_appid"]) == 8

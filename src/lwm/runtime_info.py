@@ -1,7 +1,7 @@
 import sys
 
-from libqtile.log_utils import logger
 from libqtile import __path__ as libqtile_path
+from libqtile.log_utils import logger
 
 
 def log_runtime_info() -> None:

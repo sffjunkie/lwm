@@ -1,6 +1,7 @@
-from pydantic import BaseModel
 from pathlib import Path
 from typing import Literal
+
+from pydantic import BaseModel
 
 ScreenName = str
 

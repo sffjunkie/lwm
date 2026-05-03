@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Literal
+
 from pydantic import BaseModel
 
 CommandType = Literal["std", "var", "wm", "terminal"]

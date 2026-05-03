@@ -1,7 +1,7 @@
 from libqtile.config import Screen
 
-from lwm.loader.model import Definitions
 from lwm.builder.bar import build_bars
+from lwm.loader.model import Definitions
 
 
 def build_screens(defs: Definitions) -> list[Screen]:

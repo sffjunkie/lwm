@@ -1,11 +1,10 @@
-import sys
 import subprocess
+import sys
 
 from libqtile import hook
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.log_utils import logger
 
-from lwm.runtime_info import log_runtime_info
 from lwm.builder.floating import build_floating
 from lwm.builder.group import build_group_keys, build_groups
 from lwm.builder.keyboard import build_keys
@@ -14,6 +13,7 @@ from lwm.builder.mouse import build_buttons
 from lwm.builder.scratchpad import build_scratchpad_keys, build_scratchpads
 from lwm.builder.screen import build_screens
 from lwm.loader import load_defs
+from lwm.runtime_info import log_runtime_info
 from lwm.secret.loader import load_secrets
 
 is_under_pytest = "pytest" in sys.modules

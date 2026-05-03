@@ -3,10 +3,10 @@ from qtile_extras.widget import ThermalSensor
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
+from lwm.helper.color import TRANSPARENT
+from lwm.helper.merge import merge_props
 from lwm.qmodule.base import WidgetModule
 from lwm.qwidget.icon import MDIcon
-from lwm.helper.merge import merge_props
-from lwm.helper.color import TRANSPARENT
 
 
 class CPUTempStatus(WidgetModule):

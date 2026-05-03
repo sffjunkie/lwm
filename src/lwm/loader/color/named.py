@@ -1,4 +1,3 @@
-# from lwm.config.color.default import DEFAULT_NAMED_COLORS
 from lwm.loader.color.deref import deref_colors
 from lwm.loader.color.model import Base16Colors, NamedColors
 

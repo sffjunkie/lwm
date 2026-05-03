@@ -23,7 +23,6 @@
 from math import log
 
 import psutil
-
 from libqtile.log_utils import logger
 from libqtile.widget import base
 from qtile_extras import widget

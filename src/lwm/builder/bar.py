@@ -7,11 +7,11 @@ from typing import Iterator
 from libqtile.bar import Bar as QBar
 from qtile_extras.widget import Spacer as QSpacer
 
-from lwm.helper.color import contrast_color, TRANSPARENT
-from lwm.loader.bar.model import BarLocation
-from lwm.loader.model import Definitions
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
+from lwm.helper.color import TRANSPARENT, contrast_color
+from lwm.loader.bar.model import BarLocation
+from lwm.loader.model import Definitions
 from lwm.qmodule.base import WidgetModule
 from lwm.qmodule.bluetooth import Bluetooth
 from lwm.qmodule.cpu_temp_status import CPUTempStatus

@@ -2,8 +2,8 @@ from libqtile.widget import base
 from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.context.module import ModuleContext
-from lwm.qmodule.base import WidgetModule
 from lwm.helper.merge import merge_props
+from lwm.qmodule.base import WidgetModule
 
 
 class Spacer(WidgetModule):

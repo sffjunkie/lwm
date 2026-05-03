@@ -3,10 +3,11 @@ import os
 import random
 import string
 import tomllib
+from io import TextIOWrapper
 from itertools import chain
 from pathlib import Path
 from typing import Any, Iterable
-from io import TextIOWrapper
+
 import yaml
 
 

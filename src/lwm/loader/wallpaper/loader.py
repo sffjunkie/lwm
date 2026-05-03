@@ -1,5 +1,5 @@
-from .model import WallpaperDefs, WallpaperDefinition
-from .waypaper import wallpapersdefs_waypaper
+from lwm.loader.wallpaper.model import WallpaperDefinition, WallpaperDefs
+from lwm.loader.wallpaper.waypaper import wallpapersdefs_waypaper
 
 
 def wallpaperdefs() -> WallpaperDefs:

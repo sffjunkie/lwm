@@ -3,10 +3,10 @@ from qtile_extras.widget import Spacer as QSpacer
 from qtile_extras.widget import WindowName as QWindowName
 from qtile_extras.widget.decorations import RectDecoration
 
-from lwm.qmodule.base import WidgetModule
 from lwm.context.module import ModuleContext
-from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
+from lwm.helper.merge import merge_props
+from lwm.qmodule.base import WidgetModule
 
 
 class WindowName(WidgetModule):

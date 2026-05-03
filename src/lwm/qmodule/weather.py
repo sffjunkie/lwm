@@ -3,9 +3,9 @@ from qtile_extras.widget import OpenWeather
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
-from lwm.qmodule.base import WidgetModule
-from lwm.helper.merge import merge_props
 from lwm.helper.color import TRANSPARENT
+from lwm.helper.merge import merge_props
+from lwm.qmodule.base import WidgetModule
 
 
 class Weather(WidgetModule):

@@ -1,13 +1,13 @@
 import re
 
-from libqtile.config import Match
+from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
-from libqtile.config import Key, Group
+
+from lwm.loader.group.model import GroupDef
+from lwm.loader.match.model import MatchDefs
 
 # from lwm.builder.match_registry import MATCH_REGISTRY
 from lwm.loader.model import Definitions
-from lwm.loader.group.model import GroupDef
-from lwm.loader.match.model import MatchDefs
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]

@@ -1,4 +1,4 @@
-from .typedef import (
+from lwm.anchor.typedef import (
     Margins,
     ScreenFraction,
     WindowLocation,

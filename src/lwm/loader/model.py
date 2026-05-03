@@ -18,9 +18,6 @@ from lwm.loader.menu.model import MenuDefs
 from lwm.loader.wallpaper.model import WallpaperDefs
 from lwm.loader.widget.model import WidgetDefs
 
-PropertyDefinition = str | int | float | dict[str, "PropertyDefinition"]
-PropertyDefinitions = dict[str, PropertyDefinition]
-
 
 @dataclass
 class Definitions:

@@ -1,10 +1,10 @@
-from lwm.loader.controller.model import Controllers
+from lwm.loader.controller.model import ControllerDefs
 
 
-def controllerdefs_from_config(data: dict):
+def controllerdefs_from_data(data: dict):
     controller_data = data.get("controller", None)
     if controller_data is None:
-        controllers = Controllers()
+        controllers = ControllerDefs()
     else:
-        controllers = Controllers(**controller_data)
+        controllers = ControllerDefs(**controller_data)
     return controllers

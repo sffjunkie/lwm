@@ -6,27 +6,35 @@ MatchType = str
 MatchDef = list[str]
 
 
+class MatchTypes(BaseModel):
+    appid: list[str] = []
+    title: list[str] = []
+
+
+class CommonGroupDefs(BaseModel):
+    decoration: str = "superscript"
+    layout: str | None = None
+    layouts: list[str] = []
+
+
 class GroupDef(BaseModel):
     name: str
+    layout: str = ""
     layouts: list[str] = []
-    matches: dict[MatchType, MatchDef] = {}
+    matches: MatchTypes = MatchTypes()
 
 
 class GroupDefs(BaseModel):
-    decoration: str = "superscript"
-    groups: list[GroupDef] = [
+    common: CommonGroupDefs = CommonGroupDefs()
+    defs: list[GroupDef] = [
         GroupDef(
             name="WWW",
-            layouts=["max"],
-            matches={
-                "app_id": ["firefox"],
-            },
+            layout="max",
+            matches=MatchTypes(appid=["firefox"]),
         ),
         GroupDef(
             name="TERM",
-            layouts=["max"],
-            matches={
-                "app_id": ["ghostty"],
-            },
+            layout="max",
+            matches=MatchTypes(appid=["ghostty"]),
         ),
     ]

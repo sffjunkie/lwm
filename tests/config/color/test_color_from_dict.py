@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lwm.loader.color.loader import colordefs_from_config
+from lwm.loader.color.loader import colordefs_from_data
 
 
 def test_color_from_dict(test_data: Path):
@@ -19,6 +19,6 @@ def test_color_from_dict(test_data: Path):
         }
     }
 
-    color = colordefs_from_config(config)
+    color = colordefs_from_data(config)
     assert color.base16.base00 == "#32302f"
     assert color.named.bar_fg == "#282828"

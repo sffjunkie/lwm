@@ -3,11 +3,11 @@ from lwm.loader.color.model import Base16Colors, NamedColors
 from lwm.loader.layout.model import LayoutDefs
 
 
-def layoutdef_from_config(
-    config: dict, base16: Base16Colors, named: NamedColors
+def layoutdef_from_data(
+    data: dict, base16: Base16Colors, named: NamedColors
 ) -> LayoutDefs:
     layout: LayoutDefs
-    layout_data = config.get("layout", None)
+    layout_data = data.get("layout", None)
     if layout_data is None:
         layout = LayoutDefs()
     else:

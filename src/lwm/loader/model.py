@@ -1,41 +1,43 @@
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 
-from lwm.loader.bar.model import BarDefinitions
+from lwm.loader.apps.model import AppDefs
+from lwm.loader.bar.model import BarDefs
 from lwm.loader.branding.model import Branding
-from lwm.loader.color.model import Colors
-from lwm.loader.extension.model import Extension
-from lwm.loader.font.model import FontDefinitions
+from lwm.loader.color.model import ColorDefs
+from lwm.loader.controller.model import ControllerDefs
+from lwm.loader.device.model import DeviceDefs
+from lwm.loader.extension.model import ExtensionDefs
 from lwm.loader.floating.model import Floating
+from lwm.loader.font.model import FontDefs
 from lwm.loader.group.model import GroupDefs
-from lwm.loader.apps.model import Apps
-from lwm.loader.menu.model import Menus
-from lwm.loader.device.model import Devices
-from lwm.loader.controller.model import Controllers
-from lwm.loader.key.model import Keys
-from lwm.loader.wallpaper.model import WallpaperDefinitions
+from lwm.loader.key.model import KeyDefs
 from lwm.loader.layout.model import LayoutDefs
-from lwm.loader.widget.model import Widget
+from lwm.loader.match.model import MatchDefs
+from lwm.loader.menu.model import MenuDefs
+from lwm.loader.wallpaper.model import WallpaperDefs
+from lwm.loader.widget.model import WidgetDefs
 
 PropertyDefinition = str | int | float | dict[str, "PropertyDefinition"]
 PropertyDefinitions = dict[str, PropertyDefinition]
 
 
 @dataclass
-class Config:
-    app: Apps
-    bar: BarDefinitions
+class Definitions:
+    app: AppDefs
+    bar: BarDefs
     branding: Branding
-    color: Colors
-    controller: Controllers
-    device: Devices
-    extension: Extension
+    color: ColorDefs
+    controller: ControllerDefs
+    device: DeviceDefs
+    extension: ExtensionDefs
     floating: Floating
-    font: FontDefinitions
+    font: FontDefs
     from_path: Path | None
     group: GroupDefs
-    key: Keys
+    key: KeyDefs
     layout: LayoutDefs
-    menu: Menus
-    widget: Widget
-    wallpaper: WallpaperDefinitions
+    match: MatchDefs
+    menu: MenuDefs
+    widget: WidgetDefs
+    wallpaper: WallpaperDefs

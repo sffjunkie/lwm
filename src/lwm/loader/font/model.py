@@ -15,7 +15,7 @@ DEFAULT_FONTDEF = FontDefinition(
 )
 
 
-class FontDefinitions(BaseModel):
+class FontDefs(BaseModel):
     text: FontDefinition = DEFAULT_FONTDEF
     icon: FontDefinition = DEFAULT_FONTDEF
     logo: FontDefinition = DEFAULT_FONTDEF

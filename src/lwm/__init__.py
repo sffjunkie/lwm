@@ -13,7 +13,7 @@ from lwm.builder.layout import build_layouts
 from lwm.builder.mouse import build_buttons
 from lwm.builder.scratchpad import build_scratchpad_keys, build_scratchpads
 from lwm.builder.screen import build_screens
-from lwm.loader import load_config
+from lwm.loader import load_defs
 from lwm.secret.loader import load_secrets
 
 is_under_pytest = "pytest" in sys.modules
@@ -22,7 +22,7 @@ if not is_under_pytest:
     log_runtime_info()
 
     secrets = load_secrets()
-    config = load_config()
+    config = load_defs()
 
     if config is None:
         logger.error("lwm: Unable to load configuration")

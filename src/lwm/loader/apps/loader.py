@@ -1,12 +1,12 @@
-from lwm.loader.apps.model import Apps
+from lwm.loader.apps.model import AppDefs
 
 
-def appdefs_from_config(data: dict) -> Apps:
-    apps: Apps
+def appdefs_from_data(data: dict) -> AppDefs:
+    apps: AppDefs
     app_data = data.get("app", None)
     if app_data is None:
-        apps = Apps()
+        apps = AppDefs()
     else:
-        apps = Apps(**app_data)
+        apps = AppDefs(**app_data)
 
     return apps

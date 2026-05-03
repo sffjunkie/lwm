@@ -3,8 +3,7 @@ from pathlib import Path
 from typing import cast
 
 from lwm.helper.fs import user_config_dir
-from .model import WallpaperDefinitions, WallpaperMode, WallpaperDefinition
-
+from .model import WallpaperDefs, WallpaperMode, WallpaperDefinition
 
 """
 wallpaper = image.png
@@ -15,7 +14,7 @@ monitors = All, HDMI-A-1
 """
 
 
-def wallpapersdefs_waypaper(filepath: Path | None = None) -> WallpaperDefinitions:
+def wallpapersdefs_waypaper(filepath: Path | None = None) -> WallpaperDefs:
     if filepath is not None and filepath.is_absolute():
         config_path = filepath
     else:

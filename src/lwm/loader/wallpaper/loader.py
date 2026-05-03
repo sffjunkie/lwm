@@ -1,13 +1,13 @@
-from .model import WallpaperDefinitions, WallpaperDefinition
+from .model import WallpaperDefs, WallpaperDefinition
 from .waypaper import wallpapersdefs_waypaper
 
 
-def wallpaperdefs() -> WallpaperDefinitions:
+def wallpaperdefs() -> WallpaperDefs:
     return wallpapersdefs_waypaper()
 
 
 def wallpaper_for_screen(
-    screen: str, definitions: WallpaperDefinitions
+    screen: str, definitions: WallpaperDefs
 ) -> WallpaperDefinition | None:
     if (definition := definitions.get(screen, None)) is not None:
         return definition

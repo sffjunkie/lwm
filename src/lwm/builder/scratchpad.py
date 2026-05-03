@@ -2,11 +2,11 @@ from libqtile.config import DropDown, Key, ScratchPad
 from libqtile.lazy import lazy
 
 from lwm.anchor import WindowLocation, anchor_window
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 from lwm.helper.terminal import terminal_run_command
 
 
-def build_scratchpads(config: Config) -> list[ScratchPad]:
+def build_scratchpads(defs: Definitions) -> list[ScratchPad]:
     ncmpcpp_dimension = anchor_window(
         location=WindowLocation.BottomCenter,
         width=0.5,
@@ -26,7 +26,7 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
                     name="music-player",
                     cmd=terminal_run_command(
                         command=["ncmpcpp"],
-                        terminal=config.app.terminal,
+                        terminal=defs.app.terminal,
                     ),
                     height=ncmpcpp_dimension.height,
                     width=ncmpcpp_dimension.width,
@@ -43,7 +43,7 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
             dropdowns=[
                 DropDown(
                     name="home-automation",
-                    cmd=f"{config.app.browser} https://hass.looniversity.net",
+                    cmd=f"{defs.app.browser} https://hass.looniversity.net",
                     height=home_automation_dimension.height,
                     width=home_automation_dimension.width,
                     x=home_automation_dimension.x,
@@ -57,9 +57,9 @@ def build_scratchpads(config: Config) -> list[ScratchPad]:
     ]
 
 
-def build_scratchpad_keys(config: Config) -> list[Key]:
-    Super = config.key.mapping.cmd
-    Alt = config.key.mapping.alt
+def build_scratchpad_keys(defs: Definitions) -> list[Key]:
+    Super = defs.key.mapping.cmd
+    Alt = defs.key.mapping.alt
     return [
         Key(
             [Super, Alt],

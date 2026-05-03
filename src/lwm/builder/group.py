@@ -5,8 +5,9 @@ from libqtile.lazy import lazy
 from libqtile.config import Key, Group
 
 # from lwm.builder.match_registry import MATCH_REGISTRY
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 from lwm.loader.group.model import GroupDef
+from lwm.loader.match.model import MatchDefs
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
@@ -23,35 +24,34 @@ def decoration(group_idx: int, style: str) -> str:
         return ""
 
 
-def build_groups(config: Config) -> list[Group]:
-    groupdefs = config.group
-    groups = groupdefs.groups
-    decoration_style = getattr(groupdefs, "decoration", DECORATION)
+def build_groups(defs: Definitions) -> list[Group]:
+    decoration_style = defs.group.common.decoration
 
     groups = []
-    for idx, grp in enumerate(groupdefs.groups, start=1):
+    for idx, grp in enumerate(defs.group.defs, start=1):
         kwargs = {}
 
-        matches = build_match(grp)
+        layout = grp.layout or defs.group.common.layout
+
+        matches = build_match(grp, defs.match)
         if matches:
             kwargs["matches"] = matches
 
         group = Group(
             name=str(idx),
             label=grp.name + decoration(idx, decoration_style),
+            layout=layout,
             **kwargs,
         )
         groups.append(group)
     return groups
 
 
-def build_group_keys(config: Config) -> list[Key]:
-    groupdefs = config.group
-
-    cmd = config.key.mapping.cmd
-    shift = config.key.mapping.shift
+def build_group_keys(defs: Definitions) -> list[Key]:
+    cmd = defs.key.mapping.cmd
+    shift = defs.key.mapping.shift
     keys = []
-    for idx, _ in enumerate(groupdefs.groups, start=1):
+    for idx, _ in enumerate(defs.group.defs, start=1):
         name = str(idx)
         keys.append(
             Key(
@@ -72,13 +72,19 @@ def build_group_keys(config: Config) -> list[Key]:
     return keys
 
 
-def build_match(group: GroupDef) -> list[Match]:
+def build_match(group: GroupDef, match: MatchDefs) -> list[Match]:
     matches = []
-    matchdef = getattr(group, "matches", None)
-    if matchdef is not None:
-        wmclass_regexes = matchdef.get("app_id", [])
-        if wmclass_regexes:
-            for regex in wmclass_regexes:
-                match = Match(wm_class=re.compile(regex))
-                matches.append(match)
+
+    appid_matches = []
+    for app_name in group.matches.appid:
+        nm = match.defs[app_name].appid
+        appid_matches.extend(nm)
+    matches.extend([Match(wm_class=m) for m in appid_matches])
+
+    title_matches = []
+    for app_name in group.matches.title:
+        nm = match.defs[app_name].title
+        title_matches.extend(nm)
+    matches.extend([Match(title=re.compile(m)) for m in title_matches])
+
     return matches

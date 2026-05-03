@@ -1,5 +1,10 @@
 from pydantic import BaseModel
 
 
+class MatchTypes(BaseModel):
+    appid: list[str] = []
+    title: list[str] = []
+
+
 class Floating(BaseModel):
-    match: dict[str, list[str]] = {}
+    matches: MatchTypes = MatchTypes()

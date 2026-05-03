@@ -1,11 +1,11 @@
-from lwm.loader.menu.model import Menus
+from lwm.loader.menu.model import MenuDefs
 
 
-def menudefs_from_config(data: dict) -> Menus:
+def menudefs_from_data(data: dict) -> MenuDefs:
     menu_data = data.get("menu", None)
     if menu_data is None:
-        menu = Menus()
+        menu = MenuDefs()
     else:
-        menu = Menus(**menu_data)
+        menu = MenuDefs(**menu_data)
 
     return menu

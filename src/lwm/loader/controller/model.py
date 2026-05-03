@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Controllers(BaseModel):
+class ControllerDefs(BaseModel):
     audio: str = "pavucontrol"
     clipboard: str = "rofi-clip"
     music: str = "musicctl"

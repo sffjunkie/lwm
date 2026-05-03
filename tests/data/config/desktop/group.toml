@@ -3,42 +3,44 @@ decoration = "superscript"
 layout = "max"
 layouts = ["max", "monadtall"]
 
-[[group.groups]]
+[[group.defs]]
 layout = "monadtall"
 name = "WWW"
-[group.groups.matches]
-app_id = ["brave-browser", "chromium", "firefox"]
 
-[[group.groups]]
+[group.defs.matches]
+appid = ["brave", "chrome", "firefox"]
+
+[[group.defs]]
 layout = "max"
 name = "BRAIN"
-[group.groups.matches]
-app_id = ["obsidian"]
+[group.defs.matches]
+appid = ["obsidian"]
 
-[[group.groups]]
+[[group.defs]]
 layout = "max"
 name = "CODE"
-[group.groups.matches]
-app_id = ["code-url-handler"]
+[group.defs.matches]
+appid = ["vscode"]
 
-[[group.groups]]
+[[group.defs]]
 layout = "monadtall"
 name = "TERM"
 
-[[group.groups]]
+[[group.defs]]
 layout = "monadtall"
 name = "DOC"
 
-[[group.groups]]
+[[group.defs]]
 layout = "monadtall"
 name = "CHAT"
 
-[[group.groups]]
+[[group.defs]]
 layout = "monadtall"
 name = "VID"
 
-[[group.groups]]
+[[group.defs]]
 layout = "max"
 name = "GFX"
-[group.groups.matches]
-app_id = ["Darktable", "Gimp-d+.d+", "org.inkscape.Inkscape"]
+
+[group.defs.matches]
+appid = ["darktable", "gimp", "inkscape"]

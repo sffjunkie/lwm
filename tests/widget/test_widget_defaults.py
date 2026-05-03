@@ -1,7 +1,7 @@
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 
 
-def test_widget_defaults(config: Config):
+def test_widget_defaults(config: Definitions):
     wd = config.widget
     assert wd is not None
     assert wd.fontsize == 800

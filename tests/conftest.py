@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from lwm.loader.model import Config
-from lwm.loader import load_config
+from lwm.loader.model import Definitions
+from lwm.loader import load_defs
 
 
 @pytest.fixture
@@ -15,6 +15,6 @@ def test_data() -> Path:
 
 
 @pytest.fixture
-def config(test_data: Path) -> Config | None:
+def config(test_data: Path) -> Definitions | None:
     data_path = test_data / "config" / "desktop"
-    return load_config(data_path.absolute())
+    return load_defs(data_path.absolute())

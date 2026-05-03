@@ -3,13 +3,13 @@ from typing import cast, get_args
 
 from lwm.helper.fs import user_config_dir, read_ini
 from lwm.loader.wallpaper.model import (
-    WallpaperDefinitions,
+    WallpaperDefs,
     WallpaperDefinition,
     WallpaperMode,
 )
 
 
-def wallpapersdefs_hyprpaper(filepath: Path | None = None) -> WallpaperDefinitions:
+def wallpapersdefs_hyprpaper(filepath: Path | None = None) -> WallpaperDefs:
     if filepath is not None and filepath.is_absolute():
         config_path = filepath
     else:

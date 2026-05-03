@@ -36,7 +36,7 @@ def load_base16_color_scheme(
     return None
 
 
-def base16_colors_from_config(data: dict) -> Base16Colors:
+def base16_colors_from_data(data: dict) -> Base16Colors:
     scheme_dir = data.get("scheme_dir", None)
     scheme_name = data.get("scheme_name", None)
     if scheme_dir is not None and scheme_name is not None:

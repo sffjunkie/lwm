@@ -9,7 +9,7 @@ from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.helper.color import contrast_color, TRANSPARENT
 from lwm.loader.bar.model import BarLocation
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
 from lwm.qmodule.base import WidgetModule
@@ -32,39 +32,39 @@ from lwm.qmodule.window_name import WindowName
 Bars = dict[BarLocation, QBar | None]
 
 
-def fg_color(config: Config):
+def fg_color(defs: Definitions):
     def func(bg_color: str) -> str:
         return contrast_color(
             bg_color,
-            config.color.named.widget_fg_light,
-            config.color.named.widget_fg_dark,
+            defs.color.named.widget_fg_light,
+            defs.color.named.widget_fg_dark,
         )
 
     return func
 
 
-def widget_bg_iter(config: Config) -> Iterator:
-    return cycle(getattr(config.color.named, "widget_bg", "000000"))
+def widget_bg_iter(defs: Definitions) -> Iterator:
+    return cycle(getattr(defs.color.named, "widget_bg", "000000"))
 
 
-def build_top_bar(config: Config) -> QBar | None:
-    if config.bar.top is None:
+def build_top_bar(defs: Definitions) -> QBar | None:
+    if defs.bar.top is None:
         return None
 
     idx = 0
 
-    bar_context = BarContext(position="top", config=config)
+    bar_context = BarContext(position="top", defs=defs)
     bar_context.props = {
-        "height": config.bar.top.height,
-        "margin": config.bar.top.margin,
-        "opacity": config.bar.top.opacity,
+        "height": defs.bar.top.height,
+        "margin": defs.bar.top.margin,
+        "opacity": defs.bar.top.opacity,
     }
 
     widgets = []
 
     ctx = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "background": TRANSPARENT,
             "foreground": TRANSPARENT,
@@ -74,11 +74,11 @@ def build_top_bar(config: Config) -> QBar | None:
 
     user_menu_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={"background": "base0f"},
     )
-    group_box_context = ModuleContext(bar_context, config)
-    current_layout_context = ModuleContext(bar_context, config)
+    group_box_context = ModuleContext(bar_context, defs)
+    current_layout_context = ModuleContext(bar_context, defs)
 
     # region start
     start: list[WidgetModule] = [
@@ -94,7 +94,7 @@ def build_top_bar(config: Config) -> QBar | None:
         widgets.extend(group.widgets(group_id=idx))
     # endregion
 
-    window_name_context = ModuleContext(bar_context, config)
+    window_name_context = ModuleContext(bar_context, defs)
 
     # region middle
     middle: list[WidgetModule] = [
@@ -113,7 +113,7 @@ def build_top_bar(config: Config) -> QBar | None:
     # region end
     weather_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "weather": {
                 "app_key": os.environ.get("OWM_API_KEY", ""),
@@ -126,10 +126,10 @@ def build_top_bar(config: Config) -> QBar | None:
         },
     )
 
-    date_time_context = ModuleContext(bar_context, config)
+    date_time_context = ModuleContext(bar_context, defs)
     system_menu_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={"background": "base0f"},
     )
 
@@ -154,17 +154,17 @@ def build_top_bar(config: Config) -> QBar | None:
     )
 
 
-def build_bottom_bar(config: Config) -> QBar | None:
-    if config.bar.bottom is None:
+def build_bottom_bar(defs: Definitions) -> QBar | None:
+    if defs.bar.bottom is None:
         return None
 
     idx = 0
 
-    bar_context = BarContext(position="bottom", config=config)
+    bar_context = BarContext(position="bottom", defs=defs)
     bar_context.props = {
-        "height": config.bar.bottom.height,
-        "margin": config.bar.bottom.margin,
-        "opacity": config.bar.bottom.opacity,
+        "height": defs.bar.bottom.height,
+        "margin": defs.bar.bottom.margin,
+        "opacity": defs.bar.bottom.opacity,
     }
 
     widgets = []
@@ -172,24 +172,24 @@ def build_bottom_bar(config: Config) -> QBar | None:
     separator = Separator(
         ModuleContext(
             bar_context,
-            config=config,
+            defs=defs,
         )
     )
 
     # region start
     network_status_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "network": {
-                "interface": getattr(config.device, "net", "eth0"),
+                "interface": getattr(defs.device, "net", "eth0"),
             },
         },
     )
 
     memory_status_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
@@ -197,12 +197,12 @@ def build_bottom_bar(config: Config) -> QBar | None:
         },
     )
 
-    cpu_usage_context = ModuleContext(bar_context, config)
-    cpu_temp_context = ModuleContext(bar_context, config)
+    cpu_usage_context = ModuleContext(bar_context, defs)
+    cpu_temp_context = ModuleContext(bar_context, defs)
 
     bluetooth_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "menu": {
                 "menu_font": "JetBrainsMono Nerd Font",
@@ -243,7 +243,7 @@ def build_bottom_bar(config: Config) -> QBar | None:
     end: list[WidgetModule] = []
     music_status_context = ModuleContext(
         bar_context,
-        config,
+        defs,
         props={
             "music": {
                 "status_format": "󰝚 {title} | 󰠃 {artist} | 󰀥 {album} {play_status}",
@@ -253,17 +253,17 @@ def build_bottom_bar(config: Config) -> QBar | None:
     )
     end.append(MusicStatus(music_status_context))
 
-    volume_control = config.controller.volume
+    volume_control = defs.controller.volume
     if volume_control is not None:
         volume_context = ModuleContext(
             bar_context,
-            config,
+            defs,
             props={
                 "volume": {
                     "volume_up_command": f"{volume_control} up",
                     "volume_down_command": f"{volume_control} down",
                     "mute_command": f"{volume_control} toggle",
-                    "volume_app": config.controller.audio,
+                    "volume_app": defs.controller.audio,
                 },
             },
         )
@@ -283,27 +283,27 @@ def build_bottom_bar(config: Config) -> QBar | None:
     )
 
 
-def build_left_bar(config: Config) -> QBar | None:
+def build_left_bar(defs: Definitions) -> QBar | None:
     return None
 
 
-def build_right_bar(config: Config) -> QBar | None:
+def build_right_bar(defs: Definitions) -> QBar | None:
     return None
 
 
-def build_bars(config: Config) -> Bars:
+def build_bars(defs: Definitions) -> Bars:
     bars: Bars = {}
 
-    if config.bar.top is not None:
-        bars["top"] = build_top_bar(config=config)
+    if defs.bar.top is not None:
+        bars["top"] = build_top_bar(defs=defs)
 
-    if config.bar.bottom is not None:
-        bars["bottom"] = build_bottom_bar(config=config)
+    if defs.bar.bottom is not None:
+        bars["bottom"] = build_bottom_bar(defs=defs)
 
-    if config.bar.left is not None:
-        bars["left"] = build_left_bar(config=config)
+    if defs.bar.left is not None:
+        bars["left"] = build_left_bar(defs=defs)
 
-    if config.bar.right is not None:
-        bars["right"] = build_right_bar(config=config)
+    if defs.bar.right is not None:
+        bars["right"] = build_right_bar(defs=defs)
 
     return bars

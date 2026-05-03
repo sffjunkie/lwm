@@ -16,7 +16,7 @@ class WallpaperDefinition(BaseModel):
     monitor: str = "*"
 
 
-WallpaperDefinitions = dict[ScreenName, WallpaperDefinition]
+WallpaperDefs = dict[ScreenName, WallpaperDefinition]
 
 
 class ColorPalette(BaseModel):

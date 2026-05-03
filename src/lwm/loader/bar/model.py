@@ -11,7 +11,7 @@ class BarDefinition(BaseModel):
     margin: tuple[int, int, int, int]
 
 
-class BarDefinitions(BaseModel):
+class BarDefs(BaseModel):
     top: BarDefinition | None = None
     bottom: BarDefinition | None = None
     left: BarDefinition | None = None

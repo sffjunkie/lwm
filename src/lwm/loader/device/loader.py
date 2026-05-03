@@ -1,11 +1,11 @@
-from lwm.loader.device.model import Devices
+from lwm.loader.device.model import DeviceDefs
 
 
-def devicedefs_from_config(data: dict):
+def devicedefs_from_data(data: dict):
     device_data = data.get("device", None)
     if device_data is None:
-        devices = Devices()
+        devices = DeviceDefs()
     else:
-        devices = Devices(**device_data)
+        devices = DeviceDefs(**device_data)
 
     return devices

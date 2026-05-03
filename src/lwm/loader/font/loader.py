@@ -1,10 +1,10 @@
-from .model import FontDefinitions
+from .model import FontDefs
 
 
-def fontdefs_from_config(data: dict) -> FontDefinitions:
+def fontdefs_from_data(data: dict) -> FontDefs:
     if (font_data := data.get("font", None)) is None:
-        fonts = FontDefinitions()
+        fonts = FontDefs()
     else:
-        fonts = FontDefinitions(**font_data)
+        fonts = FontDefs(**font_data)
 
     return fonts

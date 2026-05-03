@@ -1,10 +1,10 @@
 import json
 from subprocess import Popen
 
-from lwm.loader.output.typedef import Outputs
+from lwm.loader.output.model import OutputDefs
 
 
-def wlr_randr() -> Outputs | None:
+def wlr_randr() -> OutputDefs | None:
     cp = Popen(  # type: ignore
         ["wlr-randr", "--json"],
         capture_output=True,
@@ -12,4 +12,4 @@ def wlr_randr() -> Outputs | None:
     if cp.stdout is None:
         return None
     data = json.loads(cp.stdout.read())
-    return Outputs(**data)
+    return OutputDefs(**data)

@@ -34,5 +34,5 @@ class Output(BaseModel):
     adaptive_sync: bool
 
 
-class Outputs(BaseModel):
+class OutputDefs(BaseModel):
     outputs: list[Output]

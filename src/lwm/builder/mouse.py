@@ -3,11 +3,11 @@
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 
 
-def build_buttons(config: Config):
-    cmd = config.key.mapping.cmd
+def build_buttons(defs: Definitions):
+    cmd = defs.key.mapping.cmd
     return [
         Drag(
             [cmd],

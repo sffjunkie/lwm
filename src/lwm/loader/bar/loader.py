@@ -1,5 +1,5 @@
-from lwm.loader.bar.model import BarDefinitions
+from lwm.loader.bar.model import BarDefs
 
 
-def bardefs_from_config(config: dict) -> BarDefinitions:
-    return BarDefinitions(**config["bar"])
+def bardefs_from_data(data: dict) -> BarDefs:
+    return BarDefs(**data["bar"])

@@ -1,12 +1,8 @@
-[floating]
-[floating.match]
-wm_appid = [
+[floating.matches]
+appid = [
     "xdg-desktop-portal-gtk",
-    "org.pulseaudio.pavucontrol",
-    "org.gnome.Calculator",
-    "org.gnome.Characters",
-    "Pinentry",
-    "ssh-askpass",
+    "pavucontrol",
+    "gnome-calculator",
+    "gnome-characters",
     "waypaper",
-    "yubico.org.",
 ]

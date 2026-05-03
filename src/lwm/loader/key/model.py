@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import Literal
 from pydantic import BaseModel
 
-
 CommandType = Literal["std", "var", "wm", "terminal"]
 
 
@@ -28,6 +27,6 @@ class KeyDefinition(BaseModel):
     swallow: bool = False
 
 
-class Keys(BaseModel):
+class KeyDefs(BaseModel):
     mapping: KeyMapping = KeyMapping()
-    definitions: list[KeyDefinition] = []
+    defs: list[KeyDefinition] = []

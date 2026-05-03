@@ -2,7 +2,7 @@ from typing import Literal
 
 from lwm.helper.merge import merge_props
 from lwm.helper.color import opacity_to_hex
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 from lwm.context.bar import BarContext
 from lwm.helper.color import contrast_color
 from lwm.loader.color.deref import deref_colors
@@ -26,11 +26,11 @@ class ModuleContext:
     def __init__(
         self,
         bar_ctx: BarContext,
-        config: Config,
+        defs: Definitions,
         props: dict = {},
     ):
         self.bar_ctx = bar_ctx
-        self.config = config
+        self.config = defs
         self._props = {}
         self.props = props
 

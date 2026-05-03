@@ -1,12 +1,12 @@
-from lwm.loader.key.model import Keys, KeyMapping
+from lwm.loader.key.model import KeyDefs, KeyMapping
 
 
-def keydefs_from_config(data: dict) -> Keys:
+def keydefs_from_data(data: dict) -> KeyDefs:
     key_data = data.get("key", None)
     if key_data is None:
         mapping = KeyMapping()
-        keys = Keys(mapping=mapping, definitions=[])
+        keys = KeyDefs(mapping=mapping, defs=[])
     else:
-        keys = Keys(**key_data)
+        keys = KeyDefs(**key_data)
 
     return keys

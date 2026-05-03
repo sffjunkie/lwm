@@ -61,6 +61,6 @@ class NamedColors(BaseModel):
         return self
 
 
-class Colors(BaseModel):
+class ColorDefs(BaseModel):
     base16: Base16Colors
     named: NamedColors

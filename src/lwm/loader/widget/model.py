@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from lwm.loader.font.model import DEFAULT_FONTDEF
 
 
-class Widget(BaseModel):
+class WidgetDefs(BaseModel):
     margin: int = 0
     padding: int = 0
     font: str = DEFAULT_FONTDEF.family

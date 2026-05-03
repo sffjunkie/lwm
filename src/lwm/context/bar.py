@@ -2,7 +2,7 @@ from typing import Literal
 from itertools import cycle
 from typing import Any
 
-from lwm.loader.model import Config
+from lwm.loader.model import Definitions
 from lwm.helper.color import opacity_to_hex, contrast_color
 
 BarPosition = Literal["top", "bottom", "left", "right"]
@@ -29,11 +29,11 @@ class BarContext:
     def __init__(
         self,
         position: BarPosition,
-        config: Config,
+        defs: Definitions,
         props: dict = {},
     ):
         self._position = position
-        self.config = config
+        self.config = defs
         self.props = props
 
     @property

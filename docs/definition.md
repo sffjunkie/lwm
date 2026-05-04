@@ -21,11 +21,23 @@ Currently only configures height, opacity, and margins.
 
 ## `color.toml`
 
+If `scheme_dir` and `scheme_name` are defined then the base16 colors are loaded
+from the scheme file in the scheme directory.
+
+`color.base16.colors` allows you to override individual base16 hex colors
+
+`color.named` associates a name with either a hex color or a base16 reference.
+
 ```toml
 [color]
 [color.base16]
 scheme_dir = "<path to schemes directory>"
 scheme_name = "e.g. catppuccin-macchiato"
+[color.base16.colors]
+base00 = "#24273a"
+
+[color.named]
+widget_bg = "base0f"
 ```
 
 ## `controller.toml`
@@ -102,5 +114,11 @@ rounded = true  # Display with rounded corners
 
 ## `match.toml`
 
+Defines how to determine if a window is shown on a specific group or floated.
+
 ```toml
+[match.defs]
+waypaper = [{ appid = "waypaper" }]
+vscode = [{ appid = "code" }, { appid = "code-url-handler" }]
+orca-slicer-saveas = [{ appid = "orca-slicer", title = "Save file as" }]
 ```

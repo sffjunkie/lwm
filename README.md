@@ -8,10 +8,9 @@
 
 - Uses qtile
 
-- The system aims to be defined using [Definition files](./docs/definition.md)
+- Aims to be defined using [Definition files](./docs/definition.md) rather than code
   - Currently the following definitions are still TBD
     - bars
     - inputs
     - keybinds
     - layouts
-

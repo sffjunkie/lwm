@@ -3,5 +3,5 @@ from pydantic import BaseModel
 MatchName = str
 
 
-class Floating(BaseModel):
+class FloatingDefs(BaseModel):
     matches: list[MatchName] = []

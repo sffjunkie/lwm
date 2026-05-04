@@ -1,11 +1,11 @@
-from lwm.loader.floating.model import Floating
+from lwm.loader.floating.model import FloatingDefs
 
 
-def floatingdefs_from_data(data: dict) -> Floating:
+def floatingdefs_from_data(data: dict) -> FloatingDefs:
     floating_data = data.get("floating", None)
     if floating_data is None:
-        floating = Floating()
+        floating = FloatingDefs()
     else:
-        floating = Floating(**floating_data)
+        floating = FloatingDefs(**floating_data)
 
     return floating

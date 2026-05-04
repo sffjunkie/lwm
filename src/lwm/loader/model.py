@@ -8,7 +8,7 @@ from lwm.loader.color.model import ColorDefs
 from lwm.loader.controller.model import ControllerDefs
 from lwm.loader.device.model import DeviceDefs
 from lwm.loader.extension.model import ExtensionDefs
-from lwm.loader.floating.model import Floating
+from lwm.loader.floating.model import FloatingDefs
 from lwm.loader.font.model import FontDefs
 from lwm.loader.group.model import GroupDefs
 from lwm.loader.key.model import KeyDefs
@@ -28,7 +28,7 @@ class Definitions:
     controller: ControllerDefs
     device: DeviceDefs
     extension: ExtensionDefs
-    floating: Floating
+    floating: FloatingDefs
     font: FontDefs
     from_path: Path | None
     group: GroupDefs

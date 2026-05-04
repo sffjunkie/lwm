@@ -177,12 +177,13 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     )
 
     # region start
+    device = defs.device.eth or defs.device.wifi
     network_status_context = ModuleContext(
         bar_context,
         defs,
         props={
             "network": {
-                "interface": getattr(defs.device, "net", "eth0"),
+                "interface": device,
             },
         },
     )
@@ -205,8 +206,8 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
         defs,
         props={
             "menu": {
-                "menu_font": "JetBrainsMono Nerd Font",
-                "menu_fontsize": 16,
+                "menu_font": defs.font.text.family,
+                "menu_fontsize": defs.font.text.size,
                 "menu_width": 400,
             },
         },

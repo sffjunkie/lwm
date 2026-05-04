@@ -1,32 +1,22 @@
-import re
-
 from libqtile import layout
-from libqtile.config import Match, _Match
+from libqtile.config import _Match
 from qtile_extras.layout.decorations.borders import RoundedCorners
 
+from lwm.helper.match import build_matches
 from lwm.loader.model import Definitions
 
 
-def float_rules(defs: Definitions) -> list[_Match]:
+def build_float_rules(defs: Definitions) -> list[_Match]:
     matches = []
-    for app in defs.floating.matches.appid:
-        if app not in defs.match.defs:
-            continue
-        appid_matches = defs.match.defs[app].appid
-        matches.extend([Match(wm_class=re.compile(appid)) for appid in appid_matches])
+    for match_name in defs.floating.matches:
+        matches.extend(build_matches(defs, match_name))
 
-    for app in defs.floating.matches.title:
-        if app not in defs.match.defs:
-            continue
-        title_matches = defs.match.defs[app].title
-        matches.extend([Match(title=title) for title in title_matches])
-
-    return matches + layout.Floating.default_float_rules
+    return layout.Floating.default_float_rules + matches
 
 
 def build_floating(defs: Definitions) -> layout.Floating:
     return layout.Floating(
-        float_rules=float_rules(defs),
+        float_rules=build_float_rules(defs),
         border_width=defs.layout.common.border_width,
         border_normal=RoundedCorners(
             colour=defs.color.named.floating_border_normal,

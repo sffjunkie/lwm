@@ -1,5 +1,5 @@
-[floating.matches]
-appid = [
+[floating]
+matches = [
     "xdg-desktop-portal-gtk",
     "pavucontrol",
     "gnome-calculator",

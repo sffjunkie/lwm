@@ -21,7 +21,7 @@ class GroupDef(BaseModel):
     name: str
     layout: str = ""
     layouts: list[str] = []
-    matches: MatchTypes = MatchTypes()
+    matches: list[str] = []
 
 
 class GroupDefs(BaseModel):
@@ -30,11 +30,11 @@ class GroupDefs(BaseModel):
         GroupDef(
             name="WWW",
             layout="max",
-            matches=MatchTypes(appid=["firefox"]),
+            matches=["firefox"],
         ),
         GroupDef(
             name="TERM",
             layout="max",
-            matches=MatchTypes(appid=["ghostty"]),
+            matches=["ghostty"],
         ),
     ]

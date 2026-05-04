@@ -1,17 +1,12 @@
-from typing import Literal
-
 from pydantic import BaseModel
 
-DefType = Literal["appid", "title"]
-
-AppName = str
-AppMatch = str
+MatchName = str
 
 
-class AppDef(BaseModel):
-    appid: list[AppMatch] = []
-    title: list[AppMatch] = []
+class MatchDef(BaseModel):
+    appid: str | None = None
+    title: str | None = None
 
 
 class MatchDefs(BaseModel):
-    defs: dict[AppName, AppDef] = {}
+    defs: dict[MatchName, list[MatchDef]] = {}

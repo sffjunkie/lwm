@@ -6,21 +6,17 @@ layouts = ["max", "monadtall"]
 [[group.defs]]
 layout = "monadtall"
 name = "WWW"
-
-[group.defs.matches]
-appid = ["brave", "chrome", "firefox"]
+matches = ["brave", "chrome", "firefox"]
 
 [[group.defs]]
 layout = "max"
 name = "BRAIN"
-[group.defs.matches]
-appid = ["obsidian"]
+matches = ["obsidian"]
 
 [[group.defs]]
 layout = "max"
 name = "CODE"
-[group.defs.matches]
-appid = ["vscode"]
+matches = ["vscode"]
 
 [[group.defs]]
 layout = "monadtall"
@@ -41,6 +37,4 @@ name = "VID"
 [[group.defs]]
 layout = "max"
 name = "GFX"
-
-[group.defs.matches]
-appid = ["darktable", "gimp", "inkscape"]
+matches = ["darktable", "gimp", "inkscape"]

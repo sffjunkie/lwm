@@ -7,4 +7,4 @@ def test_floating_loader(test_data: Path):
     config = load_defs(data_path.absolute())
 
     assert config is not None
-    assert len(config.floating.matches.appid) == 5
+    assert len(config.floating.matches) == 5

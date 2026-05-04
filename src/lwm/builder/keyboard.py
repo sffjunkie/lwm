@@ -129,13 +129,13 @@ def window(defs: Definitions):
         Key(
             switch,
             "Left",
-            lazy.layout.up(),
+            lazy.group.prev_window(),
             desc="Previous window",
         ),
         Key(
             switch,
             "Right",
-            lazy.layout.down(),
+            lazy.group.next_window(),
             desc="Next window",
         ),
         # endregion

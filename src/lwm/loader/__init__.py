@@ -49,29 +49,29 @@ DefsData = dict[DefsKeys, DefsValues]
 
 def get_defs_path(filepath: Path | None = None) -> Path | None:
     if filepath is not None and filepath.is_absolute():
-        config_path = filepath
+        defs_path = filepath
     else:
-        config_path = user_config_dir(Path(DEFS_DIR))
+        defs_path = user_config_dir(Path(DEFS_DIR))
 
-    if not config_path.exists():
-        logger.warning(f"No config found at {config_path}")
-        config_path = None
+    if not defs_path.exists():
+        logger.warning(f"No config found at {defs_path}")
+        return None
 
-    return config_path
+    return defs_path
 
 
 def get_defs_from_file(base_name: str, defspath: Path) -> DefsValues:
-    config_filename = defspath / base_name
-    config = read_toml(config_filename)
-    return config
+    defs_filename = defspath / base_name
+    defs = read_toml(defs_filename)
+    return defs
 
 
 def load_def_files(defspath: Path) -> DefsData:
-    configs = {}
+    all_defs = {}
     for name in get_args(DefsKeys):
-        config = get_defs_from_file(f"{name}.{DEFS_FORMAT}", defspath)
-        configs[name] = config.get(name, config)
-    return configs
+        defs = get_defs_from_file(f"{name}.{DEFS_FORMAT}", defspath)
+        all_defs[name] = defs.get(name, defs)
+    return all_defs
 
 
 def load_defs(defspath: Path | None = None) -> Definitions | None:
@@ -107,4 +107,4 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
         )
 
         return defs
-    # TODO: Default config
+    return None

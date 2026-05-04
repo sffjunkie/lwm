@@ -1,23 +1,29 @@
-import os
 from pathlib import Path
 
-import yaml
+from lwm.helper.fs import read_toml, user_config_dir
 
-FILENAME = "secrets.yaml"
+SECRETS_DIR = "lde"
+FILENAME = "secrets.toml"
 
 
-def load_secrets() -> dict:
-    secrets_file = None
-    xdg_config = os.environ.get("XDG_CONFIG_HOME", None)
-    if xdg_config:
-        secrets_file = Path(xdg_config) / "qtile" / FILENAME
+def get_secrets_path(filepath: Path | None = None) -> Path | None:
+    if filepath is not None and filepath.is_absolute():
+        secrets_path = filepath
+    else:
+        secrets_path = user_config_dir(Path(SECRETS_DIR))
 
-    if not secrets_file:
+    return secrets_path
+
+
+def load_secrets(secretspath: Path | None = None) -> dict:
+    secrets_path = get_secrets_path(secretspath)
+
+    if secrets_path is not None:
+        secrets_file = secrets_path / FILENAME
+    else:
         secrets_file = Path(__file__).parent.parent / FILENAME
 
     if secrets_file.exists():
-        with open(secrets_file, "r") as fp:
-            secrets = yaml.load(fp, yaml.SafeLoader)
-        return secrets
+        return read_toml(secrets_file)
     else:
         return {}

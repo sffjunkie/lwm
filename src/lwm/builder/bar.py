@@ -25,7 +25,8 @@ from lwm.qmodule.network_status import NetworkStatus
 from lwm.qmodule.separator import Separator
 from lwm.qmodule.system_menu import SystemMenu
 from lwm.qmodule.user_menu import UserMenu
-from lwm.qmodule.volume_status import VolumeStatus
+
+# from lwm.qmodule.volume_status import VolumeStatus
 from lwm.qmodule.weather import Weather
 from lwm.qmodule.window_name import WindowName
 
@@ -177,13 +178,12 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     )
 
     # region start
-    device = defs.device.eth or defs.device.wifi
     network_status_context = ModuleContext(
         bar_context,
         defs,
         props={
             "network": {
-                "interface": device,
+                "interface": "wlp3s0",
             },
         },
     )
@@ -254,21 +254,21 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     )
     end.append(MusicStatus(music_status_context))
 
-    volume_control = defs.controller.volume
-    if volume_control is not None:
-        volume_context = ModuleContext(
-            bar_context,
-            defs,
-            props={
-                "volume": {
-                    "volume_up_command": f"{volume_control} up",
-                    "volume_down_command": f"{volume_control} down",
-                    "mute_command": f"{volume_control} toggle",
-                    "volume_app": defs.controller.audio,
-                },
-            },
-        )
-        end.append(VolumeStatus(volume_context))
+    # volume_control = defs.controller.volume
+    # if volume_control is not None:
+    #     volume_context = ModuleContext(
+    #         bar_context,
+    #         defs,
+    #         props={
+    #             "volume": {
+    #                 "volume_up_command": f"{volume_control} up",
+    #                 "volume_down_command": f"{volume_control} down",
+    #                 "mute_command": f"{volume_control} toggle",
+    #                 "volume_app": defs.controller.audio,
+    #             },
+    #         },
+    #     )
+    #     end.append(VolumeStatus(volume_context))
 
     group_id = idx + 1
     for idx, group in enumerate(end):

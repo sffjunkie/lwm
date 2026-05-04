@@ -25,14 +25,21 @@ class NetworkStatus(WidgetModule):
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         network = self.ctx.props.pop("network", {})
+        device = network.get("interface", self.eth or self.wifi)
 
-        slurm = terminal_run_command(
-            command=[
-                "slurm",
-                "-i",
-                network.get("interface", self.wifi),
-            ],
-        )
+        if device:
+            slurm = terminal_run_command(
+                command=[
+                    "slurm",
+                    "-i",
+                    device,
+                ],
+            )
+            mouse_callbacks = {
+                "Button1": lazy.spawn(slurm),
+            }
+        else:
+            mouse_callbacks = {}
 
         up_props = {
             "format": "{up:4.0f}{up_suffix:<2}",
@@ -41,9 +48,7 @@ class NetworkStatus(WidgetModule):
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
+            "mouse_callbacks": mouse_callbacks,
         }
 
         up_icon_props = {
@@ -53,9 +58,7 @@ class NetworkStatus(WidgetModule):
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
+            "mouse_callbacks": mouse_callbacks,
         }
 
         down_props = {
@@ -65,9 +68,7 @@ class NetworkStatus(WidgetModule):
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
+            "mouse_callbacks": mouse_callbacks,
         }
 
         down_icon_props = {
@@ -77,9 +78,7 @@ class NetworkStatus(WidgetModule):
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": {
-                "Button1": lazy.spawn(slurm),
-            },
+            "mouse_callbacks": mouse_callbacks,
         }
 
         decorations = None

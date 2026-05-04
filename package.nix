@@ -16,6 +16,6 @@ stdenv.mkDerivation {
   meta = {
     description = "Looniversity Qtile configuration";
     homepage = "https://github.com/sffjunkie/lwm";
-    license = lib.licenses.asl20;
+    license = lib.licenses.mit;
   };
 }

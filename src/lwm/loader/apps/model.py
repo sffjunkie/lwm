@@ -10,4 +10,5 @@ class AppDefs(BaseModel):
     launcher: str = "rofi-launcher"
     music_player: str = "ncmpcpp"
     pager: str = "bat"
+    screenshot: str = "sshot"
     terminal: str = "ghostty"

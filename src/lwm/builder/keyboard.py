@@ -298,6 +298,14 @@ def clipboard(defs: Definitions):
             ),
             desc="Delete an item from the clipboard history",
         ),
+        Key(
+            launch,
+            "s",
+            lazy.spawn(
+                f"{defs.app.screenshot}",
+            ),
+            desc="Take a screenshot",
+        ),
     ]
 
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lwm.helper.command import command_exists, command_output
+from lwm.helper.shellcmd import shellcmd_exists, shellcmd_output
 from lwm.loader.wallpaper.model import ColorPalette
 
 
@@ -10,10 +10,10 @@ def wallpaper_palette_imagemagik(
     if not wallpaper.exists():
         return None
 
-    if not command_exists("magick"):
+    if not shellcmd_exists("magick"):
         return None
 
-    image_colors = command_output(
+    image_colors = shellcmd_output(
         [
             "magick",
             str(wallpaper),

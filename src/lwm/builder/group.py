@@ -3,6 +3,7 @@ from libqtile.lazy import lazy
 
 from lwm.loader.group.model import GroupDef
 
+from lwm.helper.key import modifier_group
 from lwm.helper.match import build_matches
 from lwm.loader.model import Definitions
 
@@ -43,14 +44,12 @@ def build_groups(defs: Definitions) -> list[Group]:
 
 
 def build_group_keys(defs: Definitions) -> list[Key]:
-    cmd = defs.key.mapping.cmd
-    shift = defs.key.mapping.shift
     keys = []
     for idx, _ in enumerate(defs.group.defs, start=1):
         name = str(idx)
         keys.append(
             Key(
-                [cmd],
+                modifier_group(defs, "group_switch_numbered"),
                 str(idx),
                 lazy.group[name].toscreen(toggle=True),
                 desc=f"Switch to group {name}",
@@ -58,7 +57,7 @@ def build_group_keys(defs: Definitions) -> list[Key]:
         )
         keys.append(
             Key(
-                [cmd, shift],
+                modifier_group(defs, "window_move_to_group"),
                 str(idx),
                 lazy.window.togroup(name),
                 desc=f"Send current window to group {name}",

@@ -1,5 +1,4 @@
 import os
-from libqtile.log_utils import logger
 
 
 def terminal_from_env() -> str:
@@ -24,5 +23,4 @@ def terminal_run_command(
     else:
         cl = [terminal] + options + ["-e"] + command
 
-    logger.warning(cl)
     return " ".join(cl)

@@ -19,6 +19,7 @@ from lwm.loader.layout.loader import layoutdef_from_data
 from lwm.loader.match.loader import matchdefs_from_data
 from lwm.loader.menu.loader import menudefs_from_data
 from lwm.loader.model import Definitions
+from lwm.loader.notifier.loader import notifierdefs_from_data
 from lwm.loader.wallpaper.loader import wallpaperdefs
 from lwm.loader.widget.loader import widgetdef_from_data
 
@@ -41,6 +42,7 @@ DefsKeys = Literal[
     "layout",
     "match",
     "menu",
+    "notifier",
     "widget",
 ]
 DefsValues = dict[str, Any]
@@ -102,6 +104,7 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
             layout=layoutdef_from_data(configs, base16_defs, named_defs),
             match=matchdefs_from_data(configs),
             menu=menudefs_from_data(configs),
+            notifier=notifierdefs_from_data(configs),
             wallpaper=wallpaperdefs(),
             widget=widgetdef_from_data(configs, base16_defs, named_defs),
         )

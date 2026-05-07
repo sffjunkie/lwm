@@ -15,6 +15,7 @@ from lwm.loader.key.model import KeyDefs
 from lwm.loader.layout.model import LayoutDefs
 from lwm.loader.match.model import MatchDefs
 from lwm.loader.menu.model import MenuDefs
+from lwm.loader.notifier.model import NotifierDefs
 from lwm.loader.wallpaper.model import WallpaperDefs
 from lwm.loader.widget.model import WidgetDefs
 
@@ -36,5 +37,6 @@ class Definitions:
     layout: LayoutDefs
     match: MatchDefs
     menu: MenuDefs
+    notifier: NotifierDefs
     widget: WidgetDefs
     wallpaper: WallpaperDefs

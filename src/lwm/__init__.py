@@ -22,25 +22,21 @@ if not is_under_pytest:
     log_runtime_info()
 
     secrets = load_secrets()
-    config = load_defs()
+    defs = load_defs()
 
-    if config is None:
+    if defs is None:
         logger.error("lwm: Unable to load configuration")
     else:
-        screens = build_screens(config)
+        screens = build_screens(defs)
 
-        floating_layout = build_floating(config)
-        groups = build_groups(config) + build_scratchpads(config)
-        keys = (
-            build_keys(config)
-            + build_group_keys(config)
-            + build_scratchpad_keys(config)
-        )
-        layouts = build_layouts(config)
-        mouse = build_buttons(config)
+        floating_layout = build_floating(defs)
+        groups = build_groups(defs) + build_scratchpads(defs)
+        keys = build_keys(defs) + build_group_keys(defs) + build_scratchpad_keys(defs)
+        layouts = build_layouts(defs)
+        mouse = build_buttons(defs)
 
-        extension_defaults = config.extension.model_copy()
-        widget_defaults = config.widget.model_copy()
+        extension_defaults = defs.extension.model_copy()
+        widget_defaults = defs.widget.model_copy()
 
         auto_fullscreen = True
         bring_front_click = "floating_only"
@@ -49,7 +45,7 @@ if not is_under_pytest:
         follow_mouse_focus = False
         wmname = "lwm"
 
-        wl_input_rules = build_input_rules(config)
+        wl_input_rules = build_input_rules(defs)
 
         wl_xcursor_size = 32
 

@@ -11,6 +11,7 @@ from lwm.loader.extension.model import ExtensionDefs
 from lwm.loader.floating.model import FloatingDefs
 from lwm.loader.font.model import FontDefs
 from lwm.loader.group.model import GroupDefs
+from lwm.loader.input.model import InputDefs
 from lwm.loader.key.model import KeyDefs
 from lwm.loader.layout.model import LayoutDefs
 from lwm.loader.match.model import MatchDefs
@@ -33,6 +34,7 @@ class Definitions:
     font: FontDefs
     from_path: Path | None
     group: GroupDefs
+    input: InputDefs
     key: KeyDefs
     layout: LayoutDefs
     match: MatchDefs

@@ -7,6 +7,7 @@ from libqtile.log_utils import logger
 
 from lwm.builder.floating import build_floating
 from lwm.builder.group import build_group_keys, build_groups
+from lwm.builder.input import build_input_rules
 from lwm.builder.keyboard import build_keys
 from lwm.builder.layout import build_layouts
 from lwm.builder.mouse import build_buttons
@@ -49,14 +50,7 @@ if not is_under_pytest:
         follow_mouse_focus = False
         wmname = "lwm"
 
-        wl_input_rules = {
-            "1452:591:Keychron Keychron K1": InputConfig(
-                kb_layout="hyper_super",  # see siteconfig repo config/module/home/keyboard/hyper_super
-                kb_options="altwin:swap_lalt_lwin",
-            ),
-            "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
-            "1386:828:Wacom Intuos PT S 2 Finger": InputConfig(tap=True),
-        }
+        wl_input_rules = build_input_rules(config)
 
         wl_xcursor_size = 32
 

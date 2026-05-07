@@ -14,6 +14,7 @@ from lwm.loader.extension.loader import extensiondefs_from_data
 from lwm.loader.floating.loader import floatingdefs_from_data
 from lwm.loader.font.loader import fontdefs_from_data
 from lwm.loader.group.loader import groupdefs_from_data
+from lwm.loader.input.loader import inputdef_from_data
 from lwm.loader.key.loader import keydefs_from_data
 from lwm.loader.layout.loader import layoutdef_from_data
 from lwm.loader.match.loader import matchdefs_from_data
@@ -100,6 +101,7 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
             floating=floatingdefs_from_data(configs),
             font=fontdefs_from_data(configs),
             group=groupdefs_from_data(configs),
+            input=inputdef_from_data(configs),
             key=keydefs_from_data(configs),
             layout=layoutdef_from_data(configs, base16_defs, named_defs),
             match=matchdefs_from_data(configs),

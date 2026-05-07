@@ -50,5 +50,5 @@ class Pointer(BaseModel):
 
 
 class InputDefs(BaseModel):
-    keyboard: dict[str, Keyboard] | None = None
-    pointer: dict[str, Pointer] | None = None
+    keyboard: dict[str, Keyboard] = {}
+    pointer: dict[str, Pointer] = {}

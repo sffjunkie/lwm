@@ -1,9 +1,11 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Callable
 
 from pydantic import BaseModel
 
 CommandType = Literal["std", "var", "wm", "terminal"]
+ModifierName = str
+ModifierGroupName = str
 
 
 @dataclass
@@ -12,22 +14,23 @@ class Command:
     command: str
 
 
-class KeyMapping(BaseModel):
-    alt: str = "mod1"
-    cmd: str = "mod4"
-    ctrl: str = "control"
-    hyper: str = "mod3"
-    shift: str = "shift"
+class ModifierMapping(BaseModel):
+    alt: ModifierName = "mod1"
+    cmd: ModifierName = "mod4"
+    ctrl: ModifierName = "control"
+    hyper: ModifierName = "mod3"
+    shift: ModifierName = "shift"
 
 
-class KeyDefinition(BaseModel):
+class KeyBind(BaseModel):
     key: str
     command: str
-    modifiers: list[str] = []
+    modifier_group: ModifierGroupName | None = None
     desc: str | None
-    swallow: bool = False
+    swallow: bool = True
 
 
 class KeyDefs(BaseModel):
-    mapping: KeyMapping = KeyMapping()
-    defs: list[KeyDefinition] = []
+    modifier: ModifierMapping = ModifierMapping()
+    modifier_group: dict[ModifierGroupName, list[ModifierName]] = {}
+    defs: list[KeyBind] = []

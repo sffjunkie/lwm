@@ -4,13 +4,14 @@ type LayoutDefinition = dict[str, LayoutDefinition] | str | int | float
 LayoutDefinitions = dict[str, LayoutDefinition]
 
 
-class CommonLayoutDefs(BaseModel):
-    rounded: bool = False
-    margin: int = 4
-    border_width: int = 4
+class BaseLayoutDefs(BaseModel):
     border_focus: str = "base02"
     border_normal: str = "base07"
+    border_width: int = 4
+    margin: int = 4
+    rounded: bool = False
 
 
 class LayoutDefs(BaseModel):
     base: BaseLayoutDefs = BaseLayoutDefs()
+    defs: dict[str, LayoutDefinitions] = {}

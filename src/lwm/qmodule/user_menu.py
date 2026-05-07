@@ -79,5 +79,8 @@ class UserMenu(WidgetModule):
 
         username = TextBox(**props)
 
-        widgets = [icon, username]
+        widgets: list[base._Widget] = [
+            icon,
+            username,
+        ]
         return widgets

@@ -50,5 +50,7 @@ class Weather(WidgetModule):
 
         weather = OpenWeather(**props)
 
-        widgets = [weather]
+        widgets: list[base._Widget] = [
+            weather,
+        ]
         return widgets

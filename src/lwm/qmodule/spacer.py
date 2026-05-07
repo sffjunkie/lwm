@@ -33,5 +33,5 @@ class Spacer(WidgetModule):
 
         spacer = QSpacer(**props)
 
-        widgets = [spacer]
+        widgets: list[base._Widget] = [spacer]
         return widgets

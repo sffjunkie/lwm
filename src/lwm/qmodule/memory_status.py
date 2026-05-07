@@ -82,7 +82,9 @@ class MemoryStatus(WidgetModule):
 
         memory_icon = MDIcon(**props)
 
-        return [
+        widgets: list[base._Widget] = [
             memory_icon,
             memory,
         ]
+
+        return widgets

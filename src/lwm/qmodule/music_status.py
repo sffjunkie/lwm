@@ -50,7 +50,7 @@ class MusicStatus(WidgetModule):
 
         mpd2 = Mpd2(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             mpd2,
         ]
         return widgets

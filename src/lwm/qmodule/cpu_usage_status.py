@@ -82,7 +82,7 @@ class CPUUsageStatus(WidgetModule):
 
         cpu_usage_icon = MDIcon(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             cpu_usage_icon,
             cpu_usage,
         ]

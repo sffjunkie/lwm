@@ -139,7 +139,7 @@ class NetworkStatus(WidgetModule):
 
         down_icon = MDIcon(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             up_icon,
             up,
             down_icon,

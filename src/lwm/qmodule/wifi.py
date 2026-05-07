@@ -72,7 +72,7 @@ class Wifi(WidgetModule):
 
         # wifi_icon = MDIcon(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             wifi_widget,
             # wifi_icon,
         ]

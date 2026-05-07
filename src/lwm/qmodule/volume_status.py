@@ -88,5 +88,8 @@ class VolumeStatus(WidgetModule):
 
         volume_icon = MDIcon(**props)
 
-        widgets = [volume_text, volume_icon]
+        widgets: list[base._Widget] = [
+            volume_text,
+            volume_icon,
+        ]
         return widgets

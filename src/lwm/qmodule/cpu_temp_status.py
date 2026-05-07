@@ -71,7 +71,7 @@ class CPUTempStatus(WidgetModule):
 
         cpu_temp_icon = MDIcon(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             cpu_temp_icon,
             cpu_temp,
         ]

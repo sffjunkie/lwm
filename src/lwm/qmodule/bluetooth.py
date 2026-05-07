@@ -74,7 +74,7 @@ class Bluetooth(WidgetModule):
 
         bluetooth_icon = MDIcon(**props)
 
-        widgets = [
+        widgets: list[base._Widget] = [
             bluetooth_icon,
             bluetooth_widget,
         ]

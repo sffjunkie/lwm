@@ -83,5 +83,8 @@ class SystemMenu(WidgetModule):
 
         icon = TextBox(**props)
 
-        widgets = [hostname, icon]
+        widgets: list[base._Widget] = [
+            hostname,
+            icon,
+        ]
         return widgets

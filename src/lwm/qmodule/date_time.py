@@ -112,5 +112,10 @@ class DateTime(WidgetModule):
 
         time_icon = MDIcon(**props)
 
-        widgets = [date_text, date_icon, time_text, time_icon]
+        widgets: list[base._Widget] = [
+            date_text,
+            date_icon,
+            time_text,
+            time_icon,
+        ]
         return widgets

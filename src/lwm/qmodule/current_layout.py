@@ -50,5 +50,5 @@ class CurrentLayout(WidgetModule):
             decorations=decorations,
         )
 
-        widgets = [current_layout]
+        widgets: list[base._Widget] = [current_layout]
         return widgets

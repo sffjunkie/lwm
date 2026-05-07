@@ -46,7 +46,7 @@ class WindowName(WidgetModule):
             ]
             window_name_props["background"] = TRANSPARENT
 
-        widgets = [
+        widgets: list[base._Widget] = [
             QSpacer(
                 background=TRANSPARENT,
                 decorations=decorations,

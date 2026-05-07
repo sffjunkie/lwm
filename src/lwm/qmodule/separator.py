@@ -29,5 +29,5 @@ class Separator(WidgetModule):
 
         separator = Sep(**props)
 
-        widgets = [separator]
+        widgets: list[base._Widget] = [separator]
         return widgets

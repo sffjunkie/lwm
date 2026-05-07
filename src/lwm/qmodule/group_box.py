@@ -63,5 +63,5 @@ class GroupBox(WidgetModule):
 
         group_box = QGroubBox(**props)
 
-        widgets = [group_box]
+        widgets: list[base._Widget] = [group_box]
         return widgets

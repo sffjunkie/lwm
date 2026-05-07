@@ -16,6 +16,6 @@ def build_screens(defs: Definitions) -> list[Screen]:
 
     if (wpdef := defs.wallpaper.get("*", None)) is not None:
         screen.wallpaper = str(wpdef.path)
-        screen.wallpaper_mode = wpdef.monitor
+        screen.wallpaper_mode = wpdef.mode
 
     return [screen]

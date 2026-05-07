@@ -1,4 +1,5 @@
 import string
+from typing import cast
 
 TRANSPARENT = "#00000000"
 
@@ -86,14 +87,15 @@ def rgbhex_to_rgb(value: str, allow_short: bool = True) -> RGBColor | None:
             # pylint: disable=missing-docstring
             args = [iter(value)] * 2
             values = zip(*args)
-            color = [int("%s%s" % t, 16) / 255 for t in list(values)]
-            return RGBColor(color)
+            color = [int("%s%s" % t, 16) / 255 for t in list(values)][:3]
+            return cast(RGBColor, color)
 
     elif len(value) == 3 and allow_short:
 
         def to_iterable() -> RGBColor:
             # pylint: disable=missing-docstring
-            return RGBColor([int("%s%s" % (t, t), 16) / 255 for t in value])
+            color = [int("%s%s" % (t, t), 16) / 255 for t in value]
+            return cast(RGBColor, color)
 
     else:
         return None

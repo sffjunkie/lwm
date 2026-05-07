@@ -12,9 +12,16 @@
   - Currently the following definitions are still TBD
     - bars
     - inputs
-    - keybinds
     - layouts
 
+## Images
+
 ![Desktop](https://github.com/sffjunkie/lwm/blob/7bab4d2c8c6c7727970db4d0ae4f0e9a059c0ed5/docs/desktop_covered.png)
+![Misc Player](https://github.com/sffjunkie/lwm/blob/7bab4d2c8c6c7727970db4d0ae4f0e9a059c0ed5/docs/desktop_msic.png)
+
+### Menus
+
+![System Menu](https://github.com/sffjunkie/lwm/blob/7bab4d2c8c6c7727970db4d0ae4f0e9a059c0ed5/docs/system-menu.png)
+![WM Control](https://github.com/sffjunkie/lwm/blob/7bab4d2c8c6c7727970db4d0ae4f0e9a059c0ed5/docs/lwm-control-menu.png)
 
 [^1]: [Qtile](https://docs.qtile.org/en/stable/) is © Copyright 2008-2021, Aldo Cortesi and contributers.

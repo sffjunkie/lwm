@@ -11,7 +11,7 @@ def _layout_type_args(defs: Definitions, layout: str) -> dict:
 
 
 def build_layouts(defs: Definitions) -> list[_SimpleLayoutBase]:
-    if defs.layout.common.rounded:
+    if defs.layout.base.rounded:
         borders = {
             "border_focus": RoundedCorners(colour=defs.color.named.tiled_border_focus),
             "border_normal": RoundedCorners(
@@ -21,7 +21,7 @@ def build_layouts(defs: Definitions) -> list[_SimpleLayoutBase]:
     else:
         borders = {}
 
-    layout_args = dict(defs.layout.common) | borders
+    layout_args = dict(defs.layout.base) | borders
 
     return [
         MonadTall(**(layout_args | _layout_type_args(defs, "MonadTall"))),

@@ -7,7 +7,7 @@ from lwm.loader.model import Definitions
 
 
 def build_buttons(defs: Definitions):
-    cmd = defs.key.mapping.cmd
+    cmd = defs.key.modifier.cmd
     return [
         Drag(
             [cmd],

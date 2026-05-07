@@ -17,7 +17,7 @@ def build_float_rules(defs: Definitions) -> list[_Match]:
 def build_floating(defs: Definitions) -> layout.Floating:
     return layout.Floating(
         float_rules=build_float_rules(defs),
-        border_width=defs.layout.common.border_width,
+        border_width=defs.layout.base.border_width,
         border_normal=RoundedCorners(
             colour=defs.color.named.floating_border_normal,
         ),

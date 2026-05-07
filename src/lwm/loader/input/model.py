@@ -7,8 +7,8 @@ class Keyboard(BaseModel):
     kb_layout: str | None = None
     kb_options: str | None = None
     kb_variant: str | None = None
-    kb_repeat_rate: int | None = None
-    kb_repeat_delay: int | None = None
+    kb_repeat_rate: int = 25
+    kb_repeat_delay: int = 600
 
 
 class AccelerationProfile(StrEnum):

@@ -119,6 +119,7 @@
               pkgs.ruff
               pkgs.just
               pkgs.pre-commit
+              pkgs.reuse
               pkgs.uv
             ];
             env = {

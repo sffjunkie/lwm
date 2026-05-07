@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Any
 
 from lwm.context.bar import BarContext
 from lwm.helper.color import contrast_color, opacity_to_hex
@@ -10,6 +10,7 @@ GroupPosition = Literal["start", "middle", "end"]
 
 
 class ModuleContext:
+    _props: dict[str, Any]
     text_font_family: str
     text_font_size: int
     icon_font_family: str

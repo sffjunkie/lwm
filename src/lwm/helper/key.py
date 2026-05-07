@@ -1,7 +1,6 @@
 from typing import NamedTuple, Any
 
 from libqtile.lazy import lazy, LazyCall
-from libqtile.command.client import InteractiveCommandClient
 from lwm.loader.model import Definitions
 
 PART_SEP = ":"

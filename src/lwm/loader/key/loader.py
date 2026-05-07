@@ -1,5 +1,3 @@
-from libqtile.lazy import lazy
-
 from lwm.loader.key.model import KeyDefs
 
 

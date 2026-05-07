@@ -1,5 +1,5 @@
 [layout]
-[layout.defs.base]
+[layout.base]
 border_width = 4
 margin = 8
 rounded = true

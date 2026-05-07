@@ -2,7 +2,6 @@ import subprocess
 import sys
 
 from libqtile import hook
-from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.log_utils import logger
 
 from lwm.builder.floating import build_floating

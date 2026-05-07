@@ -3,15 +3,8 @@ from typing import Literal, Callable
 
 from pydantic import BaseModel
 
-CommandType = Literal["std", "var", "wm", "terminal"]
 ModifierName = str
 ModifierGroupName = str
-
-
-@dataclass
-class Command:
-    type: CommandType
-    command: str
 
 
 class ModifierMapping(BaseModel):

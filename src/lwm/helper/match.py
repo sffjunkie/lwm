@@ -2,7 +2,7 @@ import re
 
 from libqtile.config import Match
 
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 
 def build_matches(defs: Definitions, match_name: str) -> list[Match]:

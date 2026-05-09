@@ -1,5 +1,5 @@
 from pathlib import Path
-from lwm.loader import load_defs
+from lwm.load import load_defs
 from lwm.builder.bar import build_bars
 from lwm.helper.color import is_color
 

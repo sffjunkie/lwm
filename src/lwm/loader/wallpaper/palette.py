@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from lwm.helper.shellcmd import shellcmd_exists, shellcmd_output
-from lwm.loader.wallpaper.model import ColorPalette
+from lwm.model.wallpaper import ColorPalette
 
 
 def wallpaper_palette_imagemagik(

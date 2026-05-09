@@ -3,7 +3,7 @@ from libqtile.config import _Match
 from qtile_extras.layout.decorations.borders import RoundedCorners
 
 from lwm.helper.match import build_matches
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 
 def build_float_rules(defs: Definitions) -> list[_Match]:

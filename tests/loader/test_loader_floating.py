@@ -1,5 +1,5 @@
 from pathlib import Path
-from lwm.loader import load_defs
+from lwm.load import load_defs
 
 
 def test_floating_loader(test_data: Path):

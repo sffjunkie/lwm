@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import cast
 
 from lwm.helper.fs import user_config_dir
-from lwm.loader.wallpaper.model import WallpaperDefinition, WallpaperDefs, WallpaperMode
+from lwm.model.wallpaper import WallpaperDefinition, WallpaperDefs, WallpaperMode
 
 """
 wallpaper = image.png

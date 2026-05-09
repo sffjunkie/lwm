@@ -12,7 +12,7 @@ from lwm.builder.layout import build_layouts
 from lwm.builder.mouse import build_buttons
 from lwm.builder.scratchpad import build_scratchpad_keys, build_scratchpads
 from lwm.builder.screen import build_screens
-from lwm.loader import load_defs
+from lwm.load import load_defs
 from lwm.runtime_info import log_runtime_info
 from lwm.secret.loader import load_secrets
 
@@ -26,6 +26,7 @@ if not is_under_pytest:
 
     if defs is None:
         logger.error("lwm: Unable to load configuration")
+        raise ValueError("Loading definitions failed")
     else:
         screens = build_screens(defs)
 

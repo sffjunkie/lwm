@@ -2,7 +2,7 @@
 
 from libqtile.config import Key
 
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 from lwm.helper.key import modifier_group, qtilecmd
 
 

@@ -10,8 +10,8 @@ from qtile_extras.widget import Spacer as QSpacer
 from lwm.context.bar import BarContext
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT, contrast_color
-from lwm.loader.bar.model import BarLocation
-from lwm.loader.model import Definitions
+from lwm.model.bar import Bars
+from lwm.model.definitions import Definitions
 from lwm.qmodule.base import WidgetModule
 from lwm.qmodule.bluetooth import Bluetooth
 from lwm.qmodule.cpu_temp_status import CPUTempStatus
@@ -27,8 +27,6 @@ from lwm.qmodule.system_menu import SystemMenu
 from lwm.qmodule.user_menu import UserMenu
 from lwm.qmodule.weather import Weather
 from lwm.qmodule.window_name import WindowName
-
-Bars = dict[BarLocation, QBar | None]
 
 
 def fg_color(defs: Definitions):

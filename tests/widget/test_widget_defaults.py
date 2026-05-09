@@ -1,4 +1,4 @@
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 
 def test_widget_defaults(config: Definitions):

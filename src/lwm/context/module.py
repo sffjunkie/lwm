@@ -4,7 +4,7 @@ from lwm.context.bar import BarContext
 from lwm.helper.color import contrast_color, opacity_to_hex
 from lwm.helper.merge import merge_props
 from lwm.loader.color.deref import deref_colors
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 GroupPosition = Literal["start", "middle", "end"]
 

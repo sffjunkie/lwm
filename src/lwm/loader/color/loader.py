@@ -1,5 +1,5 @@
 from lwm.loader.color.base16 import base16_colors_from_data
-from lwm.loader.color.model import Base16Colors, ColorDefs, NamedColors
+from lwm.model.color import Base16Colors, ColorDefs, NamedColors
 from lwm.loader.color.named import named_colors_deref, named_colors_from_data
 
 

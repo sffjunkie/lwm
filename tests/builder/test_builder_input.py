@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lwm.loader import load_defs
+from lwm.load import load_defs
 from lwm.builder.input import build_input_rules
 
 

@@ -1,11 +1,11 @@
 from libqtile.config import Group, Key, Match
 from libqtile.lazy import lazy
 
-from lwm.loader.group.model import GroupDef
+from lwm.model.group import GroupDef
 
 from lwm.helper.key import modifier_group
 from lwm.helper.match import build_matches
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]

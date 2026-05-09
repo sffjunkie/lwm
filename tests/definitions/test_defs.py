@@ -1,5 +1,5 @@
 from pathlib import Path
-from lwm.loader import load_defs, get_defs_path
+from lwm.load import load_defs, get_defs_path
 
 
 def test_defs_app(test_data: Path):

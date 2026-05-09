@@ -1,7 +1,7 @@
 from typing import Any
 
 from lwm.helper.color import is_base16, is_color
-from lwm.loader.color.model import Base16Colors, NamedColors
+from lwm.model.color import Base16Colors, NamedColors
 
 
 def deref_done(data: dict, base16: Base16Colors, named: NamedColors) -> bool:

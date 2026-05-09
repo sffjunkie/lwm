@@ -1,5 +1,5 @@
 from lwm.loader.color.deref import deref_colors
-from lwm.loader.color.model import Base16Colors, NamedColors
+from lwm.model.color import Base16Colors, NamedColors
 
 
 def test_deref_colors_base16():

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lwm.loader import load_defs
+from lwm.load import load_defs
 
 
 def test_key_defs(test_data: Path):

@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from lwm.helper.key import modifier_group, qtile_args, qtilecmd
-from lwm.loader import load_defs
+from lwm.load import load_defs
 
 
 def test_helper_key_modfifier_group(test_data: Path):

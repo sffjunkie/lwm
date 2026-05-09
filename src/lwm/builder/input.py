@@ -1,6 +1,6 @@
 from libqtile.backend.wayland.inputs import InputConfig
 
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 
 def build_input_rules(defs: Definitions) -> dict:

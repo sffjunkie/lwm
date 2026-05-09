@@ -3,7 +3,7 @@
 from libqtile.config import Click, Drag
 from libqtile.lazy import lazy
 
-from lwm.loader.model import Definitions
+from lwm.model.definitions import Definitions
 
 
 def build_buttons(defs: Definitions):

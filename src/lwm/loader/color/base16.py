@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 from lwm.helper.color import is_base16, is_color
-from lwm.loader.color.model import Base16Colors
+from lwm.model.color import Base16Colors
 
 
 def load_base16_color_scheme(

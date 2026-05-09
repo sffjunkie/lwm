@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from lwm.loader.model import Definitions
-from lwm.loader import load_defs
+from lwm.model.definitions import Definitions
+from lwm.load import load_defs
 
 
 @pytest.fixture

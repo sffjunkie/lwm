@@ -1,4 +1,4 @@
-from lwm.loader.controller.model import ControllerDefs
+from lwm.model.controller import ControllerDefs
 
 
 def test_controller_defaults():

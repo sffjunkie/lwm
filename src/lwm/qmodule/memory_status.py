@@ -22,7 +22,10 @@ class MemoryStatus(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        system_status = terminal_run_command(command=["htop"])
+        system_status = terminal_run_command(
+            terminal=self.ctx.defs.app.terminal,
+            command=["htop"],
+        )
 
         memory_props = {
             "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",

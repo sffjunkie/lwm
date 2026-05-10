@@ -29,6 +29,7 @@ class NetworkStatus(WidgetModule):
 
         if device:
             slurm = terminal_run_command(
+                terminal=self.ctx.defs.app.terminal,
                 command=[
                     "slurm",
                     "-i",

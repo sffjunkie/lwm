@@ -26,8 +26,8 @@ def build_scratchpads(defs: Definitions) -> list[ScratchPad]:
                 DropDown(
                     name="music-player",
                     cmd=terminal_run_command(
-                        command=["ncmpcpp"],
                         terminal=defs.app.terminal,
+                        command=["ncmpcpp"],
                     ),
                     height=ncmpcpp_dimension.height,
                     width=ncmpcpp_dimension.width,

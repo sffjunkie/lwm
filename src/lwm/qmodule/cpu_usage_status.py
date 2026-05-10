@@ -22,7 +22,10 @@ class CPUUsageStatus(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        htop = terminal_run_command(command=["htop"])
+        htop = terminal_run_command(
+            terminal=self.ctx.defs.app.terminal,
+            command=["htop"],
+        )
 
         usage_props = {
             "format": "{load_percent:4.1f}%",

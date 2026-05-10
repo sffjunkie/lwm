@@ -15,7 +15,7 @@ class Spacer(WidgetModule):
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
         background_color = self.ctx.props.get(
-            "background", self.ctx.config.color.named.widget_bg[0]
+            "background", self.ctx.defs.color.named.widget_bg[0]
         )
         background = f"{background_color}{self.ctx.bar_ctx.opacity_hex}"
         # foreground_color = self.ctx.props.get(

@@ -22,7 +22,7 @@ class SystemMenu(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        system_menu = getattr(self.ctx.config.menu, "system", None)
+        system_menu = getattr(self.ctx.defs.menu, "system", None)
         hostname_props = {
             "text": gethostname(),
             # "fmt": "<b>{}</b>",
@@ -37,7 +37,7 @@ class SystemMenu(WidgetModule):
             hostname_props["mouse_callbacks"] = {"Button1": lazy.spawn(system_menu)}
 
         icon_props = {
-            "text": self.ctx.config.branding.icon,
+            "text": self.ctx.defs.branding.icon,
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "width": self.ctx.bar_ctx.height,

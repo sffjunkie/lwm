@@ -21,7 +21,7 @@ class Wifi(WidgetModule):
 
         wifi_props = {
             "name": "wifi",
-            "interface": self.ctx.config.device.wifi,
+            "interface": self.ctx.defs.device.wifi,
             "padding": 8,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,

@@ -29,7 +29,7 @@ class UserMenu(WidgetModule):
             "fontsize": self.ctx.icon_font_size,
             # "width": self.context.bar.height,
             "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config.menu.user)},
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -39,7 +39,7 @@ class UserMenu(WidgetModule):
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.config.menu.user)},
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }

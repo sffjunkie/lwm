@@ -11,13 +11,14 @@ def build_matches(defs: Definitions, match_name: str) -> list[Match]:
 
     matches = []
     for md in defs.match.defs[match_name]:
-        match_args = {}
+        wm_class = None
         if md.appid is not None:
-            match_args["wm_class"] = re.compile(md.appid)
+            wm_class = re.compile(md.appid)
 
+        title = None
         if md.title is not None:
-            match_args["title"] = re.compile(md.title)
+            title = re.compile(md.title)
 
-        matches.append(Match(**match_args))
+        matches.append(Match(wm_class=wm_class, title=title))
 
     return matches

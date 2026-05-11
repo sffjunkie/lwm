@@ -4,12 +4,13 @@ from lwm.model.definitions import Definitions
 
 
 def build_input_rules(defs: Definitions) -> dict:
-    input_rules = {}
+    kbd_input_rules = {}
+    ptr_input_rules = {}
 
-    for name, input_def in defs.input.keyboard.items():
-        input_rules[name] = InputConfig(**input_def.model_dump())
+    for name, kbd_input_def in defs.input.keyboard.items():
+        kbd_input_rules[name] = InputConfig(**kbd_input_def.model_dump())
 
-    for name, input_def in defs.input.pointer.items():
-        input_rules[name] = InputConfig(**input_def.model_dump())
+    for name, ptr_input_def in defs.input.pointer.items():
+        ptr_input_rules[name] = InputConfig(**ptr_input_def.model_dump())
 
-    return input_rules
+    return kbd_input_rules | ptr_input_rules

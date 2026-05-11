@@ -85,7 +85,7 @@ def qtilecmd(defs: Definitions, command: str) -> list[LazyCall]:
         def_part = args_parts[0]
         args_parts = args_parts[1:]
 
-        cmd = defs
+        cmd = defs  # type: ignore
         for elem in def_part.split(COMMAND_SEP):
             cmd = getattr(cmd, elem)
 

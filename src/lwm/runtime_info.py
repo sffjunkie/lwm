@@ -2,6 +2,7 @@ import sys
 
 from libqtile import __path__ as libqtile_path
 from libqtile.log_utils import logger
+from lwm.helper.shellcmd import shellcmd_output
 
 
 def log_runtime_info() -> None:

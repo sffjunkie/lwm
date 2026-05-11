@@ -8,7 +8,7 @@
 
 - Uses Qtile[^1]. Many thanks to them for the hard work they put in to create an highly customizable window manager.
 
-- Aims to be defined using [Definition files](./docs/definition.md) rather than code
+- Aims to be defined using [definition files](./docs/definition.md) rather than code
   - Currently the following definitions are still TBD
     - bars
     - layouts

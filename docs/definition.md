@@ -1,5 +1,5 @@
 
-# Definitions
+# Definition Files
 
 - Defines how the [Looniversity Window Manager](../README.md) works.
 - Uses TOML files

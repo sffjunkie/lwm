@@ -30,6 +30,7 @@ dev = [
     "pyright>=1.1.409",
     "pytest>=9.0.2",
     "types-psutil>=7.2.2.20260408",
+    "types-pyyaml>=6.0.12.20260508",
 ]
 
 [tool.pyright]

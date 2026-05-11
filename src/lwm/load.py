@@ -9,6 +9,7 @@ from lwm.loader.bar import bardefs_from_data
 from lwm.loader.branding import branding_from_data
 from lwm.loader.color.loader import colordefs_from_data
 from lwm.loader.controller import controllerdefs_from_data
+from lwm.loader.custom import funcs_from_module
 from lwm.loader.device import devicedefs_from_data
 from lwm.loader.extension import extensiondefs_from_data
 from lwm.loader.floating import floatingdefs_from_data
@@ -19,10 +20,10 @@ from lwm.loader.key import keydefs_from_data
 from lwm.loader.layout import layoutdef_from_data
 from lwm.loader.match import matchdefs_from_data
 from lwm.loader.menu import menudefs_from_data
-from lwm.model.definitions import Definitions
 from lwm.loader.notifier import notifierdefs_from_data
 from lwm.loader.wallpaper import wallpaperdefs
 from lwm.loader.widget import widgetdef_from_data
+from lwm.model.definitions import Definitions
 
 DEFS_DIR = "lde"
 DEFS_FORMAT = "toml"
@@ -57,7 +58,7 @@ def get_defs_path(filepath: Path | None = None) -> Path | None:
         defs_path = user_config_dir(Path(DEFS_DIR))
 
     if not defs_path.exists():
-        logger.warning(f"No config found at {defs_path}")
+        logger.warning(f"No definitions found at {defs_path}")
         return None
 
     return defs_path
@@ -83,7 +84,8 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
 
     if defs_path is not None and defs_path.exists():
         configs = load_def_files(defs_path)
-        logger.warning(f"Definitions loaded: {', '.join(configs.keys())}")
+        loaded_defs = ", ".join(configs.keys())
+        logger.warning(f"Definitions loaded: {loaded_defs}")
 
         colordefs = colordefs_from_data(configs)
         base16_defs = colordefs.base16
@@ -96,6 +98,7 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
             branding=branding_from_data(configs),
             color=colordefs,
             controller=controllerdefs_from_data(configs),
+            custom=funcs_from_module(defs_path, "custom"),
             device=devicedefs_from_data(configs),
             extension=extensiondefs_from_data(configs, base16_defs, named_defs),
             floating=floatingdefs_from_data(configs),

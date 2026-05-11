@@ -42,6 +42,7 @@ if not is_under_pytest:
         auto_fullscreen = True
         bring_front_click = "floating_only"
         cursor_warp = False
+        floats_kept_above = True
         focus_on_window_activation = "smart"
         follow_mouse_focus = False
         wmname = "lwm"

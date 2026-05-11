@@ -55,9 +55,10 @@ if not is_under_pytest:
 def autostart() -> None:
     subprocess.run(
         [
-            "dbus-update-activation-environment",
-            "--all",
-            "--systemd",
+            "systemctl",
+            "import-environment",
+            "WAYLAND_DISPLAY",
+            "XDG_CURRENT_DESKTOP",
         ],
         check=False,
     )

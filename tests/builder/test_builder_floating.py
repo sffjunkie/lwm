@@ -5,10 +5,10 @@ from lwm.builder.floating import build_floating
 
 def test_build_floating(test_data: Path):
     data_path = test_data / "config" / "desktop"
-    config = load_defs(data_path.absolute())
+    defs = load_defs(data_path.absolute())
 
-    assert config is not None
-    floating = build_floating(config)
+    assert defs is not None
+    floating = build_floating(defs)
 
     assert floating.border_focus is not None
     assert floating.border_focus.colour == "#f4dbd6"

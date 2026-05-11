@@ -1,8 +1,8 @@
 from lwm.model.definitions import Definitions
 
 
-def test_widget_defaults(config: Definitions):
-    wd = config.widget
+def test_widget_defaults(definitions: Definitions):
+    wd = definitions.widget
     assert wd is not None
     assert wd.fontsize == 800
     assert wd.foreground == "non existent"

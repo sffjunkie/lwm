@@ -4,7 +4,7 @@ from lwm.loader.color.loader import colordefs_from_data
 
 
 def test_color_from_dict(test_data: Path):
-    config = {
+    definition_data = {
         "color": {
             "base16": {
                 "scheme_dir": test_data / "config" / "color_scheme",
@@ -19,6 +19,6 @@ def test_color_from_dict(test_data: Path):
         }
     }
 
-    color = colordefs_from_data(config)
+    color = colordefs_from_data(definition_data)
     assert color.base16.base00 == "#32302f"
     assert color.named.bar_fg == "#282828"

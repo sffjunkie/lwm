@@ -6,10 +6,10 @@ from lwm.helper.color import is_color
 
 def test_bars_not_base16(test_data: Path):
     data_path = test_data / "config" / "desktop"
-    config = load_defs(data_path.absolute())
+    defs = load_defs(data_path.absolute())
 
-    assert config is not None
-    bars = build_bars(config)
+    assert defs is not None
+    bars = build_bars(defs)
 
     top = bars.get("top", None)
     assert top is not None

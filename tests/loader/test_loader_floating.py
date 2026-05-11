@@ -4,7 +4,7 @@ from lwm.load import load_defs
 
 def test_floating_loader(test_data: Path):
     data_path = test_data / "config" / "desktop"
-    config = load_defs(data_path.absolute())
+    defs = load_defs(data_path.absolute())
 
-    assert config is not None
-    assert len(config.floating.matches) == 5
+    assert defs is not None
+    assert len(defs.floating.matches) == 5

@@ -15,6 +15,6 @@ def test_data() -> Path:
 
 
 @pytest.fixture
-def config(test_data: Path) -> Definitions | None:
+def definitions(test_data: Path) -> Definitions | None:
     data_path = test_data / "config" / "desktop"
     return load_defs(data_path.absolute())

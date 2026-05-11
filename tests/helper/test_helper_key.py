@@ -19,12 +19,12 @@ def test_helper_key_qtilecmd(test_data: Path):
     assert defs is not None
 
     qtile_cmd = qtilecmd(defs, "qtile:group.next_window")
-    assert qtile_cmd is not None
-    assert qtile_cmd.name == "next_window"  # type: ignore
+    assert len(qtile_cmd) == 1
+    assert qtile_cmd[0].name == "next_window"  # type: ignore
 
     lwm_cmd = qtilecmd(defs, "lwm:spawn:app.terminal")
-    assert lwm_cmd is not None
-    assert lwm_cmd.name == "spawn"  # type: ignore
+    assert len(lwm_cmd) == 1
+    assert lwm_cmd[0].name == "spawn"  # type: ignore
 
 
 def test_helper_keycmd_qtile_args():

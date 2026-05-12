@@ -49,7 +49,8 @@ if not is_under_pytest:
 
         wl_input_rules = build_input_rules(defs)
 
-        wl_xcursor_size = 32
+        wl_xcursor_theme = defs.cursor.name
+        wl_xcursor_size = defs.cursor.size
 
 
 @hook.subscribe.startup_once

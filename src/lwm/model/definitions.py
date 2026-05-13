@@ -6,6 +6,7 @@ from lwm.model.bar import BarDefs
 from lwm.model.branding import Branding
 from lwm.model.color import ColorDefs
 from lwm.model.controller import ControllerDefs
+from lwm.model.cursor import CursorDefs
 from lwm.model.custom import CustomFuncs
 from lwm.model.device import DeviceDefs
 from lwm.model.extension import ExtensionDefs
@@ -29,6 +30,7 @@ class Definitions:
     branding: Branding
     color: ColorDefs
     controller: ControllerDefs
+    cursor: CursorDefs
     custom: CustomFuncs
     device: DeviceDefs
     extension: ExtensionDefs

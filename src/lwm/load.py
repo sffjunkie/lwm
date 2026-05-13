@@ -9,6 +9,7 @@ from lwm.loader.bar import bardefs_from_data
 from lwm.loader.branding import branding_from_data
 from lwm.loader.color.loader import colordefs_from_data
 from lwm.loader.controller import controllerdefs_from_data
+from lwm.loader.cursor import cursordefs_from_data
 from lwm.loader.custom import funcs_from_module
 from lwm.loader.device import devicedefs_from_data
 from lwm.loader.extension import extensiondefs_from_data
@@ -34,6 +35,7 @@ DefsKeys = Literal[
     "branding",
     "color",
     "controller",
+    "cursor",
     "device",
     "extension",
     "floating",
@@ -98,6 +100,7 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
             branding=branding_from_data(configs),
             color=colordefs,
             controller=controllerdefs_from_data(configs),
+            cursor=cursordefs_from_data(configs),
             custom=funcs_from_module(defs_path, "custom"),
             device=devicedefs_from_data(configs),
             extension=extensiondefs_from_data(configs, base16_defs, named_defs),

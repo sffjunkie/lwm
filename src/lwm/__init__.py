@@ -58,9 +58,12 @@ def autostart() -> None:
     subprocess.run(
         [
             "systemctl",
+            "--user",
             "import-environment",
+            "DISPLAY",
             "WAYLAND_DISPLAY",
-            "XDG_CURRENT_DESKTOP",
+            "XCURSOR_SIZE",
+            "XCURSOR_THEME",
         ],
         check=False,
     )

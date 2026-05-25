@@ -1,6 +1,6 @@
-from lwm.loader.color.deref import deref_colors
 from lwm.model.color import Base16Colors, NamedColors
-from lwm.model.layout import LayoutDefs
+from lwm.model.layout.defs import LayoutDefs
+from lwm.context.validation import ValidationContext
 
 
 def layoutdef_from_data(
@@ -11,7 +11,7 @@ def layoutdef_from_data(
     if layout_data is None:
         layout = LayoutDefs()
     else:
-        layout = LayoutDefs(**layout_data)
+        context = ValidationContext(base16=base16, named=named)
+        layout = LayoutDefs.model_validate(layout_data, context=context)
 
-    tc = deref_colors(dict(layout), base16, named)
-    return layout.model_copy(update=tc)
+    return layout

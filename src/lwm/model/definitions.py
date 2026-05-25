@@ -15,7 +15,7 @@ from lwm.model.font import FontDefs
 from lwm.model.group import GroupDefs
 from lwm.model.input import InputDefs
 from lwm.model.key import KeyDefs
-from lwm.model.layout import LayoutDefs
+from lwm.model.layout.defs import LayoutDefs
 from lwm.model.match import MatchDefs
 from lwm.model.menu import MenuDefs
 from lwm.model.notifier import NotifierDefs

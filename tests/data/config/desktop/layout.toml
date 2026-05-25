@@ -1,6 +1,8 @@
 [layout]
+default_layouts = ["max", "monadtall"]
 [layout.base]
 border_width = 4
+border_rounded = true
 margin = 8
-rounded = true
-[layout.defs.monadtall]
+[layout.layouts.monadtall]
+border_width = 6

@@ -37,7 +37,7 @@ def deref_value(value: Any, base16: Base16Colors, named: NamedColors) -> Any:
 def deref_data(data: dict, base16: Base16Colors, named: NamedColors) -> dict:
     d = {}
     for name, value in data.items():
-        if not isinstance(value, (int, float, bool)):
+        if value is not None and not isinstance(value, (int, float, bool)):
             if isinstance(value, dict):
                 value = deref_data(value, base16, named)
             elif isinstance(value, list):
@@ -54,7 +54,7 @@ def deref_colors(
 ) -> dict:
     while not deref_done(data, base16, named):
         if recursion == 2:
-            raise ValueError("Coor deref recursion depth exceeded")
+            raise ValueError("Color deref recursion depth exceeded")
         data = deref_data(data, base16, named)
         recursion = recursion + 1
     return data

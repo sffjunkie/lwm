@@ -1,6 +1,4 @@
 from libqtile.layout.base import _SimpleLayoutBase
-from libqtile.layout.max import Max
-from libqtile.layout.xmonad import MonadTall
 from qtile_extras.layout.decorations.borders import RoundedCorners
 
 from lwm.model.definitions import Definitions
@@ -11,7 +9,7 @@ def _layout_type_args(defs: Definitions, layout: str) -> dict:
 
 
 def build_layouts(defs: Definitions) -> list[_SimpleLayoutBase]:
-    if defs.layout.base.rounded:
+    if defs.layout.base.border_rounded:
         borders = {
             "border_focus": RoundedCorners(colour=defs.color.named.tiled_border_focus),
             "border_normal": RoundedCorners(
@@ -21,9 +19,10 @@ def build_layouts(defs: Definitions) -> list[_SimpleLayoutBase]:
     else:
         borders = {}
 
-    layout_args = dict(defs.layout.base) | borders
+    base_args = dict(defs.layout.base) | borders
+    layouts = []
+    for layout_name in defs.layout.default_layouts:
+        d = dict(getattr(defs.layout.layouts, layout_name)) | base_args
+        layouts.append(d)
 
-    return [
-        MonadTall(**(layout_args | _layout_type_args(defs, "MonadTall"))),
-        Max(**(layout_args | _layout_type_args(defs, "Max"))),
-    ]
+    return layouts

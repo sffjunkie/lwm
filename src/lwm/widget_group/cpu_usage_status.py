@@ -1,15 +1,17 @@
+from libqtile.lazy import lazy
 from libqtile.widget import base
-from qtile_extras.widget import Bluetooth as QEBluetooth
+from qtile_extras.widget import CPU
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
-from lwm.qwidget.icon import MDIcon
+from lwm.helper.terminal import terminal_run_command
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget.icon import MDIcon
 
 
-class Bluetooth(WidgetModule):
+class CPUUsageStatus(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -20,24 +22,33 @@ class Bluetooth(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        bluetooth_props = {
-            "name": "bluetooth",
-            "padding": 8,
+        htop = terminal_run_command(
+            terminal=self.ctx.defs.app.terminal,
+            command=["htop"],
+        )
+
+        usage_props = {
+            "format": "{load_percent:4.1f}%",
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
-            "menu_font": self.ctx.text_font_family,
-            "menu_fontsize": self.ctx.text_font_size,
+            "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(htop),
+            },
         }
 
-        bluetooth_icon_props = {
-            "name": "bluetooth",
+        usage_icon_props = {
+            "name": "cpu-64-bit",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
+            "mouse_callbacks": {
+                "Button1": lazy.spawn(htop),
+            },
         }
 
         decorations = None
@@ -51,31 +62,31 @@ class Bluetooth(WidgetModule):
                     group_id=group_id,
                 )
             ]
-            bluetooth_props["background"] = TRANSPARENT
-            bluetooth_icon_props["background"] = TRANSPARENT
+            usage_props["background"] = TRANSPARENT
+            usage_icon_props["background"] = TRANSPARENT
 
         props = merge_props(
-            bluetooth_props,
-            self.ctx.props.pop("menu", {}),
+            usage_props,
+            self.ctx.props.pop("usage", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        bluetooth_widget = QEBluetooth(**props)
+        cpu_usage = CPU(**props)
 
         props = merge_props(
-            bluetooth_icon_props,
+            usage_icon_props,
             self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        bluetooth_icon = MDIcon(**props)
+        cpu_usage_icon = MDIcon(**props)
 
         widgets: list[base._Widget] = [
-            bluetooth_icon,
-            bluetooth_widget,
+            cpu_usage_icon,
+            cpu_usage,
         ]
         return widgets

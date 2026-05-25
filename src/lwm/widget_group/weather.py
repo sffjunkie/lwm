@@ -1,15 +1,14 @@
 from libqtile.widget import base
-from qtile_extras.widget import Spacer as QSpacer
-from qtile_extras.widget import WindowName as QWindowName
+from qtile_extras.widget import OpenWeather
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
+from lwm.widget_group.base import WidgetGroup
 
 
-class WindowName(WidgetModule):
+class Weather(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -20,18 +19,13 @@ class WindowName(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        window_name_props = {
+        weather_props = {
             "padding": 12,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "foreground": foreground_color,
             "background": background_color,
         }
-
-        props = merge_props(
-            window_name_props,
-            self.ctx.props.pop("name", {}),
-        )
 
         decorations = None
         if group_id != -1:
@@ -44,20 +38,19 @@ class WindowName(WidgetModule):
                     group_id=group_id,
                 )
             ]
-            window_name_props["background"] = TRANSPARENT
+            weather_props["background"] = TRANSPARENT
+
+        props = merge_props(
+            weather_props,
+            self.ctx.props.pop("weather", {}),
+        )
+
+        if decorations is not None:
+            props["decorations"] = decorations
+
+        weather = OpenWeather(**props)
 
         widgets: list[base._Widget] = [
-            QSpacer(
-                background=TRANSPARENT,
-                decorations=decorations,
-            ),
-            QWindowName(
-                **props,
-                decorations=decorations,
-            ),
-            QSpacer(
-                background=TRANSPARENT,
-                decorations=decorations,
-            ),
+            weather,
         ]
         return widgets

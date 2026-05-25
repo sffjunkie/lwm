@@ -1,6 +1,6 @@
 from qtile_extras import widget
 
-from lwm.qwidget.mdi_codepoint import MDI_CODEPOINT
+from lwm.widget.mdi_codepoint import MDI_CODEPOINT
 
 
 class MDIcon(widget.TextBox):

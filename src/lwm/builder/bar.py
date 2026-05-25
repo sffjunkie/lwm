@@ -12,21 +12,21 @@ from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT, contrast_color
 from lwm.model.bar import Bars
 from lwm.model.definitions import Definitions
-from lwm.qmodule.base import WidgetModule
-from lwm.qmodule.bluetooth import Bluetooth
-from lwm.qmodule.cpu_temp_status import CPUTempStatus
-from lwm.qmodule.cpu_usage_status import CPUUsageStatus
-from lwm.qmodule.current_layout import CurrentLayout
-from lwm.qmodule.date_time import DateTime
-from lwm.qmodule.group_box import GroupBox
-from lwm.qmodule.memory_status import MemoryStatus
-from lwm.qmodule.music_status import MusicStatus
-from lwm.qmodule.network_status import NetworkStatus
-from lwm.qmodule.separator import Separator
-from lwm.qmodule.system_menu import SystemMenu
-from lwm.qmodule.user_menu import UserMenu
-from lwm.qmodule.weather import Weather
-from lwm.qmodule.window_name import WindowName
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget_group.bluetooth import Bluetooth
+from lwm.widget_group.cpu_temp_status import CPUTempStatus
+from lwm.widget_group.cpu_usage_status import CPUUsageStatus
+from lwm.widget_group.current_layout import CurrentLayout
+from lwm.widget_group.date_time import DateTime
+from lwm.widget_group.group_box import GroupBox
+from lwm.widget_group.memory_status import MemoryStatus
+from lwm.widget_group.music_status import MusicStatus
+from lwm.widget_group.network_status import NetworkStatus
+from lwm.widget_group.separator import Separator
+from lwm.widget_group.system_menu import SystemMenu
+from lwm.widget_group.user_menu import UserMenu
+from lwm.widget_group.weather import Weather
+from lwm.widget_group.window_name import WindowName
 
 
 def fg_color(defs: Definitions):
@@ -78,7 +78,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
     current_layout_context = ModuleContext(bar_context, defs)
 
     # region start
-    start: list[WidgetModule] = [
+    start: list[WidgetGroup] = [
         UserMenu(user_menu_context),
         GroupBox(group_box_context),
         CurrentLayout(current_layout_context),
@@ -94,7 +94,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
     window_name_context = ModuleContext(bar_context, defs)
 
     # region middle
-    middle: list[WidgetModule] = [
+    middle: list[WidgetGroup] = [
         WindowName(window_name_context),
     ]
 
@@ -130,7 +130,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
         props={"background": "base0f"},
     )
 
-    end: list[WidgetModule] = [
+    end: list[WidgetGroup] = [
         Weather(weather_context),
         DateTime(date_time_context),
         SystemMenu(system_menu_context),
@@ -209,7 +209,7 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
         },
     )
 
-    start: list[WidgetModule] = [
+    start: list[WidgetGroup] = [
         NetworkStatus(network_status_context),
         MemoryStatus(memory_status_context),
         CPUUsageStatus(cpu_usage_context),
@@ -225,7 +225,7 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     # endregion
 
     # region middle
-    middle: list[WidgetModule] = []
+    middle: list[WidgetGroup] = []
 
     if middle == []:
         widgets.append(QSpacer(background=TRANSPARENT))
@@ -237,7 +237,7 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     # endregion
 
     # region end
-    end: list[WidgetModule] = []
+    end: list[WidgetGroup] = []
     music_status_context = ModuleContext(
         bar_context,
         defs,

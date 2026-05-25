@@ -3,10 +3,10 @@ from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.context.module import ModuleContext
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
+from lwm.widget_group.base import WidgetGroup
 
 
-class Spacer(WidgetModule):
+class Spacer(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,

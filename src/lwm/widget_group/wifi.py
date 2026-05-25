@@ -1,18 +1,14 @@
-import os
-
-from libqtile.lazy import lazy
 from libqtile.widget import base
-from qtile_extras.widget import TextBox
+from qtile_extras.widget import WiFiIcon as QEWifi
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
-from lwm.qwidget.icon import MDIcon
+from lwm.widget_group.base import WidgetGroup
 
 
-class UserMenu(WidgetModule):
+class Wifi(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -23,23 +19,14 @@ class UserMenu(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        icon_props = {
-            "name": "account",
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
-            # "width": self.context.bar.height,
+        wifi_props = {
+            "name": "wifi",
+            "interface": self.ctx.defs.device.wifi,
             "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
-            "foreground": foreground_color,
-            "background": background_color,
-        }
-
-        username_props = {
-            "text": os.environ["USER"],
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
-            "padding": 8,
-            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
+            "menu_font": self.ctx.text_font_family,
+            "menu_fontsize": self.ctx.text_font_size,
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -53,34 +40,40 @@ class UserMenu(WidgetModule):
                     filled=True,
                     group=True,
                     group_id=group_id,
-                    # padding_x=8,
                 )
             ]
-            icon_props["background"] = TRANSPARENT
-            username_props["background"] = TRANSPARENT
+            wifi_props["background"] = TRANSPARENT
 
         props = merge_props(
-            icon_props,
-            self.ctx.props.pop("icon", {}),
+            wifi_props,
+            self.ctx.props.pop("menu", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        icon = MDIcon(**props)
+        wifi_widget = QEWifi(**props)
 
-        props = merge_props(
-            username_props,
-            self.ctx.props.pop("username", {}),
-        )
+        # wifi_icon_props = {
+        #     "name": "wifi",
+        #     "font": self.context.icon_font_family,
+        #     "fontsize": self.context.icon_font_size,
+        #     "padding": 8,
+        #     "background": f"{background_color}00",
+        # }
 
-        if decorations is not None:
-            props["decorations"] = decorations
+        # props = self.context.override_parameters(
+        #     wifi_icon_props,
+        #     self.context.props.pop("icon", {}),
+        # )
 
-        username = TextBox(**props)
+        # if decorations is not None:
+        #     props["decorations"] = decorations
+
+        # wifi_icon = MDIcon(**props)
 
         widgets: list[base._Widget] = [
-            icon,
-            username,
+            wifi_widget,
+            # wifi_icon,
         ]
         return widgets

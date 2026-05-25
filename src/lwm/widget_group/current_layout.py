@@ -1,14 +1,14 @@
 from libqtile.widget import base
-from qtile_extras.widget import Mpd2
+from qtile_extras.widget import CurrentLayout as QCurrentLayout
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
+from lwm.widget_group.base import WidgetGroup
 
 
-class MusicStatus(WidgetModule):
+class CurrentLayout(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -19,10 +19,10 @@ class MusicStatus(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        mpd2_props = {
+        current_layout_props = {
+            "padding": 12,
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
-            "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -35,22 +35,20 @@ class MusicStatus(WidgetModule):
                     radius=5,
                     filled=True,
                     group=True,
-                    group_id=group_id,
+                    group_id=10,
                 )
             ]
-            mpd2_props["background"] = TRANSPARENT
+            current_layout_props["background"] = TRANSPARENT
 
         props = merge_props(
-            mpd2_props,
-            self.ctx.props.pop("music", {}),
+            current_layout_props,
+            self.ctx.props.pop("layout", {}),
         )
 
-        if decorations is not None:
-            props["decorations"] = decorations
+        current_layout = QCurrentLayout(
+            **props,
+            decorations=decorations,
+        )
 
-        mpd2 = Mpd2(**props)
-
-        widgets: list[base._Widget] = [
-            mpd2,
-        ]
+        widgets: list[base._Widget] = [current_layout]
         return widgets

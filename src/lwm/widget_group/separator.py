@@ -4,10 +4,10 @@ from qtile_extras.widget import Sep
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
+from lwm.widget_group.base import WidgetGroup
 
 
-class Separator(WidgetModule):
+class Separator(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,

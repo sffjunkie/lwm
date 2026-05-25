@@ -1,85 +1,59 @@
-from libqtile.lazy import lazy
 from libqtile.widget import base
+from qtile_extras.widget import Clock
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.helper.terminal import terminal_run_command
-from lwm.qmodule.base import WidgetModule
-from lwm.qwidget.icon import MDIcon
-from lwm.qwidget.net_min import NetMin
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget.icon import MDIcon
 
 
-class NetworkStatus(WidgetModule):
+class DateTime(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
     ):
         self.ctx = ctx
-        self.wifi = ctx.defs.device.wifi
-        self.eth = ctx.defs.device.eth
 
     def widgets(self, group_id: int = -1) -> list[base._Widget]:
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        network = self.ctx.props.pop("network", {})
-        device = network.get("interface", self.eth or self.wifi)
-
-        if device:
-            slurm = terminal_run_command(
-                terminal=self.ctx.defs.app.terminal,
-                command=[
-                    "slurm",
-                    "-i",
-                    device,
-                ],
-            )
-            mouse_callbacks = {
-                "Button1": lazy.spawn(slurm),
-            }
-        else:
-            mouse_callbacks = {}
-
-        up_props = {
-            "format": "{up:4.0f}{up_suffix:<2}",
+        date_text_props = {
+            "format": "%a %Y-%m-%d",
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": mouse_callbacks,
         }
 
-        up_icon_props = {
-            "name": "upload-outline",
+        date_icon_props = {
+            "name": "calendar",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": mouse_callbacks,
         }
 
-        down_props = {
-            "format": "{down:4.0f}{down_suffix:<2}",
+        time_text_props = {
+            "format": "%H:%M",
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": mouse_callbacks,
         }
 
-        down_icon_props = {
-            "name": "download-outline",
+        time_icon_props = {
+            "name": "clock-outline",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
-            "mouse_callbacks": mouse_callbacks,
         }
 
         decorations = None
@@ -93,57 +67,55 @@ class NetworkStatus(WidgetModule):
                     group_id=group_id,
                 )
             ]
-            up_props["background"] = TRANSPARENT
-            up_icon_props["background"] = TRANSPARENT
-            down_props["background"] = TRANSPARENT
-            down_icon_props["background"] = TRANSPARENT
+            date_text_props["background"] = TRANSPARENT
+            date_icon_props["background"] = TRANSPARENT
+            time_text_props["background"] = TRANSPARENT
+            time_icon_props["background"] = TRANSPARENT
 
         props = merge_props(
-            up_props,
-            self.ctx.props.pop("up", {}),
-            self.ctx.props.pop("network", {}),
+            date_text_props,
+            self.ctx.props.pop("date", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        up = NetMin(**props)
+        date_text = Clock(**props)
 
         props = merge_props(
-            up_icon_props,
+            date_icon_props,
             self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        up_icon = MDIcon(**props)
+        date_icon = MDIcon(**props)
 
         props = merge_props(
-            down_props,
-            self.ctx.props.pop("down", {}),
-            self.ctx.props.pop("network", {}),
+            time_text_props,
+            self.ctx.props.pop("time", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        down = NetMin(**props)
+        time_text = Clock(**props)
 
         props = merge_props(
-            down_icon_props,
+            time_icon_props,
             self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        down_icon = MDIcon(**props)
+        time_icon = MDIcon(**props)
 
         widgets: list[base._Widget] = [
-            up_icon,
-            up,
-            down_icon,
-            down,
+            date_text,
+            date_icon,
+            time_text,
+            time_icon,
         ]
         return widgets

@@ -1,16 +1,17 @@
 from libqtile.lazy import lazy
 from libqtile.widget import base
-from qtile_extras.widget import PulseVolume
+from qtile_extras.widget import Memory
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
-from lwm.qwidget.icon import MDIcon
+from lwm.helper.terminal import terminal_run_command
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget.icon import MDIcon
 
 
-class VolumeStatus(WidgetModule):
+class MemoryStatus(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -21,36 +22,32 @@ class VolumeStatus(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        volume_text_props = {
-            "name": "bar_volume",
-            "volume_app": "volumectl app",
-            "mute_format": "   M",
-            "unmute_format": "{volume:>3}%",
-            "menu_font": self.ctx.text_font_family,
-            "menu_fontsize": int(self.ctx.text_font_size * 0.8),
-            "menu_width": 500,
-            "menu_offset_x": -250,
-            "padding": 8,
+        system_status = terminal_run_command(
+            terminal=self.ctx.defs.app.terminal,
+            command=["htop"],
+        )
+
+        memory_props = {
+            "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
+            "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
             "mouse_callbacks": {
-                "Button4": lazy.widget["bar_volume"].decrease_vol(),
-                "Button5": lazy.widget["bar_volume"].increase_vol(),
+                "Button1": lazy.spawn(system_status),
             },
         }
 
-        volume_icon_props = {
-            "name": "volume-high",
+        icon_props = {
+            "name": "memory",
             "font": self.ctx.icon_font_family,
             "fontsize": self.ctx.icon_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
             "mouse_callbacks": {
-                "Button4": lazy.widget["bar_volume"].decrease_vol(),
-                "Button5": lazy.widget["bar_volume"].increase_vol(),
+                "Button1": lazy.spawn(system_status),
             },
         }
 
@@ -65,31 +62,32 @@ class VolumeStatus(WidgetModule):
                     group_id=group_id,
                 )
             ]
-            volume_text_props["background"] = TRANSPARENT
-            volume_icon_props["background"] = TRANSPARENT
+            memory_props["background"] = TRANSPARENT
+            icon_props["background"] = TRANSPARENT
 
         props = merge_props(
-            volume_text_props,
-            self.ctx.props.pop("volume", {}),
+            memory_props,
+            self.ctx.props.pop("memory", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        volume_text = PulseVolume(**props)
+        memory = Memory(**props)
 
         props = merge_props(
-            volume_icon_props,
+            icon_props,
             self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        volume_icon = MDIcon(**props)
+        memory_icon = MDIcon(**props)
 
         widgets: list[base._Widget] = [
-            volume_text,
-            volume_icon,
+            memory_icon,
+            memory,
         ]
+
         return widgets

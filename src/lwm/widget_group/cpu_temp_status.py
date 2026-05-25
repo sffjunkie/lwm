@@ -1,14 +1,15 @@
 from libqtile.widget import base
-from qtile_extras.widget import WiFiIcon as QEWifi
+from qtile_extras.widget import ThermalSensor
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget.icon import MDIcon
 
 
-class Wifi(WidgetModule):
+class CPUTempStatus(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -19,14 +20,19 @@ class Wifi(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        wifi_props = {
-            "name": "wifi",
-            "interface": self.ctx.defs.device.wifi,
-            "padding": 8,
+        temp_props = {
             "font": self.ctx.text_font_family,
             "fontsize": self.ctx.text_font_size,
-            "menu_font": self.ctx.text_font_family,
-            "menu_fontsize": self.ctx.text_font_size,
+            "padding": 8,
+            "foreground": foreground_color,
+            "background": background_color,
+        }
+
+        temp_icon_props = {
+            "name": "thermometer",
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -42,38 +48,31 @@ class Wifi(WidgetModule):
                     group_id=group_id,
                 )
             ]
-            wifi_props["background"] = TRANSPARENT
+            temp_props["background"] = TRANSPARENT
+            temp_icon_props["background"] = TRANSPARENT
 
         props = merge_props(
-            wifi_props,
-            self.ctx.props.pop("menu", {}),
+            temp_props,
+            self.ctx.props.pop("temperature", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        wifi_widget = QEWifi(**props)
+        cpu_temp = ThermalSensor(**props)
 
-        # wifi_icon_props = {
-        #     "name": "wifi",
-        #     "font": self.context.icon_font_family,
-        #     "fontsize": self.context.icon_font_size,
-        #     "padding": 8,
-        #     "background": f"{background_color}00",
-        # }
+        props = merge_props(
+            temp_icon_props,
+            self.ctx.props.pop("icon", {}),
+        )
 
-        # props = self.context.override_parameters(
-        #     wifi_icon_props,
-        #     self.context.props.pop("icon", {}),
-        # )
+        if decorations is not None:
+            props["decorations"] = decorations
 
-        # if decorations is not None:
-        #     props["decorations"] = decorations
-
-        # wifi_icon = MDIcon(**props)
+        cpu_temp_icon = MDIcon(**props)
 
         widgets: list[base._Widget] = [
-            wifi_widget,
-            # wifi_icon,
+            cpu_temp_icon,
+            cpu_temp,
         ]
         return widgets

@@ -5,7 +5,7 @@ from libqtile.widget import base
 from lwm.context.module import ModuleContext
 
 
-class WidgetModule(Protocol):
+class WidgetGroup(Protocol):
     def __init__(
         self,
         ctx: ModuleContext,

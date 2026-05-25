@@ -1,15 +1,18 @@
+import os
+
+from libqtile.lazy import lazy
 from libqtile.widget import base
-from qtile_extras.widget import ThermalSensor
+from qtile_extras.widget import TextBox
 from qtile_extras.widget.decorations import RectDecoration
 
 from lwm.context.module import ModuleContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
-from lwm.qmodule.base import WidgetModule
-from lwm.qwidget.icon import MDIcon
+from lwm.widget_group.base import WidgetGroup
+from lwm.widget.icon import MDIcon
 
 
-class CPUTempStatus(WidgetModule):
+class UserMenu(WidgetGroup):
     def __init__(
         self,
         ctx: ModuleContext,
@@ -20,19 +23,23 @@ class CPUTempStatus(WidgetModule):
         background_color = self.ctx.props.get("background", self.ctx.background_rgba)
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
-        temp_props = {
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+        icon_props = {
+            "name": "account",
+            "font": self.ctx.icon_font_family,
+            "fontsize": self.ctx.icon_font_size,
+            # "width": self.context.bar.height,
             "padding": 8,
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }
 
-        temp_icon_props = {
-            "name": "thermometer",
-            "font": self.ctx.icon_font_family,
-            "fontsize": self.ctx.icon_font_size,
+        username_props = {
+            "text": os.environ["USER"],
+            "font": self.ctx.text_font_family,
+            "fontsize": self.ctx.text_font_size,
             "padding": 8,
+            "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
             "foreground": foreground_color,
             "background": background_color,
         }
@@ -46,33 +53,34 @@ class CPUTempStatus(WidgetModule):
                     filled=True,
                     group=True,
                     group_id=group_id,
+                    # padding_x=8,
                 )
             ]
-            temp_props["background"] = TRANSPARENT
-            temp_icon_props["background"] = TRANSPARENT
+            icon_props["background"] = TRANSPARENT
+            username_props["background"] = TRANSPARENT
 
         props = merge_props(
-            temp_props,
-            self.ctx.props.pop("temperature", {}),
-        )
-
-        if decorations is not None:
-            props["decorations"] = decorations
-
-        cpu_temp = ThermalSensor(**props)
-
-        props = merge_props(
-            temp_icon_props,
+            icon_props,
             self.ctx.props.pop("icon", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        cpu_temp_icon = MDIcon(**props)
+        icon = MDIcon(**props)
+
+        props = merge_props(
+            username_props,
+            self.ctx.props.pop("username", {}),
+        )
+
+        if decorations is not None:
+            props["decorations"] = decorations
+
+        username = TextBox(**props)
 
         widgets: list[base._Widget] = [
-            cpu_temp_icon,
-            cpu_temp,
+            icon,
+            username,
         ]
         return widgets

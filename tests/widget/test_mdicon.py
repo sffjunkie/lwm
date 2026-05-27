@@ -1,4 +1,4 @@
-from lwm.qwidget.icon import MDIcon
+from lwm.widget.icon import MDIcon
 
 
 def test_mdi_icon():

@@ -184,19 +184,19 @@ desc = "Quit WM"
 [[key.defs]]
 key = "F8"
 modifier_group = "fnbar_app_control"
-command = "lwm:spawn:controller.music.toggle"
+command = "lwm:spawn:controller.music.cmd_toggle"
 desc = "Toggle music play/pause"
 
 [[key.defs]]
 key = "F7"
 modifier_group = "fnbar_app_control"
-command = "lwm:spawn:controller.music.previous"
+command = "lwm:spawn:controller.music.cmd_previous"
 desc = "Play previous music track"
 
 [[key.defs]]
 key = "F9"
 modifier_group = "fnbar_app_control"
-command = "lwm:spawn:controller.music.next"
+command = "lwm:spawn:controller.music.cmd_next"
 desc = "Play next music track"
 
 [[key.defs]]

@@ -200,7 +200,7 @@ command = "lwm:spawn:controller.music.cmd_next"
 desc = "Play next music track"
 
 [[key.defs]]
-key = "F8"
+key = "F7"
 modifier_group = "app_launch"
 command = "lwm:spawn:controller.audio"
 desc = "Launch audio control app"

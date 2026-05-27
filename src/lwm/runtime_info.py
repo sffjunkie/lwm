@@ -10,5 +10,4 @@ def log_runtime_info() -> None:
     logger.warning(f"python platform: {sys.platform}")
     logger.warning(f"python path: {sys.path}")
     logger.warning(f"libqtile path: {libqtile_path}")
-    logger.warning(f"__init__ file: {__file__}")
     logger.warning(f"__package__: {__package__}")

@@ -9,7 +9,7 @@ class MonadTallLayout(BaseModel):
     border_focus: str = "base02"
     border_normal: str = "base07"
     border_width: int = 2
-    change_ratio: float = 0.5
+    change_ratio: float = 0.05
     change_size: int = 20
     margin: int | Margin = 2
     max_ratio: float = 0.75
@@ -27,7 +27,7 @@ class MonadThreeColLayout(BaseModel):
     border_focus: str = "base02"
     border_normal: str = "base07"
     border_width: int = 2
-    change_ratio: float = 0.5
+    change_ratio: float = 0.05
     change_size: int = 20
     main_centered: bool = True
     margin: int | Margin = 4
@@ -46,7 +46,7 @@ class MonadWideLayout(BaseModel):
     border_focus: str = "base02"
     border_normal: str = "base07"
     border_width: int = 2
-    change_ratio: float = 0.5
+    change_ratio: float = 0.05
     change_size: int = 20
     main_centered: bool = True
     margin: int | Margin = 4

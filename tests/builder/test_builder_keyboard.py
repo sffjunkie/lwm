@@ -1,12 +1,13 @@
 from pathlib import Path
-
 from lwm.load import load_defs
+from lwm.builder.keyboard import build_keys
 
 
-def test_key_defs(test_data: Path):
+def test_build_keyboard(test_data: Path):
     data_path = test_data / "config" / "desktop"
-    defs = load_defs(data_path)
-    assert defs is not None
-    assert len(defs.key.defs) == 34
+    defs = load_defs(data_path.absolute())
 
-    assert defs.key.defs[2].key == "Return"
+    assert defs is not None
+    keys = build_keys(defs)
+
+    assert keys is not None

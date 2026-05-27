@@ -71,10 +71,6 @@ in
       in
       {
         description = "lwm - Looniversity window manager";
-        documentation = [ "man:qtile(5)" ];
-        bindsTo = [ "lde-session.target" ];
-        wants = [ "lde-session.target" ];
-        after = [ "lde-session.target" ];
 
         environment.PATH = lib.mkForce null;
         environment.PYTHONPATH = lib.mkForce null;

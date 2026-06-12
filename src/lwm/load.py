@@ -113,6 +113,7 @@ def load_defs(defspath: Path | None = None) -> Definitions | None:
             match=matchdefs_from_data(configs),
             menu=menudefs_from_data(configs),
             notifier=notifierdefs_from_data(configs),
+            secrets={},
             wallpaper=wallpaperdefs(),
             widget=widgetdef_from_data(configs, base16_defs, named_defs),
         )

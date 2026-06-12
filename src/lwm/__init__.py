@@ -21,13 +21,14 @@ is_under_pytest = "pytest" in sys.modules
 if not is_under_pytest:
     log_runtime_info()
 
-    secrets = load_secrets()
     defs = load_defs()
 
     if defs is None:
         logger.error("lwm: Unable to load configuration")
         raise ValueError("Loading definitions failed")
     else:
+        defs.secrets = load_secrets()
+
         screens = build_screens(defs)
 
         floating_layout = build_floating(defs)

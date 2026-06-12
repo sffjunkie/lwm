@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from lwm.helper.fs import read_toml, user_config_dir
 
@@ -15,7 +16,7 @@ def get_secrets_path(filepath: Path | None = None) -> Path | None:
     return secrets_path
 
 
-def load_secrets(secretspath: Path | None = None) -> dict:
+def load_secrets(secretspath: Path | None = None) -> dict[str, Any]:
     secrets_path = get_secrets_path(secretspath)
 
     if secrets_path is not None:

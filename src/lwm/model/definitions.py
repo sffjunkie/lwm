@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from lwm.model.apps import AppDefs
 from lwm.model.bar import BarDefs
@@ -44,5 +45,6 @@ class Definitions:
     match: MatchDefs
     menu: MenuDefs
     notifier: NotifierDefs
+    secrets: dict[str, Any]
     widget: WidgetDefs
     wallpaper: WallpaperDefs

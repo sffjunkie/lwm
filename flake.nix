@@ -76,8 +76,8 @@
     in
     {
       packages = forAllSystems (system: {
-        # default = pythonSets.${system}.mkVirtualEnv "${project_name}-env" workspace.deps.default;
         default = pythonSets.${system}.callPackage ./package.nix { };
+        env = pythonSets.${system}.mkVirtualEnv "${project_name}-env" workspace.deps.default;
       });
 
       checks = forAllSystems (

@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 
@@ -59,6 +60,9 @@ if not is_under_pytest:
 
 @hook.subscribe.startup_once
 def autostart() -> None:
+    os.environ["XDG_CURRENT_DESKTOP"] = "lwm"
+    os.environ["XDG_SESSION_TYPE"] = "wayland"
+
     subprocess.run(
         [
             "systemctl",
@@ -68,6 +72,8 @@ def autostart() -> None:
             "WAYLAND_DISPLAY",
             "XCURSOR_SIZE",
             "XCURSOR_THEME",
+            "XDG_CURRENT_DESKTOP",
+            "XDG_SESSION_TYPE",
         ],
         check=False,
     )

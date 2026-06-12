@@ -14,7 +14,7 @@ stdenv.mkDerivation {
   '';
 
   meta = {
-    description = "Looniversity Qtile configuration";
+    description = "Looniversity Window Manager configuration";
     homepage = "https://github.com/sffjunkie/lwm";
     license = lib.licenses.mit;
   };

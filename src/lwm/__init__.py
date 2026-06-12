@@ -3,6 +3,7 @@ import sys
 
 from libqtile import hook
 from libqtile.log_utils import logger
+from libqtile.utils import VERSION
 
 from lwm.builder.floating import build_floating
 from lwm.builder.group import build_group_keys, build_groups
@@ -17,6 +18,8 @@ from lwm.runtime_info import log_runtime_info
 from lwm.secret.loader import load_secrets
 
 is_under_pytest = "pytest" in sys.modules
+
+__version__ = "0.1"
 
 if not is_under_pytest:
     log_runtime_info()
@@ -46,7 +49,7 @@ if not is_under_pytest:
         floats_kept_above = True
         focus_on_window_activation = "smart"
         follow_mouse_focus = False
-        wmname = "lwm"
+        wmname = f"lwm {__version__} (Qtile {VERSION})"
 
         wl_input_rules = build_input_rules(defs)
 

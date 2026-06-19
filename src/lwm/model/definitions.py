@@ -46,5 +46,5 @@ class Definitions:
     menu: MenuDefs
     notifier: NotifierDefs
     secrets: dict[str, Any]
-    widget: WidgetDefs
     wallpaper: WallpaperDefs
+    widget: WidgetDefs

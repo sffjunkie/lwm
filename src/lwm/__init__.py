@@ -2,7 +2,8 @@ import os
 import subprocess
 import sys
 
-from libqtile import hook
+from libqtile import hook, qtile
+from libqtile.backend.base.window import Static, Window
 from libqtile.log_utils import logger
 from libqtile.utils import VERSION
 
@@ -15,6 +16,7 @@ from lwm.builder.mouse import build_buttons
 from lwm.builder.scratchpad import build_scratchpad_keys, build_scratchpads
 from lwm.builder.screen import build_screens
 from lwm.load import load_defs
+from lwm.model.definitions import Definitions
 from lwm.runtime_info import log_runtime_info
 from lwm.secret.loader import load_secrets
 
@@ -32,6 +34,8 @@ if not is_under_pytest:
         raise ValueError("Loading definitions failed")
     else:
         defs.secrets = load_secrets()
+
+        qtile.defs = defs
 
         screens = build_screens(defs)
 
@@ -86,3 +90,16 @@ def autostart() -> None:
         ],
         check=False,
     )
+
+
+@hook.subscribe.client_new
+def set_floating_size(client: Window | Static):
+    classes = client.get_wm_class()
+    if classes is None:
+        return
+
+    defs: Definitions = qtile.defs
+    m = defs.floating.match(classes[0])
+
+    if m is not None and isinstance(client, Window) and m.size is not None:
+        client.set_size_floating(*m.size)

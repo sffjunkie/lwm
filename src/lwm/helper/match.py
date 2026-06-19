@@ -5,12 +5,12 @@ from libqtile.config import Match
 from lwm.model.definitions import Definitions
 
 
-def build_matches(defs: Definitions, match_name: str) -> list[Match]:
-    if match_name not in defs.match.defs:
+def build_matches(defs: Definitions, match: str) -> list[Match]:
+    if match not in defs.match.defs:
         return []
 
     matches = []
-    for md in defs.match.defs[match_name]:
+    for md in defs.match.defs[match]:
         wm_class = None
         if md.appid is not None:
             wm_class = re.compile(md.appid)

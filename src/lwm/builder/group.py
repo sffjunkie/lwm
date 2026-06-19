@@ -30,8 +30,8 @@ def build_groups(defs: Definitions) -> list[Group]:
         layout = grp.layout or defs.group.common.layout
 
         matches = []
-        for match_name in grp.matches:
-            matches.extend(build_matches(defs, match_name))
+        for match in grp.matches:
+            matches.extend(build_matches(defs, match))
 
         group = Group(
             name=str(idx),
@@ -69,7 +69,7 @@ def build_group_keys(defs: Definitions) -> list[Key]:
 def build_match(defs: Definitions, group: GroupDef) -> list[Match]:
     matches = []
 
-    for match_name in group.matches:
-        matches.extend(build_matches(defs, match_name))
+    for match in group.matches:
+        matches.extend(build_matches(defs, match))
 
     return matches

@@ -8,8 +8,8 @@ from lwm.model.definitions import Definitions
 
 def build_float_rules(defs: Definitions) -> list[_Match]:
     matches = []
-    for match_name in defs.floating.matches:
-        matches.extend(build_matches(defs, match_name))
+    for match_def in defs.floating.matches:
+        matches.extend(build_matches(defs, match_def.match))
 
     return layout.Floating.default_float_rules + matches
 

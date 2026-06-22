@@ -77,9 +77,9 @@ Configures font families and sizes
 
 ```toml
 [font]
-[font.text]
+[font.ui]
 family = "JetBrainsMono Nerd Font"
-size = 16
+size = 16 # pt
 ```
 
 ## `group.toml`

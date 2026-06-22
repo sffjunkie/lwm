@@ -59,7 +59,7 @@ def build_scratchpads(defs: Definitions) -> list[ScratchPad]:
 
 
 def build_scratchpad_keys(defs: Definitions) -> list[Key]:
-    app_launch = modifier_group(defs, "app_launch")
+    app_launch = modifier_group(defs, "fnbar_app_launch")
     return [
         Key(
             app_launch,

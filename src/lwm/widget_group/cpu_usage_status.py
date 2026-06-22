@@ -29,8 +29,8 @@ class CPUUsageStatus(WidgetGroup):
 
         usage_props = {
             "format": "{load_percent:4.1f}%",
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,

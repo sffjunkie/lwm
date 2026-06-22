@@ -20,8 +20,8 @@ class MusicStatus(WidgetGroup):
         foreground_color = self.ctx.props.get("foreground", self.ctx.foreground_rgb)
 
         mpd2_props = {
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,

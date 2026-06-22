@@ -11,12 +11,12 @@ GroupPosition = Literal["start", "middle", "end"]
 
 class ModuleContext:
     _props: dict[str, Any]
-    text_font_family: str
-    text_font_size: int
+    content_font_family: str
+    content_font_size: int
     icon_font_family: str
     icon_font_size: int
-    logo_font_family: str
-    logo_font_size: int
+    ui_font_family: str
+    ui_font_size: int
 
     opacity: float
     background_rgb: str
@@ -49,11 +49,11 @@ class ModuleContext:
             or {}
         )
 
-        self.text_font_family = new_props.get(
-            "text_font_family", self.bar_ctx.text_font_family
+        self.content_font_family = new_props.get(
+            "text_font_family", self.bar_ctx.content_font_family
         )
-        self.text_font_size = new_props.get(
-            "text_font_size", self.bar_ctx.text_font_size
+        self.content_font_size = new_props.get(
+            "text_font_size", self.bar_ctx.content_font_size
         )
         self.icon_font_family = new_props.get(
             "icon_font_family", self.bar_ctx.icon_font_family
@@ -61,11 +61,11 @@ class ModuleContext:
         self.icon_font_size = new_props.get(
             "icon_font_size", self.bar_ctx.icon_font_size
         )
-        self.logo_font_family = new_props.get(
-            "logo_font_family", self.bar_ctx.logo_font_family
+        self.ui_font_family = new_props.get(
+            "ui_font_family", self.bar_ctx.ui_font_family
         )
-        self.logo_font_size = new_props.get(
-            "logo_font_size", self.bar_ctx.logo_font_size
+        self.ui_font_size = new_props.get(
+            "ui_font_size", self.bar_ctx.ui_font_size
         )
 
         self.opacity = new_props.get("opacity", self.bar_ctx.opacity)

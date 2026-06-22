@@ -13,12 +13,12 @@ class BarContext:
     height: px
     margin: tuple[px, px, px, px]
 
-    text_font_family: str
-    text_font_size: int
+    content_font_family: str
+    content_font_size: int
     icon_font_family: str
     icon_font_size: int
-    logo_font_family: str
-    logo_font_size: int
+    ui_font_family: str
+    ui_font_size: int
 
     opacity: float
     background_rgb: str
@@ -46,13 +46,13 @@ class BarContext:
         self.height = new_props.get("height", bar_config.height)
         self.margin = new_props.get("margin", bar_config.margin)
 
-        self.text_font_family = new_props.get(
-            "text_font_family",
-            self.config.font.text.family,
+        self.content_font_family = new_props.get(
+            "content_font_family",
+            self.config.font.ui.family,
         )
-        self.text_font_size = new_props.get(
-            "text_font_size",
-            self.config.font.text.size,
+        self.content_font_size = new_props.get(
+            "content_font_size",
+            self.config.font.ui.size,
         )
         self.icon_font_family = new_props.get(
             "icon_font_family",
@@ -62,13 +62,13 @@ class BarContext:
             "icon_font_size",
             self.config.font.icon.size,
         )
-        self.logo_font_family = new_props.get(
-            "logo_font_family",
-            self.config.font.logo.family,
+        self.ui_font_family = new_props.get(
+            "ui_font_family",
+            self.config.font.ui.family,
         )
-        self.logo_font_size = new_props.get(
-            "logo_font_size",
-            self.config.font.logo.size,
+        self.ui_font_size = new_props.get(
+            "ui_font_size",
+            self.config.font.ui.size,
         )
 
         self.background_rgb = new_props.get(

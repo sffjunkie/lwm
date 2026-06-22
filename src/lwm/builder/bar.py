@@ -202,8 +202,8 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
         defs,
         props={
             "menu": {
-                "menu_font": defs.font.text.family,
-                "menu_fontsize": defs.font.text.size,
+                "menu_font": defs.font.ui.family,
+                "menu_fontsize": defs.font.ui.size,
                 "menu_width": 400,
             },
         },

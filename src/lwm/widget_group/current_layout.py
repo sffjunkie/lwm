@@ -21,8 +21,8 @@ class CurrentLayout(WidgetGroup):
 
         current_layout_props = {
             "padding": 12,
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "foreground": foreground_color,
             "background": background_color,
         }

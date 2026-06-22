@@ -29,8 +29,8 @@ class MemoryStatus(WidgetGroup):
 
         memory_props = {
             "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,

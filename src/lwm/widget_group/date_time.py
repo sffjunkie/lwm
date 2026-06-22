@@ -22,8 +22,8 @@ class DateTime(WidgetGroup):
 
         date_text_props = {
             "format": "%a %Y-%m-%d",
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,
@@ -40,8 +40,8 @@ class DateTime(WidgetGroup):
 
         time_text_props = {
             "format": "%H:%M",
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "foreground": foreground_color,
             "background": background_color,

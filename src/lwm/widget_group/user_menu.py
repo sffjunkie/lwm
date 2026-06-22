@@ -36,8 +36,8 @@ class UserMenu(WidgetGroup):
 
         username_props = {
             "text": os.environ["USER"],
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
             "padding": 8,
             "mouse_callbacks": {"Button1": lazy.spawn(self.ctx.defs.menu.user)},
             "foreground": foreground_color,

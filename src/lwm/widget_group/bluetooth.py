@@ -23,10 +23,10 @@ class Bluetooth(WidgetGroup):
         bluetooth_props = {
             "name": "bluetooth",
             "padding": 8,
-            "font": self.ctx.text_font_family,
-            "fontsize": self.ctx.text_font_size,
-            "menu_font": self.ctx.text_font_family,
-            "menu_fontsize": self.ctx.text_font_size,
+            "font": self.ctx.content_font_family,
+            "fontsize": self.ctx.content_font_size,
+            "menu_font": self.ctx.content_font_family,
+            "menu_fontsize": self.ctx.content_font_size,
             "foreground": foreground_color,
             "background": background_color,
         }

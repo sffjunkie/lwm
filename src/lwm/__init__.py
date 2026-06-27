@@ -102,4 +102,7 @@ def set_floating_size(client: Window | Static):
     m = defs.floating.match(classes[0])
 
     if m is not None and isinstance(client, Window) and m.size is not None:
+        w = m.size[0]
+        h = m.size[1]
+        logger.debug(f"lwm: setting {','.join(classes)} size to {w=},{h=}")
         client.set_size_floating(*m.size)

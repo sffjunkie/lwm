@@ -44,6 +44,11 @@
         "x86_64-linux"
       ];
 
+      nixosModule = import ./module.nix {
+        inherit lib;
+        pkgs = nixpkgs.legacyPackages;
+      };
+
       pyproject = pyproject-nix.lib.project.loadPyproject {
         projectRoot = ./.;
       };
@@ -79,6 +84,11 @@
         default = pythonSets.${system}.callPackage ./package.nix { };
         env = pythonSets.${system}.mkVirtualEnv "${project_name}-env" workspace.deps.default;
       });
+
+      nixosModules = {
+        default = nixosModule;
+        lwm = nixosModule;
+      };
 
       checks = forAllSystems (
         system:

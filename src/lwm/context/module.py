@@ -9,7 +9,7 @@ from lwm.model.definitions import Definitions
 GroupPosition = Literal["start", "middle", "end"]
 
 
-class ModuleContext:
+class WidgetGroupContext:
     _props: dict[str, Any]
     content_font_family: str
     content_font_size: int

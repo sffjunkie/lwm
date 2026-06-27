@@ -1,7 +1,7 @@
 from libqtile.widget import base
 from qtile_extras.widget import Spacer as QSpacer
 
-from lwm.context.module import ModuleContext
+from lwm.context.module import WidgetGroupContext
 from lwm.helper.merge import merge_props
 from lwm.widget_group.base import WidgetGroup
 
@@ -9,7 +9,7 @@ from lwm.widget_group.base import WidgetGroup
 class Spacer(WidgetGroup):
     def __init__(
         self,
-        ctx: ModuleContext,
+        ctx: WidgetGroupContext,
     ):
         self.ctx = ctx
 

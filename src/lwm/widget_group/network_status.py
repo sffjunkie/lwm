@@ -2,7 +2,7 @@ from libqtile.lazy import lazy
 from libqtile.widget import base
 from qtile_extras.widget.decorations import RectDecoration
 
-from lwm.context.module import ModuleContext
+from lwm.context.module import WidgetGroupContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
 from lwm.helper.terminal import terminal_run_command
@@ -14,7 +14,7 @@ from lwm.widget.net_min import NetMin
 class NetworkStatus(WidgetGroup):
     def __init__(
         self,
-        ctx: ModuleContext,
+        ctx: WidgetGroupContext,
     ):
         self.ctx = ctx
         self.wifi = ctx.defs.device.wifi

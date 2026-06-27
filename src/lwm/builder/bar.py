@@ -8,7 +8,7 @@ from libqtile.bar import Bar as QBar
 from qtile_extras.widget import Spacer as QSpacer
 
 from lwm.context.bar import BarContext
-from lwm.context.module import ModuleContext
+from lwm.context.module import WidgetGroupContext
 from lwm.helper.color import TRANSPARENT, contrast_color
 from lwm.model.bar import Bars
 from lwm.model.definitions import Definitions
@@ -59,7 +59,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
 
     widgets = []
 
-    ctx = ModuleContext(
+    ctx = WidgetGroupContext(
         bar_context,
         defs,
         props={
@@ -69,13 +69,13 @@ def build_top_bar(defs: Definitions) -> QBar | None:
     )
     separator = Separator(ctx)
 
-    user_menu_context = ModuleContext(
+    user_menu_context = WidgetGroupContext(
         bar_context,
         defs,
         props={"background": "base0f"},
     )
-    group_box_context = ModuleContext(bar_context, defs)
-    current_layout_context = ModuleContext(bar_context, defs)
+    group_box_context = WidgetGroupContext(bar_context, defs)
+    current_layout_context = WidgetGroupContext(bar_context, defs)
 
     # region start
     start: list[WidgetGroup] = [
@@ -91,7 +91,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
         widgets.extend(group.widgets(group_id=idx))
     # endregion
 
-    window_name_context = ModuleContext(bar_context, defs)
+    window_name_context = WidgetGroupContext(bar_context, defs)
 
     # region middle
     middle: list[WidgetGroup] = [
@@ -108,7 +108,7 @@ def build_top_bar(defs: Definitions) -> QBar | None:
     # endregion
 
     # region end
-    weather_context = ModuleContext(
+    weather_context = WidgetGroupContext(
         bar_context,
         defs,
         props={
@@ -123,8 +123,8 @@ def build_top_bar(defs: Definitions) -> QBar | None:
         },
     )
 
-    date_time_context = ModuleContext(bar_context, defs)
-    system_menu_context = ModuleContext(
+    date_time_context = WidgetGroupContext(bar_context, defs)
+    system_menu_context = WidgetGroupContext(
         bar_context,
         defs,
         props={"background": "base0f"},
@@ -167,14 +167,14 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
     widgets = []
 
     separator = Separator(
-        ModuleContext(
+        WidgetGroupContext(
             bar_context,
             defs=defs,
         )
     )
 
     # region start
-    network_status_context = ModuleContext(
+    network_status_context = WidgetGroupContext(
         bar_context,
         defs,
         props={
@@ -184,7 +184,7 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
         },
     )
 
-    memory_status_context = ModuleContext(
+    memory_status_context = WidgetGroupContext(
         bar_context,
         defs,
         props={
@@ -194,10 +194,10 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
         },
     )
 
-    cpu_usage_context = ModuleContext(bar_context, defs)
-    cpu_temp_context = ModuleContext(bar_context, defs)
+    cpu_usage_context = WidgetGroupContext(bar_context, defs)
+    cpu_temp_context = WidgetGroupContext(bar_context, defs)
 
-    bluetooth_context = ModuleContext(
+    bluetooth_context = WidgetGroupContext(
         bar_context,
         defs,
         props={
@@ -238,7 +238,7 @@ def build_bottom_bar(defs: Definitions) -> QBar | None:
 
     # region end
     end: list[WidgetGroup] = []
-    music_status_context = ModuleContext(
+    music_status_context = WidgetGroupContext(
         bar_context,
         defs,
         props={

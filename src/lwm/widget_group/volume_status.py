@@ -3,7 +3,7 @@ from libqtile.widget import base
 from qtile_extras.widget import PulseVolume
 from qtile_extras.widget.decorations import RectDecoration
 
-from lwm.context.module import ModuleContext
+from lwm.context.module import WidgetGroupContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
 from lwm.widget_group.base import WidgetGroup
@@ -13,7 +13,7 @@ from lwm.widget.icon import MDIcon
 class VolumeStatus(WidgetGroup):
     def __init__(
         self,
-        ctx: ModuleContext,
+        ctx: WidgetGroupContext,
     ):
         self.ctx = ctx
 

@@ -3,7 +3,7 @@ from libqtile.widget import base
 from qtile_extras.widget import CPU
 from qtile_extras.widget.decorations import RectDecoration
 
-from lwm.context.module import WidgetGroupContext
+from lwm.context.widget_group import WidgetGroupContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
 from lwm.helper.terminal import terminal_run_command

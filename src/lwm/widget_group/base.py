@@ -2,7 +2,7 @@ from typing import Protocol
 
 from libqtile.widget import base
 
-from lwm.context.module import WidgetGroupContext
+from lwm.context.widget_group import WidgetGroupContext
 
 
 class WidgetGroup(Protocol):

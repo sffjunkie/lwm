@@ -5,7 +5,7 @@ from libqtile.widget import base
 from qtile_extras.widget import TextBox
 from qtile_extras.widget.decorations import RectDecoration
 
-from lwm.context.module import WidgetGroupContext
+from lwm.context.widget_group import WidgetGroupContext
 from lwm.helper.color import TRANSPARENT
 from lwm.helper.merge import merge_props
 from lwm.widget_group.base import WidgetGroup
